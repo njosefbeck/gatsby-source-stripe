@@ -19,8 +19,8 @@
   "bugs": "https://github.com/njosefbeck/gatsby-source-stripe/issues",
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "stripe": "^5.2.0"
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "stripe": "6.2.1"
   }
 }
