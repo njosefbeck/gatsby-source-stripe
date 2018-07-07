@@ -29,6 +29,10 @@ stripe.scheduledQueryRuns.list
 
 This plugin is a source plugin, so it only brings in the data (to be used, for example, in creating a Stripe dashboard, or an e-commerce store). To actually edit the data in your Stripe account, to handle transactions, make charges, you will need to use some kind of backend server. I favor a serverless setup using [clay.run](https://clay.run), but really it's whatever floats your boat!
 
+## Expanding Objects
+
+All Stripe objects that [have expandable](https://stripe.com/docs/api#expanding_objects) sub-objects have been expanded. For example, when you retrieve a SKU using the Stripe API, there's a "product" key in the returned SKU object, which by default is an id of an associated product object. Instead of you having to query for that specific product object, this plugin will auto-expand it for you, so all of the associated product data can be accessed via the SKU object.
+
 ## Install
 
 `npm install gatsby-source-stripe`
@@ -77,7 +81,7 @@ You can query all of the different Stripe object data like the following:
 
 Just replace "Customer" with the singular version of the string used in the objects array in gatsby-config.js.
 
-You can also query for a specific product like this:
+You can also query for a specific object like this:
 
 ```graphql
 {

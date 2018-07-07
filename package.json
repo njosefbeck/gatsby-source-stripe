@@ -4,7 +4,7 @@
   "description": "Gatsby source plugin for building websites using Stripe as a data source",
   "main": "gatsby-node.js",
   "scripts": {
-    "build": "babel src --out-dir ."
+    "build": "babel src --out-dir . --copy-files"
   },
   "keywords": [
     "gatsby",

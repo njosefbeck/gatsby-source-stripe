@@ -1,10 +1,9 @@
-const fetchObjects = require('./fetch-objects');
-const buildNodes = require('./build-nodes');
+const stripeClient = require('stripe');
+const stripeObject = require('./stripeObject');
 
 exports.sourceNodes = async (
-	{ boundActionCreators, getNode, hasNodeChanged },
-	{ objects = [], secretKey = "" },
-	done
+	{ boundActionCreators },
+	{ objects = [], secretKey = "" }
 ) => {
 
 	const { createNode } = boundActionCreators;
@@ -19,12 +18,28 @@ exports.sourceNodes = async (
 		done();
 	}
 
-	const stripeObjects = await fetchObjects(objects, secretKey);
-	const nodes = stripeObjects.map(stripeObject => buildNodes(stripeObject));
-	nodes.forEach(node => createNode(node));
+	const stripe = stripeClient(secretKey);
 
-	console.log(`${nodes.length} nodes were created.`);
+	// Initialize stripeObjects based on gatsby plugin config
+	const stripeObjects = objects.map(object => {
+		const stripeObj = Object.create(stripeObject);
+		stripeObj.init(object);
+		return stripeObj;
+	});
 
-	done();
+	for (const stripeObj of stripeObjects) {
+		const apiObject = await stripeObj.getApiObject(stripe);
+		const paginatedObject = await stripeObj.paginateData(stripe, apiObject);
+		stripeObj.data = paginatedObject;
+		stripeObj.buildNodes();
+		stripeObj.nodes.forEach(node => {
+			// Ensure that the node doesn't have
+			// an owner set before creating the node
+			delete node.internal.owner;
+			createNode(node);
+		});
+	}
+
+	return;
 
 }
