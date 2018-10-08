@@ -49,6 +49,11 @@ module.exports = {
       apiObject.data.push(...nextObject.data);
 
       lastDataItemId = nextObject.data[nextObject.data.length - 1].id;
+      args = {
+        ...this.methodArgs,
+        starting_after: lastDataItemId,
+      }
+      
       hasMore = nextObject.has_more;
     }
 
