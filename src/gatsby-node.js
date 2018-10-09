@@ -2,11 +2,11 @@ const stripeClient = require('stripe');
 const stripeObject = require('./stripeObject');
 
 exports.sourceNodes = async (
-	{ boundActionCreators },
+	{ actions },
 	{ objects = [], secretKey = "" }
 ) => {
 
-	const { createNode } = boundActionCreators;
+	const { createNode } = actions;
 
 	if (!objects.length) {
 		console.error(new Error("No Stripe objects found in your gatsby-config options. Please add objects you'd like to query in Stripe."));
