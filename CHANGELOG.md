@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Change how we call the Stripe API list methods to use auto-pagination as described [here](https://github.com/stripe/stripe-node#auto-pagination).
 - Change `fileUploads` API call to `files` and add missing endpoints for getting Stripe data (i.e. incorporate updates made to the Stripe API).
 
-## 1.2.1 - 2018-11-02
+## 1.2.1(https://github.com/njosefbeck/gatsby-source-stripe/compare/v1.2.0...v1.2.1) - 2018-11-02
 ### Changed
 - Update stripe dependency to 6.13.0.
 
