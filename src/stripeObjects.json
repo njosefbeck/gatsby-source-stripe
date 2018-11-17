@@ -19,7 +19,7 @@
       "canIterate": true,
       "methodName": "listTransactions",
       "methodArgs": {
-        "expand": ["data.source"]
+        "expand": ["data.source.destination", "data.source.customer", "data.source.invoice"]
       }
     },
     {

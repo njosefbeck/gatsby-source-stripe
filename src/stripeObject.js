@@ -8,6 +8,7 @@ class StripeObject {
     this.name = obj.name;
     this.type = obj.type;
     this.description = obj.description;
+    this.canIterate = obj.canIterate;
     this.methodName = obj.methodName;
     this.methodArgs = obj.methodArgs;
   }
@@ -24,7 +25,7 @@ class StripeObject {
   }
 
   node(createContentDigest, payload) {
-    return {
+    return Object.assign({}, payload, {
       id: payload.id ? payload.id : `Stripe${this.type}${this.id}`,
       parent: null,
       children: [],
@@ -34,7 +35,7 @@ class StripeObject {
         contentDigest: createContentDigest(payload),
         description: this.description
       }
-    }
+    });
   }
 }
 
