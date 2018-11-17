@@ -6,6 +6,7 @@
       "name": "balance",
       "type": "Balance",
       "description": "The current balance on the Stripe account.",
+      "canIterate": false,
       "methodName": "retrieve",
       "methodArgs": {}
     },
@@ -15,6 +16,7 @@
       "name": "balance",
       "type": "BalanceTransaction",
       "description": "A list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth).",
+      "canIterate": true,
       "methodName": "listTransactions",
       "methodArgs": {
         "expand": ["data.source"]
@@ -26,6 +28,7 @@
       "name": "charges",
       "type": "Charge",
       "description": "A list of charges previously created.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.application", "data.application_fee", "data.balance_transaction", "data.customer", "data.destination", "data.dispute", "data.invoice", "data.on_behalf_of", "data.order", "data.review", "data.source_transfer", "data.transfer"]
@@ -37,6 +40,7 @@
       "name": "customers",
       "type": "Customer",
       "description": "A list of customers.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.default_source"]
@@ -48,6 +52,7 @@
       "name": "disputes",
       "type": "Dispute",
       "description": "A list of disputes.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.charge", "data.evidence.cancellation_policy", "data.evidence.customer_communication","data.evidence.customer_signature","data.evidence.duplicate_charge_documentation","data.evidence.receipt","data.evidence.refund_policy","data.evidence.service_documentation","data.evidence.shipping_documentation","data.evidence.uncategorized_file"]
@@ -59,6 +64,7 @@
       "name": "events",
       "type": "Event",
       "description": "A list of events.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -68,6 +74,7 @@
       "name": "files",
       "type": "File",
       "description": "A list of files uploaded to Stripe.",
+      "canIterate": false,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -77,6 +84,7 @@
       "name": "fileLinks",
       "type": "FileLink",
       "description": "A list of file object links, so non-Stripe users can access the files.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -86,6 +94,7 @@
       "name": "paymentIntents",
       "type": "PaymentIntent",
       "description": "A list of payment intents, tracking the process of collecting a payment from a customer.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.application", "data.customer", "data.on_behalf_of", "data.review", "data.source"]
@@ -97,9 +106,10 @@
       "name": "payouts",
       "type": "Payout",
       "description": "A list of existing payouts sent to third-party bank accounts or that Stripe has sent to the Stripe account.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
-        "expand": ["data.balance_transaction", "data.destination", "data.failure_balance_transactions"]
+        "expand": ["data.balance_transaction", "data.destination"]
       }
     },
     {
@@ -108,6 +118,7 @@
       "name": "products",
       "type": "Product",
       "description": "A list of all products.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -117,9 +128,10 @@
       "name": "refunds",
       "type": "Refund",
       "description": "A list of refunds.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
-        "expand": ["data.balance_transaction", "data.charge", "data.source_transfer_reversal", "data.failure_balance_transactions", "data.transfer_reversal"]
+        "expand": ["data.balance_transaction", "data.charge", "data.source_transfer_reversal", "data.transfer_reversal"]
       }
     },
     {
@@ -128,6 +140,7 @@
       "name": "coupons",
       "type": "Coupon",
       "description": "A list of all coupons.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -137,6 +150,7 @@
       "name": "invoices",
       "type": "Invoice",
       "description": "A list of invoices.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.charge", "data.default_source", "data.subscription"]
@@ -148,6 +162,7 @@
       "name": "invoiceItems",
       "type": "InvoiceItem",
       "description": "A list of all invoice items.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -157,6 +172,7 @@
       "name": "plans",
       "type": "Plan",
       "description": "A list of all plans.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
@@ -166,6 +182,7 @@
       "name": "subscriptions",
       "type": "Subscription",
       "description": "A list of subscriptions.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.customer", "data.default_source"]
@@ -174,174 +191,182 @@
     {
       "id": 18,
       "product": null,
-      "name": "subscriptionItems",
-      "type": "SubscriptionItem",
-      "description": "A list of all subscription items.",
-      "methodName": "list",
-      "methodArgs": {}
-    },
-    {
-      "id": 19,
-      "product": null,
       "name": "accounts",
       "type": "Account",
       "description": "A list of all accounts connected to your platform via Stripe Connect.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.business_logo"]
       }
     },
     {
-      "id": 20,
+      "id": 19,
       "product": null,
       "name": "applicationFees",
       "type": "ApplicationFee",
       "description": "A list of all application fees associated with your Stripe Connect platform.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 20,
+      "product": null,
+      "name": "countrySpecs",
+      "type": "CountrySpec",
+      "description": "A list of country specs.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
       "id": 21,
       "product": null,
-      "name": "countrySpecs",
-      "type": "CountrySpec",
-      "description": "A list of country specs.",
+      "name": "topups",
+      "type": "TopUp",
+      "description": "A list of top-ups.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
       "id": 22,
       "product": null,
-      "name": "topups",
-      "type": "TopUp",
-      "description": "A list of top-ups.",
-      "methodName": "list",
-      "methodArgs": {}
-    },
-    {
-      "id": 23,
-      "product": null,
       "name": "transfers",
       "type": "Transfer",
       "description": "A list of transfers to and from the accounts connected to your Stripe Connect platform.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.balance_transaction", "data.destination", "data.destination_payment", "data.source_transaction"]
       }
     },
     {
-      "id": 24,
+      "id": 23,
       "product": "issuing",
       "name": "authorizations",
       "type": "IssuingAuthorization",
       "description": "A list of Issuing authorizations.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.cardholder"]
       }
     },
     {
-      "id": 25,
+      "id": 24,
       "product": "issuing",
       "name": "cardholders",
       "type": "IssuingCardholder",
       "description": "A list of Issuing cardholders.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 25,
+      "product": "issuing",
+      "name": "cards",
+      "type": "IssuingCard",
+      "description": "A list of Issuing cards.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
       "id": 26,
       "product": "issuing",
-      "name": "cards",
-      "type": "IssuingCard",
-      "description": "A list of Issuing cards.",
+      "name": "disputes",
+      "type": "IssuingDispute",
+      "description": "A list of Issuing disputes.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
       "id": 27,
       "product": "issuing",
-      "name": "disputes",
-      "type": "IssuingDispute",
-      "description": "A list of Issuing disputes.",
-      "methodName": "list",
-      "methodArgs": {}
-    },
-    {
-      "id": 28,
-      "product": "issuing",
       "name": "transactions",
       "type": "IssuingTransaction",
       "description": "A list of Issuing transactions.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.authorization", "data.card", "data.cardholder"]
       }
     },
     {
-      "id": 29,
+      "id": 28,
       "product": "terminal",
       "name": "locations",
       "type": "TerminalLocation",
       "description": "A list of Terminal locations.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 29,
+      "product": "terminal",
+      "name": "readers",
+      "type": "TerminalReader",
+      "description": "A list of Terminal readers.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
       "id": 30,
-      "product": "terminal",
-      "name": "readers",
-      "type": "TerminalReader",
-      "description": "A list of Terminal readers.",
-      "methodName": "list",
-      "methodArgs": {}
-    },
-    {
-      "id": 31,
       "product": null,
       "name": "orders",
       "type": "Order",
       "description": "A list of orders.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.charge", "data.customer"]
       }
     },
     {
-      "id": 32,
+      "id": 31,
       "product": null,
       "name": "orderReturns",
       "type": "OrderReturn",
       "description": "A list of order returns.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
-      "id": 33,
+      "id": 32,
       "product": null,
       "name": "skus",
       "type": "Sku",
       "description": "A list of skus.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {
         "expand": ["data.product"]
       }
     },
     {
-      "id": 34,
+      "id": 33,
       "product": "sigma",
       "name": "scheduledQueryRuns",
       "type": "SigmaScheduledQueryRun",
       "description": "A list of Sigma scheduled query runs.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
     {
-      "id": 35,
+      "id": 34,
       "product": null,
       "name": "webhookEndpoints",
       "type": "WebhookEndpoint",
       "description": "A list of webhook endpoints.",
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     }
