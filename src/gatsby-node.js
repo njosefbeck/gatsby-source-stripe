@@ -1,51 +1,62 @@
 const stripeClient = require('stripe');
-const stripeObject = require('./stripeObject');
+const StripeObject = require('./StripeObject');
 
 exports.sourceNodes = async (
-	{ actions, createNodeId, createContentDigest },
-	{ objects = [], secretKey = "" }
+  { actions, createContentDigest },
+  { objects = [], secretKey = "" }
 ) => {
 
-	const { createNode } = actions;
+  const { createNode } = actions;
 
-	if (!objects.length) {
-		console.error(new Error("No Stripe objects found in your gatsby-config options. Please add objects you'd like to query in Stripe."));
-		done();
-	}
+  if (!objects.length) {
+    console.error(new Error("No Stripe object types found in your gatsby-config. Add types to the objects array like this: ['Balance', 'Customer', 'BalanceTransaction']"));
+    return;
+  }
 
-	if (!secretKey) {
-		console.error(new Error("No Stripe secret key found in your gatsby-config options. Please add!"));
-		done();
-	}
+  if (!secretKey) {
+    console.error(new Error("No Stripe secret key found in your gatsby-config."));
+    return;
+  }
 
-	const stripe = stripeClient(secretKey);
+  const stripe = stripeClient(secretKey);
 
-	stripe.setAppInfo({
-	  name: "Gatsby.js Stripe Source Plugin",
-	  version: "2.0.0",
-	  url: "https://www.npmjs.com/package/gatsby-source-stripe"
-	});
+  stripe.setAppInfo({
+    name: "Gatsby.js Stripe Source Plugin",
+    version: "2.0.0",
+    url: "https://www.npmjs.com/package/gatsby-source-stripe"
+  });
 
-	// Initialize stripeObjects based on gatsby plugin config
-	const stripeObjects = objects.map(object => {
-		const stripeObj = Object.create(stripeObject);
-		stripeObj.init(object);
-		return stripeObj;
-	});
+  // Initialize stripeObjects based on gatsby plugin objects
+  const stripeObjects = objects.map(type => new StripeObject(type));
 
-	for (const stripeObj of stripeObjects) {
-		const apiObject = await stripeObj.getApiObject(stripe);
-		const paginatedObject = await stripeObj.paginateData(stripe, apiObject);
-		stripeObj.data = paginatedObject;
-		stripeObj.buildNodes();
-		stripeObj.nodes.forEach(node => {
-			// Ensure that the node doesn't have
-			// an owner set before creating the node
-			delete node.internal.owner;
-			createNode(node);
-		});
-	}
+  for (const stripeObj of stripeObjects) {
 
-	return;
+    /*
+     * Outputs the stripe object's path, to allow us to
+     * get to the proper method
+     *
+     * Example outputs:
+     * const path = stripe['customers']
+     * const path = stripe['terminal']['readers']
+     */
+    const path = stripeObj.objectPath(stripe);
 
-}
+    /*
+     * Use for - await - of as per the Stripe.js Node documentation
+     * for auto pagination purposes
+     *
+     * path[stripeObj.methodName](stripeObj.methodArgs) translates to
+     * something like the following, depending on the object types
+     * passed in the config:
+     *
+     * stripe['customers']['list']({ "expand": "data.default_source" })
+     */
+    for await (const payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
+      const node = stripeObj.node(createContentDigest, payload);
+      createNode(node);
+    }
+  }
+
+  return;
+
+};

@@ -1,87 +1,41 @@
-const stripeObjects = require('./stripeObjects');
-const crypto = require('crypto');
+const stripeObjs = require('./stripeObjects.json');
 
-module.exports = {
-  init(object) {
-    const filteredArray = stripeObjects.objects.filter(stripeObject => stripeObject.name === object);
-    const stripeObject = filteredArray[0];
+class StripeObject {
+  constructor(type) {
+    const obj = stripeObjs.objects.find(o => o.type === type);
+    this.id = obj.id;
+    this.product = obj.product;
+    this.name = obj.name;
+    this.type = obj.type;
+    this.description = obj.description;
+    this.methodName = obj.methodName;
+    this.methodArgs = obj.methodArgs;
+  }
 
-    this.name = stripeObject.name;
-    this.methodName = stripeObject.methodName;
-    this.methodArgs = stripeObject.methodArgs;
-    this.data = stripeObject.data;
-    this.dataType = stripeObject.dataType;
-    this.nodeBlueprint = stripeObject.node;
-    this.nodes = [];
-  },
-
-  async getApiObject(stripe) {
-    const apiObject = await stripe[this.name][this.methodName](this.methodArgs);
-    return apiObject;
-  },
-
-  async paginateData(stripe, apiObject) {
-    
-    // No data so don't need to paginate
-    if (!apiObject.data.length) {
-      return apiObject;
+  objectPath(stripe) {
+    let path = null;
+    if (this.product) {
+      path = stripe[this.product][this.name];
+    } else {
+      path = stripe[this.name];
     }
 
-    let hasMore = apiObject.has_more;
+    return path;
+  }
 
-    // If apiObject doesn't have more, don't need
-    // to paginate
-    if (!hasMore) {
-      return apiObject;
-    }
-
-    // Need to paginate the apiObject data
-    let lastDataItemId = apiObject.data[apiObject.data.length - 1].id;
-    let args = {
-    ...this.methodArgs,
-    starting_after: lastDataItemId,
-  };
-
-    // Paginate through as many objects as needed in order to
-    // get all of the data.
-    while (hasMore) {
-      const nextObject = await stripe[this.name][this.methodName](args);
-      apiObject.data.push(...nextObject.data);
-
-      lastDataItemId = nextObject.data[nextObject.data.length - 1].id;
-      args = {
-        ...this.methodArgs,
-        starting_after: lastDataItemId,
+  node(createContentDigest, payload) {
+    return {
+      id: payload.id,
+      parent: null,
+      children: [],
+      internal: {
+        type: `Stripe${this.type}`,
+        content: JSON.stringify(payload),
+        contentDigest: createContentDigest(payload),
+        description: this.description
       }
-      
-      hasMore = nextObject.has_more;
     }
+  }
+}
 
-    return apiObject;
-  },
-
-  buildNodes() {
-    let nodes = [];
-    if (this.data.data.length) {
-      nodes = this.data.data.map(item => this.buildNode(item));
-    }
-
-    this.nodes = nodes;
-  },
-
-  buildNode(item) {
-    
-    const nodeContent = JSON.stringify(item);
-    const nodeContentDigest = crypto
-      .createHash('md5')
-      .update(nodeContent)
-      .digest('hex');
-
-    const node = Object.assign(item, this.nodeBlueprint);
-
-    node.internal.content = nodeContent;
-    node.internal.contentDigest = nodeContentDigest;
-
-    return node;
-  },
-};
+module.exports = StripeObject;
