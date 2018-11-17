@@ -43,7 +43,11 @@ or
 
 ## How to use
 
-Note: In your objects array, the strings match the middle object name from the API. So, for example, if I want to get all of my customers' data, which can be found at `stripe.customers.list`, I would use the string `'customers'` in my objects array. Example below.
+Note: In your objects array, the strings match the middle object name from the API. So, for example, if I want to get all of my customers' data, which can be found at `stripe.customers.list`, I would use the string `'customers'` in my objects array.
+
+Additionally, please only include your Stripe secret key by using a .env file. We don't want your key ending up in your version-controlled source code!
+
+Example below.
 
 ```javascript
 // In your gatsby-config.js
