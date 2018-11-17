@@ -43,7 +43,7 @@ or
 
 ## How to use
 
-Note: In your objects array, the strings match the middle object name from the API. So, for example, if I want to get all of my customers' data, which can be found at `stripe.customers.list`, I would use the string `'customers'` in my objects array.
+In the plugin options objects' array, specify the object types you would like to get data for. For example, if I'd like to get the lists of data for my balances, customers, and subscription items, my objects array would look like this: `['Balance', 'Customer', 'SubscriptionItem']`.
 
 Additionally, please only include your Stripe secret key by using a .env file. We don't want your key ending up in your version-controlled source code!
 
@@ -55,7 +55,7 @@ plugins: [
   {
     resolve: `gatsby-source-stripe`,
     options: {
-      objects: ['balance', 'customers', 'products', 'applicationFees', 'skus', 'subscriptions'],
+      objects: ['Balance', 'BalanceTransaction', 'Product', 'ApplicationFee', 'Sku', 'Subscription'],
       secretKey: 'stripe_secret_key_here'
     }
   }
