@@ -25,7 +25,7 @@ class StripeObject {
 
   node(createContentDigest, payload) {
     return {
-      id: payload.id,
+      id: payload.id ? payload.id : `Stripe${this.type}${this.id}`,
       parent: null,
       children: [],
       internal: {
