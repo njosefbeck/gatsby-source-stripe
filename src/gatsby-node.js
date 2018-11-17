@@ -42,6 +42,19 @@ exports.sourceNodes = async (
     const path = stripeObj.objectPath(stripe);
 
     /*
+     * Some Stripe objects, for whatever reason, aren't iterable
+     * This check here, allows us to still get that data from Stripe
+     * The canIterate key is set manually in stripeObjects.json
+     * based on testing the different object types.
+     */
+    if (!stripeObj.canIterate) {
+      const payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+      const node = stripeObj.node(createContentDigest, payload);
+      createNode(node);
+      continue;
+    }
+
+    /*
      * Use for - await - of as per the Stripe.js Node documentation
      * for auto pagination purposes
      *
