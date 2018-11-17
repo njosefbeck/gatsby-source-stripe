@@ -1,378 +1,349 @@
 {
   "objects": [
     {
+      "id": 1,
+      "product": null,
       "name": "balance",
+      "type": "Balance",
+      "description": "A list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth).",
+      "methodName": "retrieve",
+      "methodArgs": {}
+    },
+    {
+      "id": 2,
+      "product": null,
+      "name": "balance",
+      "type": "BalanceTransaction",
+      "description": "A list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth).",
       "methodName": "listTransactions",
-      "methodArgs": { "expand": ["data.source"] },
-      "data": {},
-      "dataType": "Balance",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeBalance",
-          "content": "",
-          "description": "A list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth).",
-          "contentDigest": null
-        }
+      "methodArgs": {
+        "expand": ["source"]
       }
     },
     {
+      "id": 3,
+      "product": null,
       "name": "charges",
+      "type": "Charge",
+      "description": "A list of charges previously created.",
       "methodName": "list",
-      "methodArgs": { "expand": ["data.application", "data.application_fee", "data.balance_transaction"] },
-      "data": {},
-      "dataType": "Charge",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeCharge",
-          "content": "",
-          "description": "A list of charges previously created.",
-          "contentDigest": null
-        }
+      "methodArgs": {
+        "expand": ["application", "application_fee", "balance_transaction", "customer", "destination", "dispute", "invoice", "on_behalf_of", "order", "review", "source_transfer", "transfer"]
       }
     },
     {
+      "id": 4,
+      "product": null,
       "name": "customers",
+      "type": "Customer",
+      "description": "A list of customers.",
       "methodName": "list",
-      "methodArgs": { "expand": ["data.default_source"] },
-      "data": {},
-      "dataType": "Customer",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeCustomer",
-          "content": "",
-          "description": "A list of customers.",
-          "contentDigest": null
-        }
+      "methodArgs": {
+        "expand": ["default_source"]
       }
     },
     {
+      "id": 5,
+      "product": null,
       "name": "disputes",
+      "type": "Dispute",
+      "description": "A list of disputes.",
       "methodName": "list",
-      "methodArgs": { "expand": ["data.charge"] },
-      "data": {},
-      "dataType": "Dispute",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeDispute",
-          "content": "",
-          "description": "A list of disputes.",
-          "contentDigest": null
-        }
+      "methodArgs": {
+        "expand": ["charge", "evidence.cancellation_policy", "evidence.customer_communication","evidence.customer_signature","evidence.duplicate_charge_documentation","evidence.receipt","evidence.refund_policy","evidence.service_documentation","evidence.shipping_documentation","evidence.uncategorized_file"]
       }
     },
     {
+      "id": 6,
+      "product": null,
       "name": "events",
+      "type": "Event",
+      "description": "A list of events.",
       "methodName": "list",
-      "methodArgs": {},
-      "data": {},
-      "dataType": "Event",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeEvent",
-          "content": "",
-          "description": "A list of events, going back up to 30 days.",
-          "contentDigest": null
-        }
+      "methodArgs": {}
+    },
+    {
+      "id": 7,
+      "product": null,
+      "name": "files",
+      "type": "File",
+      "description": "A list of files uploaded to Stripe.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 8,
+      "product": null,
+      "name": "fileLinks",
+      "type": "FileLink",
+      "description": "A list of file object links, so non-Stripe users can access the files.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 9,
+      "product": null,
+      "name": "paymentIntents",
+      "type": "PaymentIntent",
+      "description": "A list of payment intents, tracking the process of collecting a payment from a customer.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["application", "customer", "on_behalf_of", "review", "source"]
       }
     },
     {
-      "name": "fileUploads",
-      "methodName": "list",
-      "methodArgs": {},
-      "data": {},
-      "dataType": "FileUpload",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeFileUpload",
-          "content": "",
-          "description": "A list of files uploaded to Stripe.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
+      "id": 10,
+      "product": null,
       "name": "payouts",
+      "type": "Payout",
+      "description": "A list of existing payouts sent to third-party bank accounts or that Stripe has sent to the Stripe account.",
       "methodName": "list",
-      "methodArgs": { "expand": ["data.balance_transaction", "data.destination", "data.failure_balance_transaction"] },
-      "data": {},
-      "dataType": "Payout",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripePayout",
-          "content": "",
-          "description": "A list of existing payouts sent to third-party bank accounts or that Stripe has sent to the Stripe account.",
-          "contentDigest": null
-        }
+      "methodArgs": {
+        "expand": ["balance_transaction", "destination", "failure_balance_transactions"]
       }
     },
     {
-      "name": "refunds",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.balance_transaction", "data.charge", "data.failure_balance_transaction"] },
-      "data": {},
-      "dataType": "Refund",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeRefund",
-          "content": "",
-          "description": "A list of all refunds.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "coupons",
-      "methodName": "list",
-      "methodArgs": {},
-      "data": {},
-      "dataType": "Coupon",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeCoupon",
-          "content": "",
-          "description": "A list of all coupons.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "invoices",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.charge", "data.subscription"] },
-      "data": {},
-      "dataType": "Invoice",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeInvoice",
-          "content": "",
-          "description": "A list of all invoices.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "invoiceItems",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.customer","data.invoice", "data.subscription"] },
-      "data": {},
-      "dataType": "InvoiceItem",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeInvoiceItem",
-          "content": "",
-          "description": "A list of all invoice items.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "plans",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.product"] },
-      "data": {},
-      "dataType": "Plan",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripePlan",
-          "content": "",
-          "description": "A list of all plans.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "subscriptions",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.customer"] },
-      "data": {},
-      "dataType": "Subscription",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeSubscription",
-          "content": "",
-          "description": "A list of all non-canceled subscriptions.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "accounts",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.business_logo"] },
-      "data": {},
-      "dataType": "Account",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeAccount",
-          "content": "",
-          "description": "A list of accounts connected to the Stripe account's platform via Connect.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "applicationFees",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.account", "data.application", "data.balance_transaction", "data.charge", "data.originating_transaction"] },
-      "data": {},
-      "dataType": "ApplicationFee",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeApplicationFee",
-          "content": "",
-          "description": "A list of application fees that have been previously collected.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "countrySpecs",
-      "methodName": "list",
-      "methodArgs": {},
-      "data": {},
-      "dataType": "CountrySpec",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeCountrySpec",
-          "content": "",
-          "description": "A list of all Country Spec objects available in the API.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "transfers",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.balance_transaction", "data.destination", "data.destination_payment", "data.source_transaction"] },
-      "data": {},
-      "dataType": "Transfer",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeTransfer",
-          "content": "",
-          "description": "A list of existing transfers sent to connected accounts.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
-      "name": "orders",
-      "methodName": "list",
-      "methodArgs": { "expand": ["data.charge", "data.customer"] },
-      "data": {},
-      "dataType": "Order",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeOrder",
-          "content": "",
-          "description": "A list of all orders.",
-          "contentDigest": null
-        }
-      }
-    },
-    {
+      "id": 11,
+      "product": null,
       "name": "products",
+      "type": "Product",
+      "description": "A list of all products.",
       "methodName": "list",
-      "methodArgs": {},
-      "data": {},
-      "dataType": "Product",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeProduct",
-          "content": "",
-          "description": "A list of all products.",
-          "contentDigest": null
-        }
+      "methodArgs": {}
+    },
+    {
+      "id": 12,
+      "product": null,
+      "name": "refunds",
+      "type": "Refund",
+      "description": "A list of refunds.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["balance_transaction", "charge", "source_transfer_reversal", "failure_balance_transactions", "transfer_reversal"]
       }
     },
     {
+      "id": 13,
+      "product": null,
+      "name": "coupons",
+      "type": "Coupon",
+      "description": "A list of all coupons.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 14,
+      "product": null,
+      "name": "invoices",
+      "type": "Invoice",
+      "description": "A list of invoices.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["charge", "default_source", "subscription"]
+      }
+    },
+    {
+      "id": 15,
+      "product": null,
+      "name": "invoiceItems",
+      "type": "InvoiceItem",
+      "description": "A list of all invoice items.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 16,
+      "product": null,
+      "name": "plans",
+      "type": "Plan",
+      "description": "A list of all plans.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 17,
+      "product": null,
+      "name": "subscriptions",
+      "type": "Subscription",
+      "description": "A list of subscriptions.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["customer", "default_source"]
+      }
+    },
+    {
+      "id": 18,
+      "product": null,
+      "name": "subscriptionItems",
+      "type": "SubscriptionItem",
+      "description": "A list of all subscription items.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 19,
+      "product": null,
+      "name": "accounts",
+      "type": "Account",
+      "description": "A list of all accounts connected to your platform via Stripe Connect.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["business_logo"]
+      }
+    },
+    {
+      "id": 20,
+      "product": null,
+      "name": "applicationFees",
+      "type": "ApplicationFee",
+      "description": "A list of all application fees associated with your Stripe Connect platform.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 21,
+      "product": null,
+      "name": "countrySpecs",
+      "type": "CountrySpec",
+      "description": "A list of country specs.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 22,
+      "product": null,
+      "name": "topups",
+      "type": "TopUp",
+      "description": "A list of top-ups.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 23,
+      "product": null,
+      "name": "transfers",
+      "type": "Transfer",
+      "description": "A list of transfers to and from the accounts connected to your Stripe Connect platform.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["balance_transaction", "destination", "destination_payment", "source_transaction"]
+      }
+    },
+    {
+      "id": 24,
+      "product": "issuing",
+      "name": "authorizations",
+      "type": "IssuingAuthorization",
+      "description": "A list of Issuing authorizations.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["cardholder"]
+      }
+    },
+    {
+      "id": 25,
+      "product": "issuing",
+      "name": "cardholders",
+      "type": "IssuingCardholder",
+      "description": "A list of Issuing cardholders.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 26,
+      "product": "issuing",
+      "name": "cards",
+      "type": "IssuingCard",
+      "description": "A list of Issuing cards.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 27,
+      "product": "issuing",
+      "name": "disputes",
+      "type": "IssuingDispute",
+      "description": "A list of Issuing disputes.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 28,
+      "product": "issuing",
+      "name": "transactions",
+      "type": "IssuingTransaction",
+      "description": "A list of Issuing transactions.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["authorization", "card", "cardholder"]
+      }
+    },
+    {
+      "id": 29,
+      "product": "terminal",
+      "name": "locations",
+      "type": "TerminalLocation",
+      "description": "A list of Terminal locations.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 30,
+      "product": "terminal",
+      "name": "readers",
+      "type": "TerminalReader",
+      "description": "A list of Terminal readers.",
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 31,
+      "product": null,
+      "name": "orders",
+      "type": "Order",
+      "description": "A list of orders.",
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["charge", "customer"]
+      }
+    },
+    {
+      "id": 32,
+      "product": null,
       "name": "orderReturns",
+      "type": "OrderReturn",
+      "description": "A list of order returns.",
       "methodName": "list",
-      "methodArgs": { "expand": ["data.order", "data.refund"] },
-      "data": {},
-      "dataType": "OrderReturn",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeOrderReturn",
-          "content": "",
-          "description": "A list of all order returns.",
-          "contentDigest": null
-        }
-      }
+      "methodArgs": {}
     },
     {
+      "id": 33,
+      "product": null,
       "name": "skus",
+      "type": "Sku",
+      "description": "A list of skus.",
       "methodName": "list",
-      "methodArgs": { "expand": ["data.product"] },
-      "data": {},
-      "dataType": "Sku",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeSku",
-          "content": "",
-          "description": "A list of all SKUs.",
-          "contentDigest": null
-        }
+      "methodArgs": {
+        "expand": ["product"]
       }
     },
     {
+      "id": 34,
+      "product": "sigma",
       "name": "scheduledQueryRuns",
+      "type": "SigmaScheduledQueryRun",
+      "description": "A list of Sigma scheduled query runs.",
       "methodName": "list",
-      "methodArgs": {},
-      "data": {},
-      "dataType": "ScheduledQueryRun",
-      "node": {
-        "parent": null,
-        "children": [],
-        "internal": {
-          "type": "StripeScheduledQueryRun",
-          "content": "",
-          "description": "A list of all Sigma scheduled query runs.",
-          "contentDigest": null
-        }
-      }
+      "methodArgs": {}
+    },
+    {
+      "id": 35,
+      "product": null,
+      "name": "webhookEndpoints",
+      "type": "WebhookEndpoint",
+      "description": "A list of webhook endpoints.",
+      "methodName": "list",
+      "methodArgs": {}
     }
   ]
 }
