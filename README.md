@@ -14,6 +14,8 @@ or
 
 ## How to use
 
+**NOTE: This plugin only supports Node v.10 and above, and has been tested against v10.13.0. If you experience any issues, first make sure you're running at least Node v.10.**
+
 In the plugin options objects' array, specify the object types you would like to get data for. For example, if I'd like to get the lists of data for my balances, customers, and subscriptions, my objects array would look like this: `['Balance', 'Customer', 'Subscription']`.
 
 Additionally, please only include your Stripe secret key via a .env file. We don't want your key ending up in your version-controlled source code!
@@ -77,7 +79,13 @@ Below is a table with a list of the Stripe types supported in the options' objec
 
 ## Expanding Objects
 
-All Stripe objects that [have expandable](https://stripe.com/docs/api#expanding_objects) sub-objects have been expanded. For example, when you retrieve a SKU using the Stripe API, there's a "product" key in the returned SKU object, which by default is an id of an associated product object. Instead of you having to query for that specific product object, this plugin will auto-expand it for you, so all of the associated product data can be accessed via the SKU object.
+Expanding all Stripe objects is tricky, as some objects have a lot of nested sub-objects to expand! We've tried to auto-expand as much of the top-level objects as possible. You can peruse a list of what is expanded per object in the `stripeObjects.json` file.
+
+## Auto-pagination
+
+**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin only supports Node v.10 and above, and has been tested against v10.13.0. If you experience any issues, first make sure you're running at least Node v.10.**
+
+All list responses are fully paginated.
 
 ## How to query
 
