@@ -2,7 +2,7 @@ const stripeClient = require('stripe');
 const stripeObject = require('./stripeObject');
 
 exports.sourceNodes = async (
-	{ actions },
+	{ actions, createNodeId, createContentDigest },
 	{ objects = [], secretKey = "" }
 ) => {
 
@@ -19,6 +19,12 @@ exports.sourceNodes = async (
 	}
 
 	const stripe = stripeClient(secretKey);
+
+	stripe.setAppInfo({
+	  name: "Gatsby.js Stripe Source Plugin",
+	  version: "2.0.0",
+	  url: "https://www.npmjs.com/package/gatsby-source-stripe"
+	});
 
 	// Initialize stripeObjects based on gatsby plugin config
 	const stripeObjects = objects.map(object => {
