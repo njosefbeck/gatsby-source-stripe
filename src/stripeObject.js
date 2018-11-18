@@ -30,6 +30,7 @@ class StripeObject {
       parent: null,
       children: [],
       internal: {
+        mediaType: 'application/json',
         type: `Stripe${this.type}`,
         content: JSON.stringify(payload),
         contentDigest: createContentDigest(payload),
