@@ -4,6 +4,8 @@ Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/
 
 This plugin is a source plugin, so it only brings in the data (to be used, for example, in creating a Stripe dashboard, or an e-commerce store). To actually edit the data in your Stripe account, to handle transactions, make charges, you will need to use some kind of backend server or serverless architecture.
 
+Check out the [CHANGELOG](https://github.com/njosefbeck/gatsby-source-stripe/blob/master/CHANGELOG.md) for past and upcoming updates.
+
 ## Install
 
 `npm install gatsby-source-stripe`
@@ -16,9 +18,9 @@ or
 
 **NOTE: This plugin only supports Node v.10 and above, and has been tested against v10.13.0. If you experience any issues, first make sure you're running at least Node v.10.**
 
-In the plugin options objects' array, specify the object types you would like to get data for. For example, if I'd like to get the lists of data for my balances, customers, and subscriptions, my objects array would look like this: `['Balance', 'Customer', 'Subscription']`.
+In the plugin options objects' array, specify the object types you would like to get data for. For example, if I'd like to get the lists of data for my balance transactions, customers, and subscriptions, my objects array would look like this: `['BalanceTransaction', 'Customer', 'Subscription']`.
 
-Additionally, please only include your Stripe secret key via a .env file. We don't want your key ending up in your version-controlled source code!
+Additionally, please only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file. We don't want your key ending up in your version-controlled source code!
 
 Example below.
 
@@ -125,7 +127,7 @@ When using GraphiQL, click on "Docs" in the top-right corner of the screen to ex
 
 ## Develop
 
-Would you like to help maintain this project? We would love your help! Checkout issues and look for tags labeled `help wanted`. Also, feel free to get in touch via Twitter @njosefbeck.
+Would you like to help maintain this project? We would love your help! Checkout [issues](https://github.com/njosefbeck/gatsby-source-stripe/issues) and look for tags labeled `help wanted`. Also, feel free to get in touch via Twitter @njosefbeck.
 
 To set up the project locally, follow these steps.
 
