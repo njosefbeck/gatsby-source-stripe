@@ -65,6 +65,20 @@ exports.sourceNodes = async (
      * stripe['customers']['list']({ "expand": "data.default_source" })
      */
     for await (const payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
+
+      /**
+       * Leaving this in here as a reminder that, depending on what the Gatsby.js
+       * team says, I'll need to deal with event objects for skus and products having
+       * the same attributes key, but having different data types (i.e. sku.attributes
+       * is an object, and product.attributes is an array).
+       */
+      /*
+      if (payload.object == 'event' && Array.isArray(payload.data.object.attributes)) {
+        console.log(payload.data.object.object);
+        console.log(payload.data.object.attributes);
+      }
+      */
+
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
     }
