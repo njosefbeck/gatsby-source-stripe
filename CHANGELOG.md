@@ -4,9 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+- None
+
+## [2.0.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v1.2.1...v2.0.0) - 2018-11-18
+### Changed
+- This release contains a number of breaking changes. 
+  - Due to the way we're handling auto-pagination, you must use Node v.10 or higher when using this version of the plugin.
+  - When adding Stripe objects to the objects array in `gatsby-config.js`, you must use the object types listed in the README. Thus, the type names have changed.
+- Re-write plugin to incorporate [stripe-node](https://github.com/stripe/stripe-node) auto-pagination.
+- Update README to include more information about how to use the plugin.
+- Update plugin implementation to bring it fully up to date with Stripe API version 2018-11-08. This involves adding some new object types (ex: TopUp, TerminalLocation), and renaming other objects (fileUploads becomes File).
 - Add plugin information for the Stripe library as recommended [here](https://github.com/stripe/stripe-node#writing-a-plugin).
-- Change how we call the Stripe API list methods to use auto-pagination as described [here](https://github.com/stripe/stripe-node#auto-pagination).
-- Change `fileUploads` API call to `files` and add missing endpoints for getting Stripe data (i.e. incorporate updates made to the Stripe API).
 
 ## [1.2.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v1.2.0...v1.2.1) - 2018-11-02
 ### Changed
