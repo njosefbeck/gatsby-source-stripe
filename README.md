@@ -1,6 +1,6 @@
 # gatsby-source-stripe
 
-Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api).
+Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version 2018-11-08.
 
 This plugin is a source plugin, so it only brings in the data (to be used, for example, in creating a Stripe dashboard, or an e-commerce store). To actually edit the data in your Stripe account, to handle transactions, make charges, you will need to use some kind of backend server or serverless architecture.
 
