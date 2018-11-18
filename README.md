@@ -122,3 +122,15 @@ You can also query for a specific Stripe object like this:
 ```
 
 When using GraphiQL, click on "Docs" in the top-right corner of the screen to explore all of the Stripe data being brought in, including their schemas. Additionally, check out Gatsby's handy [GraphQL Reference](https://www.gatsbyjs.org/docs/graphql-reference/) for information about filtering, sorting, etc.
+
+## Develop
+
+Would you like to help maintain this project? We would love your help! Checkout issues and look for tags labeled `help wanted`. Also, feel free to get in touch via Twitter @njosefbeck.
+
+To set up the project locally, follow these steps.
+
+1) Make sure you're on at least Node v.10.
+2) Fork the repo and pull it down locally. For ease of testing, we recommend pulling it into an existing Gatsby project, in a `plugins` directory.
+3) Run `npm run build` in the console, to transpile the code for testing and running in your project.
+4) Add the plugin, with options, to `gatsby-config.js`.
+4) Hack away!
