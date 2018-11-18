@@ -108,16 +108,17 @@ You can query all of the different Stripe object data like the following:
 }
 ```
 
-Just replace "Customer" with the singular version of the string used in the objects array in gatsby-config.js.
+Just replace "Customer" with any of the types used in your objects config array.
 
-You can also query for a specific object like this:
+You can also query for a specific Stripe object like this:
 
 ```graphql
 {
-  StripeCustomer(id: { eq: "customer_id_here" }) {
+  stripeCustomer(id: { eq: "customer_id_here" }) {
     id,
     name
   }
 }
 ```
 
+When using GraphiQL, click on "Docs" in the top-right corner of the screen to explore all of the Stripe data being brought in, including their schemas. Additionally, check out Gatsby's handy [GraphQL Reference](https://www.gatsbyjs.org/docs/graphql-reference/) for information about filtering, sorting, etc.
