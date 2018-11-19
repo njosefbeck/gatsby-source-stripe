@@ -30,7 +30,6 @@ exports.sourceNodes = async (
   const stripeObjects = objects.map(type => new StripeObject(type));
 
   for (const stripeObj of stripeObjects) {
-
     /*
      * Outputs the stripe object's path, to allow us to
      * get to the proper method
