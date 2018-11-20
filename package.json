@@ -21,11 +21,13 @@
   "peerDependencies": {
     "gatsby": ">=1"
   },
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "7.1.5",
     "@babel/core": "7.1.6",
     "@babel/node": "7.0.0",
-    "@babel/preset-env": "7.1.6",
+    "@babel/preset-env": "7.1.6"
+  },
+  "dependencies": {
     "stripe": "6.15.0"
   }
 }
