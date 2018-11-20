@@ -7,8 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
-## [2.0.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.0.0...v2.0.4) - 2018-11-20
+## [2.0.5](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.0.0...v2.0.5) - 2018-11-20
 ### Changed
+- Fix generated file to accurately reflect StripeObject.js
+- Add babel-transpiled files back to version control to ensure they are part of npm package when installed by users.
 - Moved dependencies to devDependencies to avoid dependency pollution.
 
 ## [2.0.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v1.2.1...v2.0.0) - 2018-11-18
