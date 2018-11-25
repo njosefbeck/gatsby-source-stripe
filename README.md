@@ -6,8 +6,8 @@ This plugin is a source plugin, so it only brings in the data (to be used, for e
 
 Use cases for this Stripe source plugin could be:
 
-* Create an ecommerce store based on the products and skus found in your Stripe account.
-* Create various dashboards around customers, invoices, etc.
+* Create an ecommerce store. This plugin will allow you to bring your products and skus into your Gatsby site, and then you can use Stripe Checkout via the [gatsby-plugin-stripe-checkout](https://github.com/njosefbeck/gatsby-plugin-stripe-checkout) plugin.
+* Create various dashboards around customers, invoices, etc. Use this plugin to bring in any of the data types listed below.
 
 Do you use this plugin in your Gatsby project? Let me know and I can add it here as an example!
 
