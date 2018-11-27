@@ -86,32 +86,41 @@ exports.sourceNodes = async (
       * Adds the localFiles field, which is an array of
       * references to the created File nodes.
       *
-      * Currently only supports grabbing images from Product and Sku objects.
+      * Currently only supports Product and Sku images.
       */
-      const fields = [];
-      if (downloadFiles) {
-        let fileNode;
+      const type = stripeObj.type.toLowerCase();
+      const fileFields = {
+        product: ["images"],
+        sku: ["image", "product.images"]
+      };
 
-        if (payload.image) fields.push({ urls: [payload.image] });
-        if (payload.images) fields.push({ urls: payload.images });
-        if (payload.product && payload.product.images) fields.push({ urls: payload.product.images, object: 'product' });
+      if (downloadFiles && fileFields[type]) {
+        fileFields[type].forEach(field => {
+          const splitPath = field.split(".");
+          const urls = Array.from(getNestedObject(payload, splitPath) || []);
+          if (!urls.length) return;
 
-        fields.forEach(field => {
-          field.object ? payload[field.object].localFiles___NODE = [] : payload.localFiles___NODE = [];
-          field.urls.forEach(async url => {
-            fileNode = await createRemoteFileNode({
-              url,
-              store,
-              cache,
-              createNode,
-              createNodeId
-            });
+          const sourceObject = splitPath.length >= 1
+            ? getNestedObject(payload, splitPath.slice(0, -1))
+            : payload;
+          sourceObject.localFiles___NODE = [];
 
-            if (!fileNode) return;
-            if (field.object) {
-              payload[field.object].localFiles___NODE.push(fileNode.id);
-            } else {
-              payload.localFiles___NODE.push(fileNode.id);
+          urls.forEach(async url => {
+            let fileNode;
+            try {
+              fileNode = await createRemoteFileNode({
+                url,
+                store,
+                cache,
+                createNode,
+                createNodeId
+              });
+            } catch (e) {
+              // Ignore
+            }
+
+            if (fileNode) {
+              sourceObject.localFiles___NODE.push(fileNode.id);
             }
           });
         });
@@ -125,3 +134,8 @@ exports.sourceNodes = async (
   return;
 
 };
+
+// Access nested objects with path given as array.
+const getNestedObject = (object, path) => (
+  path.reduce((obj, key) => (obj[key]), object)
+);

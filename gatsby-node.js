@@ -108,39 +108,44 @@ exports.sourceNodes = async ({
         *
         * Adds the localFiles field, which is an array of
         * references to the created File nodes.
-        *
-        * Currently only supports grabbing images from Product and Sku objects.
         */
-        const fields = [];
+        const type = stripeObj.type.toLowerCase();
+        const fileFields = {
+          product: ["images"],
+          sku: ["image", "product.images"],
+          file: ["url"]
+        };
 
-        if (downloadFiles) {
-          let fileNode;
-          if (payload.image) fields.push({
-            urls: [payload.image]
-          });
-          if (payload.images) fields.push({
-            urls: payload.images
-          });
-          if (payload.product && payload.product.images) fields.push({
-            urls: payload.product.images,
-            object: 'product'
-          });
-          fields.forEach(field => {
-            field.object ? payload[field.object].localFiles___NODE = [] : payload.localFiles___NODE = [];
-            field.urls.forEach(async url => {
-              fileNode = await createRemoteFileNode({
-                url,
-                store,
-                cache,
-                createNode,
-                createNodeId
-              });
-              if (!fileNode) return;
+        if (downloadFiles && fileFields[type]) {
+          fileFields[type].forEach(field => {
+            const splitPath = field.split(".");
+            const urls = Array.from(getNestedObject(payload, splitPath) || []);
 
-              if (field.object) {
-                payload[field.object].localFiles___NODE.push(fileNode.id);
-              } else {
-                payload.localFiles___NODE.push(fileNode.id);
+            if (!urls.length) {
+              // console.table({ type, splitPath });
+              return;
+            }
+
+            const sourceObject = splitPath.length >= 1 ? getNestedObject(payload, splitPath.slice(0, -1)) : payload;
+            sourceObject.localFiles___NODE = [];
+            urls.forEach(async url => {
+              let fileNode;
+
+              try {
+                fileNode = await createRemoteFileNode({
+                  url,
+                  store,
+                  cache,
+                  createNode,
+                  createNodeId
+                });
+              } catch (e) {
+                // Ignore
+                console.log(e, url);
+              }
+
+              if (fileNode) {
+                sourceObject.localFiles___NODE.push(fileNode.id);
               }
             });
           });
@@ -166,4 +171,7 @@ exports.sourceNodes = async ({
   }
 
   return;
-};
+}; // Access nested objects, given as path array.
+
+
+const getNestedObject = (object, path) => path.reduce((obj, key) => obj[key], object);
