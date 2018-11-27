@@ -19,7 +19,8 @@
   "bugs": "https://github.com/njosefbeck/gatsby-source-stripe/issues",
   "license": "MIT",
   "peerDependencies": {
-    "gatsby": ">=1"
+    "gatsby": ">=1",
+    "gatsby-source-filesystem": "^2.0.4"
   },
   "devDependencies": {
     "@babel/cli": "7.1.5",

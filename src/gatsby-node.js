@@ -1,9 +1,10 @@
 const stripeClient = require('stripe');
 const StripeObject = require('./StripeObject');
+const { createRemoteFileNode } = require('gatsby-source-filesystem');
 
 exports.sourceNodes = async (
-  { actions, createContentDigest },
-  { objects = [], secretKey = "" }
+  { actions, cache, createNodeId, createContentDigest, store },
+  { downloadFiles = false, objects = [], secretKey = "" }
 ) => {
 
   const { createNode } = actions;
@@ -77,6 +78,44 @@ exports.sourceNodes = async (
         console.log(payload.data.object.attributes);
       }
       */
+
+      /*
+      * Download and create File nodes for object images, only if
+      * downloadFiles is configured.
+      *
+      * Adds the localFiles field, which is an array of
+      * references to the created File nodes.
+      *
+      * Currently only supports grabbing images from Product and Sku objects.
+      */
+      const fields = [];
+      if (downloadFiles) {
+        let fileNode;
+
+        if (payload.image) fields.push({ urls: [payload.image] });
+        if (payload.images) fields.push({ urls: payload.images });
+        if (payload.product && payload.product.images) fields.push({ urls: payload.product.images, object: 'product' });
+
+        fields.forEach(field => {
+          field.object ? payload[field.object].localFiles___NODE = [] : payload.localFiles___NODE = [];
+          field.urls.forEach(async url => {
+            fileNode = await createRemoteFileNode({
+              url,
+              store,
+              cache,
+              createNode,
+              createNodeId
+            });
+
+            if (!fileNode) return;
+            if (field.object) {
+              payload[field.object].localFiles___NODE.push(fileNode.id);
+            } else {
+              payload.localFiles___NODE.push(fileNode.id);
+            }
+          });
+        });
+      }
 
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
