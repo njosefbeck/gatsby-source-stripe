@@ -97,8 +97,9 @@ exports.sourceNodes = async (
       if (downloadFiles && fileFields[type]) {
         fileFields[type].forEach(field => {
           const splitPath = field.split(".");
-          const urls = Array.from(getNestedObject(payload, splitPath) || []);
-          if (!urls.length) return;
+          let urls = getNestedObject(payload, splitPath);
+          if (!urls || !urls.length) return;
+          if (!Array.isArray(urls)) urls = [urls];
 
           const sourceObject = splitPath.length >= 1
             ? getNestedObject(payload, splitPath.slice(0, -1))
@@ -117,6 +118,7 @@ exports.sourceNodes = async (
               });
             } catch (e) {
               // Ignore
+              console.log('\n', e);
             }
 
             if (fileNode) {

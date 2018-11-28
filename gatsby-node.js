@@ -108,24 +108,21 @@ exports.sourceNodes = async ({
         *
         * Adds the localFiles field, which is an array of
         * references to the created File nodes.
+        *
+        * Currently only supports Product and Sku images.
         */
         const type = stripeObj.type.toLowerCase();
         const fileFields = {
           product: ["images"],
-          sku: ["image", "product.images"],
-          file: ["url"]
+          sku: ["image", "product.images"]
         };
 
         if (downloadFiles && fileFields[type]) {
           fileFields[type].forEach(field => {
             const splitPath = field.split(".");
-            const urls = Array.from(getNestedObject(payload, splitPath) || []);
-
-            if (!urls.length) {
-              // console.table({ type, splitPath });
-              return;
-            }
-
+            let urls = getNestedObject(payload, splitPath);
+            if (!urls || !urls.length) return;
+            if (!Array.isArray(urls)) urls = [urls];
             const sourceObject = splitPath.length >= 1 ? getNestedObject(payload, splitPath.slice(0, -1)) : payload;
             sourceObject.localFiles___NODE = [];
             urls.forEach(async url => {
@@ -141,7 +138,7 @@ exports.sourceNodes = async ({
                 });
               } catch (e) {
                 // Ignore
-                console.log(e, url);
+                console.log('\n', e);
               }
 
               if (fileNode) {
@@ -171,7 +168,7 @@ exports.sourceNodes = async ({
   }
 
   return;
-}; // Access nested objects, given as path array.
+}; // Access nested objects with path given as array.
 
 
 const getNestedObject = (object, path) => path.reduce((obj, key) => obj[key], object);
