@@ -31,8 +31,7 @@ class LocalFile {
             ...this.createRemoteArgs
           });
         } catch (e) {
-          // Ignore
-          console.error(new Error(e));
+          console.log(e);
         }
 
         if (fileNode) {
