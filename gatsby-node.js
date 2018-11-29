@@ -6,9 +6,7 @@ const stripeClient = require('stripe');
 
 const StripeObject = require('./StripeObject');
 
-const {
-  createRemoteFileNode
-} = require('gatsby-source-filesystem');
+const LocalFile = require('./LocalFile');
 
 exports.sourceNodes = async ({
   actions,
@@ -35,6 +33,12 @@ exports.sourceNodes = async ({
     return;
   }
 
+  const localFile = new LocalFile({
+    store,
+    cache,
+    createNode,
+    createNodeId
+  });
   const stripe = stripeClient(secretKey);
   stripe.setAppInfo({
     name: "Gatsby.js Stripe Source Plugin",
@@ -86,7 +90,7 @@ exports.sourceNodes = async ({
 
     try {
       for (var _iterator = _asyncIterator(path[stripeObj.methodName](stripeObj.methodArgs)), _step, _value; _step = await _iterator.next(), _iteratorNormalCompletion = _step.done, _value = await _step.value, !_iteratorNormalCompletion; _iteratorNormalCompletion = true) {
-        const payload = _value;
+        let payload = _value;
 
         /**
          * Leaving this in here as a reminder that, depending on what the Gatsby.js
@@ -111,41 +115,8 @@ exports.sourceNodes = async ({
         *
         * Currently only supports Product and Sku images.
         */
-        const type = stripeObj.type.toLowerCase();
-        const fileFields = {
-          product: ["images"],
-          sku: ["image", "product.images"]
-        };
-
-        if (downloadFiles && fileFields[type]) {
-          fileFields[type].forEach(field => {
-            const splitPath = field.split(".");
-            let urls = getNestedObject(payload, splitPath);
-            if (!urls || !urls.length) return;
-            if (!Array.isArray(urls)) urls = [urls];
-            const sourceObject = splitPath.length >= 1 ? getNestedObject(payload, splitPath.slice(0, -1)) : payload;
-            sourceObject.localFiles___NODE = [];
-            urls.forEach(async url => {
-              let fileNode;
-
-              try {
-                fileNode = await createRemoteFileNode({
-                  url,
-                  store,
-                  cache,
-                  createNode,
-                  createNodeId
-                });
-              } catch (e) {
-                // Ignore
-                console.log('\n', e);
-              }
-
-              if (fileNode) {
-                sourceObject.localFiles___NODE.push(fileNode.id);
-              }
-            });
-          });
+        if (downloadFiles) {
+          payload = localFile.download(payload, stripeObj.type);
         }
 
         const node = stripeObj.node(createContentDigest, payload);
@@ -168,7 +139,4 @@ exports.sourceNodes = async ({
   }
 
   return;
-}; // Access nested objects with path given as array.
-
-
-const getNestedObject = (object, path) => path.reduce((obj, key) => obj[key], object);
+};
