@@ -10,7 +10,7 @@ class LocalFile {
     };
   }
 
-  download(payload, type) {
+  downloadImages(payload, type) {
     const fields = this.fileFields[type.toLowerCase()];
 
     fields.forEach(field => {
@@ -43,7 +43,7 @@ class LocalFile {
     return payload;
   }
 
-  async downloadFile(payload) {
+  async downloadFiles(payload) {
     const updatedData = payload.data.map(async file => {
       let fileNode;
       try {
