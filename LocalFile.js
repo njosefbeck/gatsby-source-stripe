@@ -9,7 +9,8 @@ class LocalFile {
     this.createRemoteArgs = createRemoteArgs;
     this.fileFields = {
       product: ["images"],
-      sku: ["image", "product.images"]
+      sku: ["image", "product.images"],
+      file: ["url"]
     };
   }
 
@@ -31,8 +32,7 @@ class LocalFile {
             ...this.createRemoteArgs
           });
         } catch (e) {
-          // Ignore
-          console.error(new Error(e));
+          console.log(e);
         }
 
         if (fileNode) {
@@ -40,6 +40,30 @@ class LocalFile {
         }
       });
     });
+    return payload;
+  }
+
+  async downloadFile(payload) {
+    const updatedData = payload.data.map(async file => {
+      let fileNode;
+
+      try {
+        fileNode = await createRemoteFileNode({
+          url: file.url,
+          ext: `.${file.type}`,
+          ...this.createRemoteArgs
+        });
+      } catch (e) {
+        console.log(e);
+      }
+
+      if (fileNode) {
+        file.localFiles___NODE = [fileNode.id];
+      }
+
+      return file;
+    });
+    payload.data = await Promise.all(updatedData);
     return payload;
   } // Access nested objects with path given as array.
 

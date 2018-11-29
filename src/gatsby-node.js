@@ -23,7 +23,9 @@ exports.sourceNodes = async (
     store,
     cache,
     createNode,
-    createNodeId
+    createNodeId,
+    // Currently createRemoteFileNode discards auth headers with empty passwords
+    auth: { htaccess_user: secretKey, htaccess_pass: "" }
   });
 
   const stripe = stripeClient(secretKey);
@@ -55,7 +57,10 @@ exports.sourceNodes = async (
      * based on testing the different object types.
      */
     if (!stripeObj.canIterate) {
-      const payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+      let payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+      if (downloadFiles) {
+        payload = await localFile.downloadFile(payload);
+      }
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
       continue;
@@ -95,7 +100,6 @@ exports.sourceNodes = async (
       *
       * Currently only supports Product and Sku images.
       */
-
       if (downloadFiles) {
         payload = localFile.download(payload, stripeObj.type);
       }

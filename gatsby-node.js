@@ -37,7 +37,12 @@ exports.sourceNodes = async ({
     store,
     cache,
     createNode,
-    createNodeId
+    createNodeId,
+    // Currently createRemoteFileNode discards auth headers with empty passwords
+    auth: {
+      htaccess_user: secretKey,
+      htaccess_pass: ""
+    }
   });
   const stripe = stripeClient(secretKey);
   stripe.setAppInfo({
@@ -66,7 +71,12 @@ exports.sourceNodes = async ({
      */
 
     if (!stripeObj.canIterate) {
-      const payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+      let payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+
+      if (downloadFiles) {
+        payload = await localFile.downloadFile(payload);
+      }
+
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
       continue;
