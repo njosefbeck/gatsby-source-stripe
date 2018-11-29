@@ -29,7 +29,7 @@ In the plugin options objects' array, specify the object types you would like to
 
 Additionally, please only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file. We don't want your key ending up in your version-controlled source code!
 
-Enable [downloading images](#downloading-files) associated with your Stripe data by setting `downloadFiles` to true.
+Enable [downloading files](#downloading-files) associated with your Stripe data by setting `downloadFiles` to true.
 
 Example below.
 
@@ -101,7 +101,7 @@ All list responses are fully paginated.
 
 ## Downloading Files
 
-Setting `downloadFiles: true` in the plugin configuration enables downloading of images associated with Sku and Product objects. The images' [File nodes](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#how-to-query) are placed on the `localFiles` field of the Sku and Product nodes.
+Setting `downloadFiles: true` in the plugin configuration enables downloading of files associated with File objects, and images on Sku and Product objects. A Gatsby [File node](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#how-to-query) is created for each downloaded file, and references are placed on the `localFiles` field of their Stripe nodes.
 
 You can give these File nodes to plugins like [gatsby-image](https://using-gatsby-image.gatsbyjs.org/) to create responsive images and/or [gatsby-transformer-sharp](https://image-processing.gatsbyjs.org/) to process images at build.
 
