@@ -1,9 +1,10 @@
 const stripeClient = require('stripe');
 const StripeObject = require('./StripeObject');
+const LocalFile = require('./LocalFile');
 
 exports.sourceNodes = async (
-  { actions, createContentDigest },
-  { objects = [], secretKey = "" }
+  { actions, cache, createNodeId, createContentDigest, store },
+  { downloadFiles = false, objects = [], secretKey = "" }
 ) => {
 
   const { createNode } = actions;
@@ -17,6 +18,15 @@ exports.sourceNodes = async (
     console.error(new Error("No Stripe secret key found in your gatsby-config."));
     return;
   }
+
+  const localFile = new LocalFile({
+    store,
+    cache,
+    createNode,
+    createNodeId,
+    // Currently createRemoteFileNode discards auth headers with empty passwords
+    auth: { htaccess_user: secretKey, htaccess_pass: "null" }
+  });
 
   const stripe = stripeClient(secretKey);
 
@@ -47,7 +57,10 @@ exports.sourceNodes = async (
      * based on testing the different object types.
      */
     if (!stripeObj.canIterate) {
-      const payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+      let payload = await path[stripeObj.methodName](stripeObj.methodArgs);
+      if (downloadFiles) {
+        payload = await localFile.downloadFiles(payload);
+      }
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
       continue;
@@ -63,7 +76,7 @@ exports.sourceNodes = async (
      *
      * stripe['customers']['list']({ "expand": "data.default_source" })
      */
-    for await (const payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
+    for await (let payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
 
       /**
        * Leaving this in here as a reminder that, depending on what the Gatsby.js
@@ -77,6 +90,19 @@ exports.sourceNodes = async (
         console.log(payload.data.object.attributes);
       }
       */
+
+      /*
+      * Download and create File nodes for object images, only if
+      * downloadFiles is configured.
+      *
+      * Adds the localFiles field, which is an array of
+      * references to the created File nodes.
+      *
+      * Currently only supports Product and Sku images.
+      */
+      if (downloadFiles) {
+        payload = localFile.downloadImages(payload, stripeObj.type);
+      }
 
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
