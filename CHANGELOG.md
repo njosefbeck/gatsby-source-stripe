@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
+## [2.1.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.0.5...v2.1.0) - 2018-12-06
+### Changed
+- Add support for downloading File objects associated with File objects, and images on Sku and Product objects. This will enable images to be processed by gatsby-transformer-sharp and used with gatsby-image. Read the updated README for more information. Thanks to @brxck for this AWESOME update.
+- Update peer dependency for Gatsby to >= 2.0.15. This is necessary since the plugin uses "createContentDigest", which didn't exist in versions prior to 2.0.15. Peer dependency information can be found in `package.json` and in the README.
+- Update project dependencies to latest versions.
+
 ## [2.0.5](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.0.0...v2.0.5) - 2018-11-20
 ### Changed
 - Fix generated file to accurately reflect StripeObject.js
