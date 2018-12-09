@@ -74,7 +74,7 @@
       "name": "files",
       "type": "File",
       "description": "A list of files uploaded to Stripe.",
-      "canIterate": false,
+      "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
     },
