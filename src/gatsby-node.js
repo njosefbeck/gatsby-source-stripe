@@ -51,8 +51,7 @@ exports.sourceNodes = async (
     const path = stripeObj.objectPath(stripe);
 
     /*
-     * Some Stripe objects, for whatever reason, aren't iterable
-     * This check here, allows us to still get that data from Stripe
+     * Some Stripe objects, like "Balance" aren't iterable.
      * The canIterate key is set manually in stripeObjects.json
      * based on testing the different object types.
      */
