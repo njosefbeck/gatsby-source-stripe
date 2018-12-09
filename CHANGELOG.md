@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
+## [2.1.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.0...v2.1.2) - 2018-12-09
+### Changed
+- Update project dependencies, including stripe, which fixes issue #11.
+- Change README and inline code comments to reflect update (Stripe Files are now iterable!).
+
 ## [2.1.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.0.5...v2.1.0) - 2018-12-06
 ### Changed
 - Add support for downloading File objects associated with File objects, and images on Sku and Product objects. This will enable images to be processed by gatsby-transformer-sharp and used with gatsby-image. Read the updated README for more information. Thanks to @brxck for this AWESOME update.
