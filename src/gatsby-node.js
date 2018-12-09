@@ -97,7 +97,7 @@ exports.sourceNodes = async (
       * Adds the localFiles field, which is an array of
       * references to the created File nodes.
       *
-      * Currently only supports Product and Sku images.
+      * Currently supports File, Product and Sku images.
       */
       if (downloadFiles) {
         payload = localFile.downloadImages(payload, stripeObj.type);
