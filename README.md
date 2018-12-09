@@ -59,7 +59,7 @@ Below is a table with a list of the Stripe types supported in the options' objec
 | Customer | [stripe.customers.list()](https://stripe.com/docs/api/customers/list?lang=node) | None |
 | Dispute | [stripe.disputes.list()](https://stripe.com/docs/api/disputes/list?lang=node) | None |
 | Event | [stripe.events.list()](https://stripe.com/docs/api/events/list?lang=node) | None |
-| File | [stripe.files.list()](https://stripe.com/docs/api/files/list?lang=node) | Not iterable |
+| File | [stripe.files.list()](https://stripe.com/docs/api/files/list?lang=node) | None |
 | FileLink | [stripe.fileLinks.list()](https://stripe.com/docs/api/file_links/list?lang=node) | None |
 | PaymentIntent | [stripe.paymentIntents.list()](https://stripe.com/docs/api/payment_intents/list?lang=node) | None |
 | Payout | [stripe.payouts.list()](https://stripe.com/docs/api/payouts/list?lang=node) | None |
