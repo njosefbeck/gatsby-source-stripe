@@ -1,5 +1,7 @@
 "use strict";
 
+function _asyncIterator(iterable) { var method; if (typeof Symbol === "function") { if (Symbol.asyncIterator) { method = iterable[Symbol.asyncIterator]; if (method != null) return method.call(iterable); } if (Symbol.iterator) { method = iterable[Symbol.iterator]; if (method != null) return method.call(iterable); } } throw new TypeError("Object is not async iterable"); }
+
 const stripeClient = require('stripe');
 
 const StripeObject = require('./StripeObject');
@@ -62,8 +64,7 @@ exports.sourceNodes = async ({
      */
     const path = stripeObj.objectPath(stripe);
     /*
-     * Some Stripe objects, for whatever reason, aren't iterable
-     * This check here, allows us to still get that data from Stripe
+     * Some Stripe objects, like "Balance" aren't iterable.
      * The canIterate key is set manually in stripeObjects.json
      * based on testing the different object types.
      */
@@ -91,36 +92,58 @@ exports.sourceNodes = async ({
      */
 
 
-    for await (let payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
-      /**
-       * Leaving this in here as a reminder that, depending on what the Gatsby.js
-       * team says, I'll need to deal with event objects for skus and products having
-       * the same attributes key, but having different data types (i.e. sku.attributes
-       * is an object, and product.attributes is an array).
-       */
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
 
-      /*
-      if (payload.object == 'event' && Array.isArray(payload.data.object.attributes)) {
-        console.log(payload.data.object.object);
-        console.log(payload.data.object.attributes);
+    var _iteratorError;
+
+    try {
+      for (var _iterator = _asyncIterator(path[stripeObj.methodName](stripeObj.methodArgs)), _step, _value; _step = await _iterator.next(), _iteratorNormalCompletion = _step.done, _value = await _step.value, !_iteratorNormalCompletion; _iteratorNormalCompletion = true) {
+        let payload = _value;
+
+        /**
+         * Leaving this in here as a reminder that, depending on what the Gatsby.js
+         * team says, I'll need to deal with event objects for skus and products having
+         * the same attributes key, but having different data types (i.e. sku.attributes
+         * is an object, and product.attributes is an array).
+         */
+
+        /*
+        if (payload.object == 'event' && Array.isArray(payload.data.object.attributes)) {
+          console.log(payload.data.object.object);
+          console.log(payload.data.object.attributes);
+        }
+        */
+
+        /*
+        * Download and create File nodes for object images, only if
+        * downloadFiles is configured.
+        *
+        * Adds the localFiles field, which is an array of
+        * references to the created File nodes.
+        *
+        * Currently supports File, Product and Sku images.
+        */
+        if (downloadFiles) {
+          payload = localFile.downloadImages(payload, stripeObj.type);
+        }
+
+        const node = stripeObj.node(createContentDigest, payload);
+        createNode(node);
       }
-      */
-
-      /*
-      * Download and create File nodes for object images, only if
-      * downloadFiles is configured.
-      *
-      * Adds the localFiles field, which is an array of
-      * references to the created File nodes.
-      *
-      * Currently only supports Product and Sku images.
-      */
-      if (downloadFiles) {
-        payload = localFile.downloadImages(payload, stripeObj.type);
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          await _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
       }
-
-      const node = stripeObj.node(createContentDigest, payload);
-      createNode(node);
     }
   }
 
