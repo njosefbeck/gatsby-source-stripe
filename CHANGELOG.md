@@ -7,6 +7,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
+## [2.1.3](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.2...v2.1.3) - 2019-01-08
+### Changed
+- Update stripe from [6.18.0 to 6.20.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.0.11 to 2.0.12](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update @babel/cli from 7.2.0 to 7.2.3.
+- Update @babel/core from 7.2.0 to 7.2.2.
+- Update @babel/node from 7.2.0 to 7.2.2.
+- Update @babel/preset-env from 7.2.0 to 7.2.3.
+- Add [code of conduct](CODE_OF_CONDUCT.md) file.
+- Add [contributing](CONTRIBUTING.md) file.
+- Add [issue template](ISSUE_TEMPLATE.md) file.
+
 ## [2.1.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.0...v2.1.2) - 2018-12-09
 ### Changed
 - Update project dependencies, including stripe, which fixes issue #11.
