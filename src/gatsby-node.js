@@ -56,9 +56,6 @@ exports.sourceNodes = async (
      */
     if (!stripeObj.canIterate) {
       let payload = await path[stripeObj.methodName](stripeObj.methodArgs);
-      if (downloadFiles) {
-        payload = await localFile.downloadFiles(payload);
-      }
       const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
       continue;
@@ -99,7 +96,7 @@ exports.sourceNodes = async (
       * Currently supports File, Product and Sku images.
       */
       if (downloadFiles) {
-        payload = localFile.downloadImages(payload, stripeObj.type);
+        payload = localFile.downloadFiles(payload, stripeObj.type);
       }
 
       const node = stripeObj.node(createContentDigest, payload);

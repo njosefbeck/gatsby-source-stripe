@@ -10,7 +10,9 @@ class LocalFile {
     };
   }
 
-  downloadImages(payload, type) {
+  downloadFiles(payload, type) {
+    if (type === "File") return downloadFileNode(payload);
+    
     const fields = this.fileFields[type.toLowerCase()];
     if (!fields) return payload;
 
@@ -44,7 +46,7 @@ class LocalFile {
     return payload;
   }
 
-  async downloadFiles(payload) {
+  async downloadFileNode(payload) {
     const updatedData = payload.data.map(async file => {
       let fileNode;
       try {
