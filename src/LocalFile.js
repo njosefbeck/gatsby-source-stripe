@@ -12,6 +12,7 @@ class LocalFile {
 
   downloadImages(payload, type) {
     const fields = this.fileFields[type.toLowerCase()];
+    if (!fields) return payload;
 
     fields.forEach(field => {
       const splitPath = field.split(".");
