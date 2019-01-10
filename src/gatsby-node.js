@@ -24,8 +24,7 @@ exports.sourceNodes = async (
     cache,
     createNode,
     createNodeId,
-    // Currently createRemoteFileNode discards auth headers with empty passwords
-    auth: { htaccess_user: secretKey, htaccess_pass: "null" }
+    auth: { htaccess_user: secretKey }
   });
 
   const stripe = stripeClient(secretKey);
