@@ -116,7 +116,9 @@ You can query all of the different Stripe object data like the following:
       node {
         id,
         active,
-        localFiles,
+        localFiles {
+          id
+        }
         product {
           id
         }
