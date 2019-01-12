@@ -7,6 +7,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
+## [2.1.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.3...v2.1.4) - 2019-01-12
+### Changed
+- Update [README](README.md) with the following:
+    - Add links to the newly added CONTRIBUTING and CODE OF CONDUCT documents
+    - Add caveat to file downloading section about using Checkout's beta
+- Refinements to file downloading feature (Thanks @brxck for your contributions!)
+    - Remove no longer needed dummy password
+    - Check node type before attempting download
+    - Update downloading for iterable File nodes
+    - Correct query for localFiles
+- Update gatsby-source-filesystem from [2.0.11 to 2.0.16](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+
 ## [2.1.3](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.2...v2.1.3) - 2019-01-08
 ### Changed
 - Update stripe from [6.18.0 to 6.20.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
