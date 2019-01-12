@@ -105,6 +105,8 @@ Setting `downloadFiles: true` in the plugin configuration enables downloading of
 
 You can give these File nodes to plugins like [gatsby-image](https://using-gatsby-image.gatsbyjs.org/) to create responsive images and/or [gatsby-transformer-sharp](https://image-processing.gatsbyjs.org/) to process images at build.
 
+Note: If you're using the Checkout beta, and have uploaded your images through the dashboard, this feature will not work, due to how Stripe forms the URL for the image resource.
+
 ## How to query
 
 You can query all of the different Stripe object data like the following:
@@ -145,7 +147,7 @@ When using GraphiQL, click on "Docs" in the top-right corner of the screen to ex
 
 ## Develop
 
-Would you like to help maintain this project? We would love your help! Checkout [issues](https://github.com/njosefbeck/gatsby-source-stripe/issues) and look for tags labeled `help wanted`. Also, feel free to get in touch via Twitter @njosefbeck.
+Would you like to help maintain this project? We would love your help! Checkout [issues](https://github.com/njosefbeck/gatsby-source-stripe/issues) and look for tags labeled `help wanted`. Also please check out our [CODE OF CONDUCT](CODE_OF_CONDUCT.md) and our [CONTRIBUTING](CONTRIBUTING.md) documents.
 
 To set up the project locally, follow these steps.
 
