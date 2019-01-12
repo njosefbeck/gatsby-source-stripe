@@ -28,7 +28,7 @@
     "@babel/preset-env": "7.2.3"
   },
   "dependencies": {
-    "gatsby-source-filesystem": "2.0.12",
+    "gatsby-source-filesystem": "2.0.16",
     "stripe": "6.20.0"
   }
 }
