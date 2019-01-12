@@ -1,7 +1,5 @@
 "use strict";
 
-function _asyncIterator(iterable) { var method; if (typeof Symbol === "function") { if (Symbol.asyncIterator) { method = iterable[Symbol.asyncIterator]; if (method != null) return method.call(iterable); } if (Symbol.iterator) { method = iterable[Symbol.iterator]; if (method != null) return method.call(iterable); } } throw new TypeError("Object is not async iterable"); }
-
 const stripeClient = require('stripe');
 
 const StripeObject = require('./StripeObject');
@@ -85,58 +83,36 @@ exports.sourceNodes = async ({
      */
 
 
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
+    for await (let payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
+      /**
+       * Leaving this in here as a reminder that, depending on what the Gatsby.js
+       * team says, I'll need to deal with event objects for skus and products having
+       * the same attributes key, but having different data types (i.e. sku.attributes
+       * is an object, and product.attributes is an array).
+       */
 
-    var _iteratorError;
-
-    try {
-      for (var _iterator = _asyncIterator(path[stripeObj.methodName](stripeObj.methodArgs)), _step, _value; _step = await _iterator.next(), _iteratorNormalCompletion = _step.done, _value = await _step.value, !_iteratorNormalCompletion; _iteratorNormalCompletion = true) {
-        let payload = _value;
-
-        /**
-         * Leaving this in here as a reminder that, depending on what the Gatsby.js
-         * team says, I'll need to deal with event objects for skus and products having
-         * the same attributes key, but having different data types (i.e. sku.attributes
-         * is an object, and product.attributes is an array).
-         */
-
-        /*
-        if (payload.object == 'event' && Array.isArray(payload.data.object.attributes)) {
-          console.log(payload.data.object.object);
-          console.log(payload.data.object.attributes);
-        }
-        */
-
-        /*
-        * Download and create File nodes for object images, only if
-        * downloadFiles is configured.
-        *
-        * Adds the localFiles field, which is an array of
-        * references to the created File nodes.
-        *
-        * Currently supports File, Product and Sku images.
-        */
-        if (downloadFiles) {
-          payload = localFile.downloadFiles(payload, stripeObj.type);
-        }
-
-        const node = stripeObj.node(createContentDigest, payload);
-        createNode(node);
+      /*
+      if (payload.object == 'event' && Array.isArray(payload.data.object.attributes)) {
+        console.log(payload.data.object.object);
+        console.log(payload.data.object.attributes);
       }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          await _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
+      */
+
+      /*
+      * Download and create File nodes for object images, only if
+      * downloadFiles is configured.
+      *
+      * Adds the localFiles field, which is an array of
+      * references to the created File nodes.
+      *
+      * Currently supports File, Product and Sku images.
+      */
+      if (downloadFiles) {
+        payload = localFile.downloadFiles(payload, stripeObj.type);
       }
+
+      const node = stripeObj.node(createContentDigest, payload);
+      createNode(node);
     }
   }
 
