@@ -11,7 +11,7 @@ class LocalFile {
   }
 
   downloadFiles(payload, type) {
-    if (type === "File") return downloadFileNode(payload);
+    if (type === "File") return this.downloadFileNode(payload);
     
     const fields = this.fileFields[type.toLowerCase()];
     if (!fields) return payload;
