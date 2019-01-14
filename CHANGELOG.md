@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
+## [2.1.5](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.4...v2.1.5) - 2019-01-14
+### Changed
+- Fix File-breaking typo (Thanks @brxck!)
+
 ## [2.1.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.3...v2.1.4) - 2019-01-12
 ### Changed
 - Update [README](README.md) with the following:
