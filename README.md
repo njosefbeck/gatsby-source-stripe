@@ -27,7 +27,7 @@ or
 
 In the plugin options objects' array, specify the object types you would like to get data for. For example, if I'd like to get the lists of data for my balance transactions, customers, and subscriptions, my objects array would look like this: `['BalanceTransaction', 'Customer', 'Subscription']`.
 
-Additionally, please only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file. We don't want your key ending up in your version-controlled source code!
+Additionally, please only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file that is not version-controlled. We don't want your key ending up in your version-controlled source code! For enhanced security, you can also create a [restricted API key](https://stripe.com/docs/keys#limiting-access-with-restricted-api-keys) in your Stripe Developer Dashboard. Since this plugin only ever sources data, you can restrict `All core resources` to `Read only`, and even turn off access to certain resources that you know you don't use.
 
 Enable [downloading files](#downloading-files) associated with your Stripe data by setting `downloadFiles` to true.
 
