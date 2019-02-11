@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
+## [2.1.7](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.7) - 2019-02-11
+### Changed
+- Update @babel/preset-env from [7.2.3 to 7.3.1](https://github.com/babel/babel/releases).
+- Update gatsby-source-filesystem from [2.0.16 to 2.0.20](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [6.20.0 to 6.23.1](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
 ## [2.1.6](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.5...v2.1.6) - 2019-01-14
 ### Changed
 - Add information to README about using restricted API keys
