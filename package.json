@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "gatsby-source-filesystem": "2.0.20",
-    "stripe": "6.20.0"
+    "stripe": "6.23.1"
   }
 }
