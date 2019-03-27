@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - None
 
 <<<<<<< HEAD
-## [2.1.8](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.8) - 2019-03-27
+## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed
 - Update stripe from [6.20.0 to 6.28.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
 - Update gatsby-source-filesystem from [2.0.16 to 2.0.28](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
