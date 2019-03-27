@@ -7,7 +7,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - None
 
-<<<<<<< HEAD
 ## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed
 - Update stripe from [6.20.0 to 6.28.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
@@ -15,13 +14,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Update @babel/cli from 7.2.0 to 7.2.3.
 - Update @babel/core from 7.2.2 to 7.4.0.
 - Update @babel/preset-env from 7.2.2 to 7.4.0.
-=======
+
 ## [2.1.7](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.7) - 2019-02-11
 ### Changed
 - Update @babel/preset-env from [7.2.3 to 7.3.1](https://github.com/babel/babel/releases).
 - Update gatsby-source-filesystem from [2.0.16 to 2.0.20](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
 - Update stripe from [6.20.0 to 6.23.1](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
->>>>>>> 72fe96cfd8bc075a2d1e8c324ebb0715a8748ffc
 
 ## [2.1.6](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.5...v2.1.6) - 2019-01-14
 ### Changed
