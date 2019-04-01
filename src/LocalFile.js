@@ -32,6 +32,7 @@ class LocalFile {
         try {
           fileNode = await createRemoteFileNode({
             url,
+            parentNodeId: sourceObject.id,
             ...this.createRemoteArgs
           });
         } catch (e) {
@@ -52,6 +53,7 @@ class LocalFile {
       try {
         fileNode = await createRemoteFileNode({
           url: file.url,
+          parentNodeId: file.id,
           ext: `.${file.type}`,
           ...this.createRemoteArgs
         });
