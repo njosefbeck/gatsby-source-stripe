@@ -10,13 +10,13 @@ class LocalFile {
     };
   }
 
-  downloadFiles(payload, type) {
+  async downloadFiles(payload, type) {
     if (type === "File") return this.downloadFileNode(payload);
     
     const fields = this.fileFields[type.toLowerCase()];
     if (!fields) return payload;
 
-    fields.forEach(field => {
+    for (let field of fields) {
       const splitPath = field.split(".");
       let urls = this.getNestedObject(payload, splitPath);
       if (!urls || !urls.length) return;
@@ -25,9 +25,10 @@ class LocalFile {
       const sourceObject = splitPath.length >= 1
         ? this.getNestedObject(payload, splitPath.slice(0, -1))
         : payload;
+      
       sourceObject.localFiles___NODE = [];
 
-      urls.forEach(async url => {
+      for (const url of urls) {
         let fileNode;
         try {
           fileNode = await createRemoteFileNode({
@@ -42,8 +43,8 @@ class LocalFile {
         if (fileNode) {
           sourceObject.localFiles___NODE.push(fileNode.id);
         }
-      });
-    });
+      }
+    }
     return payload;
   }
 
