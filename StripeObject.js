@@ -27,8 +27,8 @@ class StripeObject {
     return path;
   }
 
-  node(createContentDigest, payload) {
-    return Object.assign({}, payload, {
+  node(createContentDigest, payload, fileNodes) {
+    const node = Object.assign({}, payload, {
       id: payload.id ? payload.id : `Stripe${this.type}${this.id}`,
       parent: null,
       children: [],
@@ -40,6 +40,10 @@ class StripeObject {
         description: this.description
       }
     });
+
+    if (fileNodes) node.localFiles___NODE = fileNodes;
+
+    return node;
   }
 
 }

@@ -15,7 +15,8 @@ exports.sourceNodes = async ({
 }, {
   downloadFiles = false,
   objects = [],
-  secretKey = ""
+  secretKey = "",
+  auth = "",
 }) => {
   const {
     createNode
@@ -107,11 +108,13 @@ exports.sourceNodes = async ({
       *
       * Currently supports File, Product and Sku images.
       */
+      let fileNodes;
+
       if (downloadFiles) {
-        payload = localFile.downloadFiles(payload, stripeObj.type);
+        fileNodes = localFile.downloadFiles(payload, stripeObj.type, auth);
       }
 
-      const node = stripeObj.node(createContentDigest, payload);
+      const node = stripeObj.node(createContentDigest, payload, fileNodes);
       createNode(node);
     }
   }

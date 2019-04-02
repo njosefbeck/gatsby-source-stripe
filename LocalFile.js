@@ -7,73 +7,58 @@ const {
 class LocalFile {
   constructor(createRemoteArgs) {
     this.createRemoteArgs = createRemoteArgs;
-    this.fileFields = {
-      product: ["images"],
-      sku: ["image", "product.images"],
-      file: ["url"]
-    };
   }
 
-  downloadFiles(payload, type) {
-    if (type === "File") return this.downloadFileNode(payload);
-    const fields = this.fileFields[type.toLowerCase()];
-    if (!fields) return payload;
-    fields.forEach(field => {
-      const splitPath = field.split(".");
-      let urls = this.getNestedObject(payload, splitPath);
-      if (!urls || !urls.length) return;
-      if (!Array.isArray(urls)) urls = [urls];
-      const sourceObject = splitPath.length >= 1 ? this.getNestedObject(payload, splitPath.slice(0, -1)) : payload;
-      sourceObject.localFiles___NODE = [];
-      urls.forEach(async url => {
-        let fileNode;
+  async downloadFiles(payload, type, auth) {
+    let fileNodes;
 
-        try {
-          fileNode = await createRemoteFileNode({
-            url,
-            ...this.createRemoteArgs
-          });
-        } catch (e) {
-          console.log(e);
-        }
+    switch(type.toLowerCase()) {
+      case "file":
+        const fileURLs = payload.links.data.map(({ url }) => url);
+        fileNodes = await this.downloadStripeHostedFile(fileURLs);
+        break;
+      case "product":
+        const fileURLs = [...payload["images"]];
+        fileNodes = await this.downloadRemoteHostedFile(fileURLs, auth);
+        break;
+      case "skus":
+        const fileURLs = [...payload["image"], ...payload["product"]["images"]];
+        fileNodes = await this.downloadRemoteHostedFile(fileURLs, auth);
+        break;
+      default:
+        return [];
+    }
 
-        if (fileNode) {
-          sourceObject.localFiles___NODE.push(fileNode.id);
-        }
-      });
-    });
-    return payload;
+    return fileNodes;
   }
 
-  async downloadFileNode(payload) {
-    const updatedData = payload.data.map(async file => {
-      let fileNode;
-
-      try {
-        fileNode = await createRemoteFileNode({
-          url: file.url,
-          ext: `.${file.type}`,
-          ...this.createRemoteArgs
-        });
-      } catch (e) {
-        console.log(e);
-      }
-
-      if (fileNode) {
-        file.localFiles___NODE = [fileNode.id];
-      }
-
-      return file;
-    });
-    payload.data = await Promise.all(updatedData);
-    return payload;
-  } // Access nested objects with path given as array.
-
-
-  getNestedObject(object, path) {
-    return path.reduce((obj, key) => obj[key], object);
+  /* Product and SKU type payloads can have images but they can't currently be hosted on Stripe
+  Since these images can be hosted anywhere the developer has the option to specify the auth options
+  which will affect the content of the Authorization HTTP header sent when fetching the images. */
+  async downloadRemoteHostedFile(urls, auth) {
+    try {
+      const fileNodePromises = urls.map(url => createRemoteFileNode({ url, ...this.createRemoteArgs, auth }));
+      const fileNodes = Promise.all(fileNodePromises);
+    
+      return fileNodes;
+    } catch (e) {
+      console.log("We were unable to download images that stripe was pointing at, the following error occured:", e);
+      return null;
+    }
   }
 
+  // File types objects have images that are hosted on Stripes servers
+  async downloadStripeHostedFile(urls) {
+    try {
+      const fileNodePromises = urls.map(url => createRemoteFileNode({ url, ext: `.${file.type}`,...this.createRemoteArgs }));
+      const fileNodes = Promise.all(fileNodePromises);
+    
+      return fileNodes;
+    } catch (e) {
+      console.log("We were unable to download images that stripe was hosting, the following error occured:", e);
+      return null;
+    }
+  }
 }
 
 module.exports = LocalFile;
