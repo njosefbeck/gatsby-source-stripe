@@ -4,7 +4,7 @@ const LocalFile = require('./LocalFile');
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, store },
-  { downloadFiles = false, objects = [], secretKey = "" }
+  { downloadFiles = false, objects = [], secretKey = "", auth = true }
 ) => {
 
   const { createNode } = actions;
@@ -95,12 +95,14 @@ exports.sourceNodes = async (
       *
       * Currently supports File, Product and Sku images.
       */
-      if (downloadFiles) {
-        payload = await localFile.downloadFiles(payload, stripeObj.type);
-      }
+     let fileNodes;
 
-      const node = stripeObj.node(createContentDigest, payload);
-      createNode(node);
+     if (downloadFiles) {
+       fileNodes = await localFile.downloadFiles(payload, stripeObj.type, auth);
+     }
+
+     const node = stripeObj.node(createContentDigest, payload, fileNodes);
+     createNode(node);
     }
   }
 

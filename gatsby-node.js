@@ -16,7 +16,7 @@ exports.sourceNodes = async ({
   downloadFiles = false,
   objects = [],
   secretKey = "",
-  auth = "",
+  auth = true,
 }) => {
   const {
     createNode
@@ -111,7 +111,7 @@ exports.sourceNodes = async ({
       let fileNodes;
 
       if (downloadFiles) {
-        fileNodes = localFile.downloadFiles(payload, stripeObj.type, auth);
+        fileNodes = await localFile.downloadFiles(payload, stripeObj.type, auth);
       }
 
       const node = stripeObj.node(createContentDigest, payload, fileNodes);

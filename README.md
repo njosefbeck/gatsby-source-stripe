@@ -103,6 +103,8 @@ All list responses are fully paginated.
 
 Setting `downloadFiles: true` in the plugin configuration enables downloading of files associated with File objects, and images on Sku and Product objects. A Gatsby [File node](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#how-to-query) is created for each downloaded file, and references are placed on the `localFiles` field of their Stripe nodes.
 
+When downloading these files this plugin will by default use the same authorization header used in the HTTP request for fetching your stripe details. This can cause some issues with platforms used to host public files (e.g. Google Cloud Platform Storage Buckets) where you will receive a 401 Unauthorized since this header won't match anything the platform knows about. As such you can choose to remove the auth header using the setting `auth: false`. Currently you can not set custom auth headers due to limitations in [gatsby-source-filesystem](https://www.gatsbyjs.org/packages/gatsby-source-filesystem/), however this limitation may be removed in the future.
+
 You can give these File nodes to plugins like [gatsby-image](https://using-gatsby-image.gatsbyjs.org/) to create responsive images and/or [gatsby-transformer-sharp](https://image-processing.gatsbyjs.org/) to process images at build.
 
 Note: If you're using the Checkout beta, and have uploaded your images through the dashboard, this feature will not work, due to how Stripe forms the URL for the image resource.

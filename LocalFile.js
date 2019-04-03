@@ -11,18 +11,19 @@ class LocalFile {
 
   async downloadFiles(payload, type, auth) {
     let fileNodes;
+    let fileURLs;
 
     switch(type.toLowerCase()) {
       case "file":
-        const fileURLs = payload.links.data.map(({ url }) => url);
+        fileURLs = payload.links.data.map(({ url }) => url);
         fileNodes = await this.downloadStripeHostedFile(fileURLs);
         break;
       case "product":
-        const fileURLs = [...payload["images"]];
+        fileURLs = [...payload["images"]];
         fileNodes = await this.downloadRemoteHostedFile(fileURLs, auth);
         break;
       case "skus":
-        const fileURLs = [...payload["image"], ...payload["product"]["images"]];
+        fileURLs = [...payload["image"], ...payload["product"]["images"]];
         fileNodes = await this.downloadRemoteHostedFile(fileURLs, auth);
         break;
       default:
@@ -33,11 +34,16 @@ class LocalFile {
   }
 
   /* Product and SKU type payloads can have images but they can't currently be hosted on Stripe
-  Since these images can be hosted anywhere the developer has the option to specify the auth options
-  which will affect the content of the Authorization HTTP header sent when fetching the images. */
-  async downloadRemoteHostedFile(urls, auth) {
+  Since these images can be hosted anywhere the developer has the option to specify the auth flag 
+  which will add or remove the Authorization HTTP header sent when fetching the images. */
+  async downloadRemoteHostedFile(urls, authFlag) {
     try {
-      const fileNodePromises = urls.map(url => createRemoteFileNode({ url, ...this.createRemoteArgs, auth }));
+      const { auth, ...createRemoteArgsWithoutAuth } = this.createRemoteArgs;
+
+      const fileNodePromises = urls.map(url => {
+        const createRemoteArgs = authFlag ? { url, ...this.createRemoteArgs } : { url, ...createRemoteArgsWithoutAuth };
+        return createRemoteFileNode(createRemoteArgs);
+      });
       const fileNodes = Promise.all(fileNodePromises);
     
       return fileNodes;

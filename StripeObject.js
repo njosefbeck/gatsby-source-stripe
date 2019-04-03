@@ -41,7 +41,10 @@ class StripeObject {
       }
     });
 
-    if (fileNodes) node.localFiles___NODE = fileNodes;
+    if (fileNodes) {
+      const fileNodeIds = fileNodes.map(fileNode => fileNode.id);
+      node.localFiles___NODE = fileNodeIds;
+    }
 
     return node;
   }
