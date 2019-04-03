@@ -96,7 +96,7 @@ exports.sourceNodes = async (
       * Currently supports File, Product and Sku images.
       */
       if (downloadFiles) {
-        payload = localFile.downloadFiles(payload, stripeObj.type);
+        payload = await localFile.downloadFiles(payload, stripeObj.type);
       }
 
       const node = stripeObj.node(createContentDigest, payload);
