@@ -16,7 +16,7 @@ exports.sourceNodes = async ({
   downloadFiles = false,
   objects = [],
   secretKey = "",
-  auth = true,
+  auth = true
 }) => {
   const {
     createNode

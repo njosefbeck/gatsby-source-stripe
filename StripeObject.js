@@ -40,10 +40,17 @@ class StripeObject {
         description: this.description
       }
     });
+    /* We are currently making the assumption that we will not need to assign a localFiles
+    field more than one level deep on the node object. This is a relatively safe assumption
+    but may need to be revisited if Stripe introduces nested expandable objects. */
 
     if (fileNodes) {
-      const fileNodeIds = fileNodes.map(fileNode => fileNode.id);
-      node.localFiles___NODE = fileNodeIds;
+      Object.entries(fileNodes).forEach(([nodeField, fileNodesValues]) => {
+        if (!fileNodesValues) return; // If we failed to grab the file then the node will be null
+
+        const fileNodeIds = fileNodesValues.map(fileNode => fileNode.id);
+        if (nodeField === "root") node.localFiles___NODE = fileNodeIds;else node[nodeField].localFiles___NODE = fileNodeIds;
+      });
     }
 
     return node;

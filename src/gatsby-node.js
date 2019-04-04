@@ -95,13 +95,13 @@ exports.sourceNodes = async (
       *
       * Currently supports File, Product and Sku images.
       */
-     let fileNodes;
+     let fileNodesMap;
 
      if (downloadFiles) {
-       fileNodes = await localFile.downloadFiles(payload, stripeObj.type, auth);
+       fileNodesMap = await localFile.downloadFiles(payload, stripeObj.type, auth);
      }
 
-     const node = stripeObj.node(createContentDigest, payload, fileNodes);
+     const node = stripeObj.node(createContentDigest, payload, fileNodesMap);
      createNode(node);
     }
   }
