@@ -149,10 +149,13 @@ When using GraphiQL, click on "Docs" in the top-right corner of the screen to ex
 
 Would you like to help maintain this project? We would love your help! Checkout [issues](https://github.com/njosefbeck/gatsby-source-stripe/issues) and look for tags labeled `help wanted`. Also please check out our [CODE OF CONDUCT](CODE_OF_CONDUCT.md) and our [CONTRIBUTING](CONTRIBUTING.md) documents.
 
-To set up the project locally, follow these steps.
+To set up the project locally, follow these steps:
 
 1) Make sure you're on at least Node v.10.
 2) Fork the repo and pull it down locally. For ease of testing, we recommend pulling it into an existing Gatsby project, in a `plugins` directory.
-3) Run `npm run build` in the console, to transpile the code for testing and running in your project.
-4) Add the plugin, with options, to `gatsby-config.js`.
-4) Hack away!
+3) Add the plugin, with options, to `gatsby-config.js`.
+4) Install dependencies by running `npm install` in the project directory.
+5) Run `npm run build` in the console, to transpile the code for testing and running in your project.
+6) Hack away!
+
+Included is an [ESLint](https://eslint.org) config to help check the correctness of your changes of your code, and a [prettier](https://prettier.io) config to format it. Use them with the corresponding plugins for your editor of choice, or run the tools from the commandline with `npm run lint` and `npm run format`. Don't forget to format your changes with prettier before submitting a PR!

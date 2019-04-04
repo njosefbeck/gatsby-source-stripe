@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-- None
+- Add ESLint and prettier configuration & dependencies.
+- Fix bootstrap progressing without awaiting file downloads.
+- Fix cached Gatsby File nodes being deleted after development server restart.
 
 ## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed
