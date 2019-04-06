@@ -1,10 +1,10 @@
 "use strict";
 
-const stripeClient = require('stripe');
+const stripeClient = require("stripe");
 
-const StripeObject = require('./StripeObject');
+const StripeObject = require("./StripeObject");
 
-const LocalFile = require('./LocalFile');
+const LocalFile = require("./LocalFile");
 
 exports.sourceNodes = async ({
   actions,
@@ -108,13 +108,13 @@ exports.sourceNodes = async ({
       *
       * Currently supports File, Product and Sku images.
       */
-      let fileNodes;
+      let fileNodesMap;
 
       if (downloadFiles) {
-        fileNodes = await localFile.downloadFiles(payload, stripeObj.type, auth);
+        fileNodesMap = await localFile.downloadFiles(payload, stripeObj.type, auth);
       }
 
-      const node = stripeObj.node(createContentDigest, payload, fileNodes);
+      const node = stripeObj.node(createContentDigest, payload, fileNodesMap);
       createNode(node);
     }
   }

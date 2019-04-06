@@ -12,37 +12,33 @@ class LocalFile {
   async downloadFiles(payload, type, auth) {
     let fileNodes;
     let fileNodesMap;
-    let fileURLs;
     /* Stripe objects can be expandable - i.e. they contain the ID of a related object in their
     payload, and Stripe can do some magic to make that objects' payload directly available on 
     this payload. An SKU is an example of this. Both of these objects can contain files, and 
     we want to keep these files seperate when querying the payloads corresponding node via 
-    GraphQL. As a result fileNodes have an associated key because we need to tell us where on 
-    the node the localFiles field/s should go */
+    GraphQL. To this end we return a map, where the key tells us where on the node the localFiles 
+    field/s should go, and the value is the corresponding file nodes */
 
     switch (type.toLowerCase()) {
       case "file":
-        fileURLs = this.convertToArray(payload.url);
-        fileNodes = await this.downloadStripeHostedFile(fileURLs, payload.type);
+        fileNodes = await this.downloadStripeHostedFile(payload.url, payload.type, payload.id);
         fileNodesMap = {
           root: fileNodes
         };
         break;
 
       case "product":
-        fileURLs = this.convertToArray(payload["images"]);
-        fileNodes = await this.downloadRemoteHostedFile(fileURLs, auth);
+        fileNodes = await this.downloadRemoteHostedFiles(payload.images, auth);
         fileNodesMap = {
           root: fileNodes
         };
         break;
 
-      case "skus":
-        const skuFileUrls = this.convertToArray(payload["image"]);
-        const skuParentProductFileUrls = this.convertToArray(payload["product"]["images"]);
-        const [skuFileNodes, skuParentProductFileNodes] = await Promise.all(this.downloadRemoteHostedFile(skuFileUrls, auth), this.downloadRemoteHostedFile(skuParentProductFileUrls, auth));
+      case "sku":
+        const skuFileNode = await this.downloadStripeHostedFile(payload.image, payload.type, payload.id);
+        const skuParentProductFileNodes = await this.downloadRemoteHostedFiles(payload.product.images, auth);
         fileNodesMap = {
-          root: skuFileNodes,
+          root: skuFileNode,
           product: skuParentProductFileNodes
         };
         break;
@@ -53,23 +49,21 @@ class LocalFile {
 
     return fileNodesMap;
   }
-
-  convertToArray(urls) {
-    if (!urls || !urls.length) return [];
-    if (!Array.isArray(urls)) return [urls];else return urls;
-  }
-  /* Product and SKU type payloads can have images but they can't currently be hosted on Stripe
-  Since these images can be hosted anywhere the developer has the option to specify the auth flag 
-  which will add or remove the Authorization HTTP header sent when fetching the images. */
+  /* Some Stripe objects (e.g. Product and SKU types) payloads can have images but they can't
+  currently be hosted on Stripe. Since these images can be hosted anywhere the developer has
+  the option to specify the auth flag which will add or remove the Authorization HTTP header
+  sent when fetching the images. */
 
 
-  async downloadRemoteHostedFile(urls, authFlag) {
+  async downloadRemoteHostedFiles(urls, authFlag) {
+    const urlsArray = convertToArray(urls);
+    const {
+      auth,
+      ...createRemoteArgsWithoutAuth
+    } = this.createRemoteArgs;
+
     try {
-      const {
-        auth,
-        ...createRemoteArgsWithoutAuth
-      } = this.createRemoteArgs;
-      const fileNodePromises = urls.map(url => {
+      const fileNodePromises = urlsArray.map(url => {
         const createRemoteArgs = authFlag ? {
           url,
           ...this.createRemoteArgs
@@ -80,33 +74,45 @@ class LocalFile {
         return createRemoteFileNode(createRemoteArgs);
       });
       const fileNodes = await Promise.all(fileNodePromises);
-      const validFileNodes = fileNodes.filter(node => node);
-      if (validFileNodes.length < 1) throw new Error("Failed to process remote content");
-      return validFileNodes;
+      return this.validateFileNodes(fileNodes);
     } catch (e) {
-      console.log("We were unable to download images that stripe was pointing at, the following error occured:", e);
+      const URLStrings = urlsArray.reduce((URLString, url, i) => URLString + `URL ${i + 1}: ` + url + '\n', '');
+      console.log("\x1b[1;31m\u2715\x1b[0m We were unable to download images that stripe was pointing at, the following error occured: \n" + URLStrings + `Error: ${e.message}\n`);
       return null;
     }
-  } // File types objects have images that are hosted on Stripes servers. Th
+  } // File types objects have images that are hosted on Stripes servers.
 
 
-  async downloadStripeHostedFile(urls, type) {
+  async downloadStripeHostedFile(url, type, id) {
     try {
-      const fileNodePromises = urls.map(url => createRemoteFileNode({
+      /* The parentNodeId field is needed so that Gatsby knows what node the newly downloaded File
+      is connected to. Without this, Gatsby will delete the File node when you restart the develop server */
+      const fileNode = await createRemoteFileNode({
         url,
         ext: `.${type}`,
+        parentNodeId: id,
         ...this.createRemoteArgs
-      }));
-      const fileNodes = await Promise.all(fileNodePromises);
-      const validFileNodes = fileNodes.filter(node => node);
-      if (validFileNodes.length < 1) throw new Error("Failed to process remote content");
-      return validFileNodes;
+      });
+      return this.validateFileNodes(fileNode);
     } catch (e) {
-      console.log("We were unable to download images that stripe was hosting, the following error occured:", e);
+      console.log(`\x1b[1;31m\u2715\x1b[0m We were unable to download images that stripe was hosting, the following error occured:\nURL: ${url}\n` + `Error: ${e.message}\n`);
       return null;
     }
+  } // Accepts both a single file node and an array of file nodes
+
+
+  validateFileNodes(fileNodes) {
+    const fileNodesArray = convertToArray(fileNodes);
+    const validFileNodes = fileNodesArray.filter(node => node);
+    if (validFileNodes.length < 1) throw new Error("Failed to process remote content");
+    return validFileNodes;
   }
 
+}
+
+function convertToArray(entity) {
+  if (!entity || !entity.length) return [];
+  if (!Array.isArray(entity)) return [entity];else return entity;
 }
 
 module.exports = LocalFile;

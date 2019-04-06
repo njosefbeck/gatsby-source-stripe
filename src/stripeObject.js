@@ -25,18 +25,19 @@ class StripeObject {
   }
 
   node(createContentDigest, payload, fileNodesMap) {
-    const node = Object.assign({}, payload, {
-      id: payload.id ? payload.id : `Stripe${this.type}${this.id}`,
-      parent: null,
-      children: [],
-      internal: {
-        mediaType: "application/json",
-        type: `Stripe${this.type}`,
-        content: JSON.stringify(payload),
-        contentDigest: createContentDigest(payload),
-        description: this.description
-      }
-    });
+    const node = {
+        ...payload,
+        id: payload.id || `Stripe${this.type}${this.id}`,
+        parent: null,
+        children: [],
+        internal: {
+          mediaType: "application/json",
+          type: `Stripe${this.type}`,
+          content: JSON.stringify(payload),
+          contentDigest: createContentDigest(payload),
+          description: this.description
+        }
+    }
 
     /* We are currently making the assumption that we will not need to assign a localFiles
     field more than one level deep on the node object. This is a relatively safe assumption
