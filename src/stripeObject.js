@@ -1,4 +1,4 @@
-const stripeObjs = require('./stripeObjects.json');
+const stripeObjs = require("./stripeObjects.json");
 
 class StripeObject {
   constructor(type) {
@@ -30,7 +30,7 @@ class StripeObject {
       parent: null,
       children: [],
       internal: {
-        mediaType: 'application/json',
+        mediaType: "application/json",
         type: `Stripe${this.type}`,
         content: JSON.stringify(payload),
         contentDigest: createContentDigest(payload),

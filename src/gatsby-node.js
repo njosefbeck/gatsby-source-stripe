@@ -1,21 +1,26 @@
-const stripeClient = require('stripe');
-const StripeObject = require('./StripeObject');
-const LocalFile = require('./LocalFile');
+const stripeClient = require("stripe");
+const StripeObject = require("./StripeObject");
+const LocalFile = require("./LocalFile");
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, store },
   { downloadFiles = false, objects = [], secretKey = "", auth = true }
 ) => {
-
   const { createNode } = actions;
 
   if (!objects.length) {
-    console.error(new Error("No Stripe object types found in your gatsby-config. Add types to the objects array like this: ['Balance', 'Customer', 'BalanceTransaction']"));
+    console.error(
+      new Error(
+        "No Stripe object types found in your gatsby-config. Add types to the objects array like this: ['Balance', 'Customer', 'BalanceTransaction']"
+      )
+    );
     return;
   }
 
   if (!secretKey) {
-    console.error(new Error("No Stripe secret key found in your gatsby-config."));
+    console.error(
+      new Error("No Stripe secret key found in your gatsby-config.")
+    );
     return;
   }
 
@@ -71,8 +76,9 @@ exports.sourceNodes = async (
      *
      * stripe['customers']['list']({ "expand": "data.default_source" })
      */
-    for await (let payload of path[stripeObj.methodName](stripeObj.methodArgs)) {
-
+    for await (let payload of path[stripeObj.methodName](
+      stripeObj.methodArgs
+    )) {
       /**
        * Leaving this in here as a reminder that, depending on what the Gatsby.js
        * team says, I'll need to deal with event objects for skus and products having
@@ -107,5 +113,4 @@ exports.sourceNodes = async (
   }
 
   return;
-
 };

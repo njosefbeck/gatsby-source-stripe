@@ -5,10 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-### 2.2.0 - 2019-04-05
-#### Changed
-- Added the ability to remove Authorization headers from any HTTP request made when fetching files not hosted on Stripe.
 - Refactored LocalFile.js to improve readability.
+- Add ESLint and prettier configuration & dependencies.
+- Fix bootstrap progressing without awaiting file downloads.
+- Fix cached Gatsby File nodes being deleted after development server restart.
+- Added the ability to remove Authorization headers from any HTTP request made when fetching files not hosted on Stripe.
 
 ## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed

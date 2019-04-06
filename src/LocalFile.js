@@ -1,4 +1,3 @@
-"use strict";
 const { createRemoteFileNode } = require('gatsby-source-filesystem')
 
 class LocalFile {
