@@ -29,7 +29,7 @@ In the plugin options objects' array, specify the object types you would like to
 
 Additionally, please only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file that is not version-controlled. We don't want your key ending up in your version-controlled source code! For enhanced security, you can also create a [restricted API key](https://stripe.com/docs/keys#limiting-access-with-restricted-api-keys) in your Stripe Developer Dashboard. Since this plugin only ever sources data, you can restrict `All core resources` to `Read only`, and even turn off access to certain resources that you know you don't use.
 
-Enable [downloading files](#downloading-files) associated with your Stripe data by setting `downloadFiles` to true.
+Enable [downloading files](#downloading-files) associated with your Stripe data by setting `downloadFiles` to true. You can also set `auth` to false as shown below to remove any Authorization header from HTTP requests made when [downloading files](#downloading-files) not hosted on Stripe.
 
 Example below.
 
@@ -41,7 +41,8 @@ plugins: [
     options: {
       objects: ['Balance', 'BalanceTransaction', 'Product', 'ApplicationFee', 'Sku', 'Subscription'],
       secretKey: 'stripe_secret_key_here',
-      downloadFiles: true
+      downloadFiles: true,
+      auth: false,
     }
   }
 ]
@@ -102,6 +103,8 @@ All list responses are fully paginated.
 ## Downloading Files
 
 Setting `downloadFiles: true` in the plugin configuration enables downloading of files associated with File objects, and images on Sku and Product objects. A Gatsby [File node](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#how-to-query) is created for each downloaded file, and references are placed on the `localFiles` field of their Stripe nodes.
+
+When downloading these files this plugin will by default use the same authorization header used in the HTTP request for fetching your Stripe details. This can cause some issues with platforms used to host public files (e.g. Google Cloud Platform Storage Buckets) where you will receive a 401 Unauthorized since this header won't match anything the platform knows about. As such you can choose to remove the auth header using the setting `auth: false`. Currently you can not set custom auth headers due to limitations in [gatsby-source-filesystem](https://www.gatsbyjs.org/packages/gatsby-source-filesystem/), however this limitation may be removed in the future.
 
 You can give these File nodes to plugins like [gatsby-image](https://using-gatsby-image.gatsbyjs.org/) to create responsive images and/or [gatsby-transformer-sharp](https://image-processing.gatsbyjs.org/) to process images at build.
 
