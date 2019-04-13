@@ -70,6 +70,14 @@ Unsure where to begin contributing? You can start by looking through the `help-w
 
 * [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
 
+### Coding Guidelines
+
+Several notes to keep in mind as you add code to this project.
+
+* If you add any dependencies to the project via package.json, keep in mind that we only use absolute versions of packages. For example, `2.2.6` instead of `^2.2.6`. This helps maintain consistency across npm installs. Our `.npmrc` file also helps enforce this.
+* For commits, we prefer the active voice / imperative mood. For more info (and a great article), check [here](https://chris.beams.io/posts/git-commit/#imperative)
+* Be sure to use the `npm run lint` and `npm run format` commands often, but especially before submitting a PR.
+
 ## Attribution
 
-This document is an edited version of [Atom's CONTRIBUTING.md](https://github.com/atom/atom/blob/master/CONTRIBUTING.md). 
+This document is an edited version of [Atom's CONTRIBUTING.md](https://github.com/atom/atom/blob/master/CONTRIBUTING.md).
