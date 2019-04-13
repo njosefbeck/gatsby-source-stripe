@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 - Nada
 
+## [2.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.1...v2.2.2) - 2019-04-13
+- Fix file capitalization issue.
+
 ## [2.2.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.0...v2.2.1) - 2019-04-13
 - Fix issue where need an index.js file, even if blank, so that Gatsby can find the plugin.
 
