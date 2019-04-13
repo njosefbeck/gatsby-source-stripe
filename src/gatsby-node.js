@@ -1,5 +1,5 @@
 const stripeClient = require("stripe");
-const StripeObject = require("./StripeObject");
+const StripeObject = require("./stripeObject");
 const LocalFile = require("./LocalFile");
 
 exports.sourceNodes = async (
