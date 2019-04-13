@@ -10,8 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add ESLint and prettier configuration & dependencies.
 - Fix bootstrap progressing without awaiting file downloads.
 - Fix cached Gatsby File nodes being deleted after development server restart.
-- Refactor LocalFile.js to improve readability.
-- Add the ability to remove Authorization headers from any HTTP request made when fetching files not hosted on Stripe.
+- Refactor LocalFile.js to improve readability. (Thanks @Francesco-Lanciana !)
+- Add the ability to remove Authorization headers from any HTTP request made when fetching files not hosted on Stripe. (Thanks @Francesco-Lanciana !)
 - Remove babel-compiled files from .gitignore.
 - Add .npmignore.
 - Add engines field to package.json. This plugin only works in versions of Node >= 10.13.0.
