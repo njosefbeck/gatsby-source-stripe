@@ -20,6 +20,9 @@
   },
   "bugs": "https://github.com/njosefbeck/gatsby-source-stripe/issues",
   "license": "MIT",
+  "engines": {
+    "node": ">=10.13.0"
+  },
   "peerDependencies": {
     "gatsby": ">=2.0.15"
   },
