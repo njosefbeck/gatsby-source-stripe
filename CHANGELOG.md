@@ -4,12 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Nada
 
-- Refactored LocalFile.js to improve readability.
+## [2.2.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.9...v2.2.0) - 2019-04-13
 - Add ESLint and prettier configuration & dependencies.
 - Fix bootstrap progressing without awaiting file downloads.
 - Fix cached Gatsby File nodes being deleted after development server restart.
-- Added the ability to remove Authorization headers from any HTTP request made when fetching files not hosted on Stripe.
+- Refactor LocalFile.js to improve readability.
+- Add the ability to remove Authorization headers from any HTTP request made when fetching files not hosted on Stripe.
 
 ## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed
