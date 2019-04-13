@@ -93,22 +93,26 @@ exports.sourceNodes = async (
       */
 
       /*
-      * Download and create File nodes for object images, only if
-      * downloadFiles is configured.
-      *
-      * Adds the localFiles field, which is an array of
-      * references to the created File nodes.
-      *
-      * Currently supports File, Product and Sku images.
-      */
-     let fileNodesMap;
+       * Download and create File nodes for object images, only if
+       * downloadFiles is configured.
+       *
+       * Adds the localFiles field, which is an array of
+       * references to the created File nodes.
+       *
+       * Currently supports File, Product and Sku images.
+       */
+      let fileNodesMap;
 
-     if (downloadFiles) {
-       fileNodesMap = await localFile.downloadFiles(payload, stripeObj.type, auth);
-     }
+      if (downloadFiles) {
+        fileNodesMap = await localFile.downloadFiles(
+          payload,
+          stripeObj.type,
+          auth
+        );
+      }
 
-     const node = stripeObj.node(createContentDigest, payload, fileNodesMap);
-     createNode(node);
+      const node = stripeObj.node(createContentDigest, payload, fileNodesMap);
+      createNode(node);
     }
   }
 

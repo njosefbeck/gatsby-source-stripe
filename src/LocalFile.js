@@ -1,4 +1,4 @@
-const { createRemoteFileNode } = require('gatsby-source-filesystem')
+const { createRemoteFileNode } = require("gatsby-source-filesystem");
 
 class LocalFile {
   constructor(createRemoteArgs) {
@@ -15,21 +15,40 @@ class LocalFile {
     we want to keep these files seperate when querying the payloads corresponding node via 
     GraphQL. To this end we return a map, where the key tells us where on the node the localFiles 
     field/s should go, and the value is the corresponding file nodes */
-    switch(type.toLowerCase()) {
+    switch (type.toLowerCase()) {
       case "file": {
-        fileNodes = await this.downloadStripeHostedFile(payload.url, payload.type, payload.id);
+        fileNodes = await this.downloadStripeHostedFile(
+          payload.url,
+          payload.type,
+          payload.id
+        );
         fileNodesMap = { root: fileNodes };
         break;
       }
       case "product": {
-        fileNodes = await this.downloadRemoteHostedFiles(payload.images, auth, payload.id);
+        fileNodes = await this.downloadRemoteHostedFiles(
+          payload.images,
+          auth,
+          payload.id
+        );
         fileNodesMap = { root: fileNodes };
         break;
       }
       case "sku": {
-        const skuFileNode = await this.downloadStripeHostedFile(payload.image, payload.type, payload.id);
-        const skuParentProductFileNodes = await this.downloadRemoteHostedFiles(payload.product.images, auth, payload.product.id);
-        fileNodesMap = { root: skuFileNode, product: skuParentProductFileNodes };
+        const skuFileNode = await this.downloadStripeHostedFile(
+          payload.image,
+          payload.type,
+          payload.id
+        );
+        const skuParentProductFileNodes = await this.downloadRemoteHostedFiles(
+          payload.product.images,
+          auth,
+          payload.product.id
+        );
+        fileNodesMap = {
+          root: skuFileNode,
+          product: skuParentProductFileNodes
+        };
         break;
       }
       default:
@@ -53,18 +72,25 @@ class LocalFile {
       const fileNodePromises = urlsArray
         .filter(url => url)
         .map(url => {
-        const createRemoteArgs = authFlag ?
-          { url, parentNodeId, ...this.createRemoteArgs } : 
-          { url, parentNodeId, ...createRemoteArgsWithoutAuth };
+          const createRemoteArgs = authFlag
+            ? { url, parentNodeId, ...this.createRemoteArgs }
+            : { url, parentNodeId, ...createRemoteArgsWithoutAuth };
 
-        return createRemoteFileNode(createRemoteArgs);
-      });
+          return createRemoteFileNode(createRemoteArgs);
+        });
       const fileNodes = await Promise.all(fileNodePromises);
 
       return this.validateFileNodes(fileNodes);
     } catch (e) {
-      const URLStrings = urlsArray.reduce((URLString, url, i) => URLString + `URL ${i + 1}: ` + url + '\n', '');
-      console.log("\x1b[1;31m\u2715\x1b[0m We were unable to download images that stripe was pointing at\n" + URLStrings + `Error: ${e.message}\n`);
+      const URLStrings = urlsArray.reduce(
+        (URLString, url, i) => URLString + `URL ${i + 1}: ` + url + "\n",
+        ""
+      );
+      console.log(
+        "\x1b[1;31m\u2715\x1b[0m We were unable to download images that stripe was pointing at\n" +
+          URLStrings +
+          `Error: ${e.message}\n`
+      );
       return null;
     }
   }
@@ -83,7 +109,10 @@ class LocalFile {
 
       return this.validateFileNodes(fileNode);
     } catch (e) {
-      console.log(`\x1b[1;31m\u2715\x1b[0m We were unable to download files that Stripe was hosting\nURL: ${url}\n` + `Error: ${e.message}\n`);
+      console.log(
+        `\x1b[1;31m\u2715\x1b[0m We were unable to download files that Stripe was hosting\nURL: ${url}\n` +
+          `Error: ${e.message}\n`
+      );
       return null;
     }
   }
@@ -92,8 +121,9 @@ class LocalFile {
   validateFileNodes(fileNodes) {
     const fileNodesArray = convertToArray(fileNodes);
     const validFileNodes = fileNodesArray.filter(node => node);
-    if (validFileNodes.length < 1) throw new Error("We were unable to create a valid Gatsby file node");
-  
+    if (validFileNodes.length < 1)
+      throw new Error("We were unable to create a valid Gatsby file node");
+
     return validFileNodes;
   }
 }
