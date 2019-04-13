@@ -2,7 +2,6 @@
   "name": "gatsby-source-stripe",
   "version": "2.1.9",
   "description": "Gatsby source plugin for building websites using Stripe as a data source",
-  "main": "gatsby-node.js",
   "scripts": {
     "build": "babel src --out-dir . --copy-files",
     "lint": "eslint src --ext .js",
