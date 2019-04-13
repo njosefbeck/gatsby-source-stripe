@@ -17,6 +17,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add engines field to package.json. This plugin only works in versions of Node >= 10.13.0.
 - Update package.json scripts for properly building plugin for publishing.
 - Add .npmrc to enforce exact versions when adding new packages to the project.
+- Update @babel/cli from 7.2.3 to 7.4.3.
+- Update @babel/core from 7.4.0 to 7.4.3.
+- Update @babel/preset-env from 7.4.2 to 7.4.3.
+- Update eslint-plugin-import from [2.16.0 to 2.17.0](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.0.28 to 2.0.29](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update prettier from [1.16.4 to 1.17.0](https://prettier.io/blog/2019/04/12/1.17.0.html).
 
 ## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed
