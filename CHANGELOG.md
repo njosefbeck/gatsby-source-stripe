@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add .npmignore.
 - Add engines field to package.json. This plugin only works in versions of Node >= 10.13.0.
 - Update package.json scripts for properly building plugin for publishing.
+- Add .npmrc to enforce exact versions when adding new packages to the project.
 
 ## [2.1.9](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.1.6...v2.1.9) - 2019-03-27
 ### Changed
