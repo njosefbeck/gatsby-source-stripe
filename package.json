@@ -1,6 +1,7 @@
 {
   "name": "gatsby-source-stripe",
   "version": "2.2.0",
+  "main": "index.js",
   "description": "Gatsby source plugin for building websites using Stripe as a data source",
   "scripts": {
     "build": "babel src --out-dir . --copy-files --ignore **/__tests__",
