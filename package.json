@@ -8,6 +8,7 @@
     "prepare": "cross-env NODE_ENV=production npm run build",
     "lint": "eslint src --ext .js",
     "format": "prettier --write src/**/**.js",
+    "test": "jest",
     "watch": "babel -w src --out-dir . --ignore **/__tests__"
   },
   "keywords": [
