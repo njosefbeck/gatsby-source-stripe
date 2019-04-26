@@ -1,4 +1,18 @@
 const StripeObject = require('../stripeObject')
+const crypto = require(`crypto`)
+
+/**
+ * createContentDigest() implementation taken from:
+ * https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby/src/utils/create-content-digest.js
+ */
+const createContentDigest = input => {
+  const content = typeof input !== `string` ? JSON.stringify(input) : input
+
+  return crypto
+    .createHash(`md5`)
+    .update(content)
+    .digest(`hex`)
+}
 
 describe('StripeObject', () => {
   describe('constructor', () => {
@@ -19,8 +33,7 @@ describe('StripeObject', () => {
     })
   })
 
-  describe('objectPath', () => {
-
+  describe('objectPath()', () => {
     const stripe = {
       orders: {
         list: () => 'Listing out orders...'
@@ -44,6 +57,50 @@ describe('StripeObject', () => {
       const resourceObject = instance.objectPath(stripe)
 
       expect(resourceObject.list()).toBe('Listing issuing authorizations...')
+    })
+  })
+
+  describe('node()', () => {
+    test('creates a proper Gatsby node from a stripe-node resource payload', () => {
+      const instance = new StripeObject('Sku')
+      const payload = {
+        "id": "sku_Ew1GWVDLcI23bd",
+        "object": "sku",
+        "active": true,
+        "attributes": {
+          "size": "Medium",
+          "gender": "Unisex"
+        },
+        "created": 1555966756,
+        "currency": "usd",
+        "image": null,
+        "inventory": {
+          "quantity": null,
+          "type": "infinite",
+          "value": null
+        },
+        "livemode": false,
+        "metadata": {},
+        "package_dimensions": null,
+        "price": 1500,
+        "product": "prod_BosWT9EsdzgjPn",
+        "updated": 1555966756,
+      }
+      const expected = {
+        ...payload,
+        id: "sku_Ew1GWVDLcI23bd",
+        parent: null,
+        children: [],
+        internal: {
+          mediaType: "application/json",
+          type: `Stripe${instance.type}`,
+          content: JSON.stringify(payload),
+          contentDigest: createContentDigest(payload),
+          description: instance.description,
+        }
+      }
+
+      expect(instance.node(createContentDigest, payload)).toEqual(expected)
     })
   })
 })
