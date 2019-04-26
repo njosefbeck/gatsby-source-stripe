@@ -1,3 +1,5 @@
+const StripeObject = require('../stripeObject')
+
 describe('StripeObject', () => {
   test('initializes the right object given a known type', () => {
     const type = 'Sku'
