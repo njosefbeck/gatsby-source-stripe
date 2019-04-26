@@ -1,6 +1,7 @@
 const stripeClient = require("stripe");
 const StripeObject = require("./stripeObject");
 const LocalFile = require("./LocalFile");
+const checkForSecretKey = require('./checkForSecretKey')
 const checkForStripeObjects = require("./checkForStripeObjects")
 
 exports.sourceNodes = async (
@@ -10,13 +11,7 @@ exports.sourceNodes = async (
   const { createNode } = actions;
 
   checkForStripeObjects(objects)
-
-  if (!secretKey) {
-    console.error(
-      new Error("No Stripe secret key found in your gatsby-config.")
-    );
-    return;
-  }
+  checkForSecretKey(secretKey)
 
   const localFile = new LocalFile({
     store,
