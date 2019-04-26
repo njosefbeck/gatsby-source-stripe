@@ -16,14 +16,14 @@ const createContentDigest = input => {
 
 describe('StripeObject', () => {
   describe('constructor', () => {
-    test('throws an error when given an unknown type', () => {
+    test('throws error when given unknown type', () => {
       const type = 'Review'
       const error = `Unknown type: ${type} passed to StripeObject. This type is not supported.`
 
       expect(() => new StripeObject(type)).toThrow(error)
     })
 
-    test('initializes the right object given a known type', () => {
+    test('initializes object given a known type', () => {
       const type = 'Sku'
       const instance = new StripeObject('Sku')
 
@@ -45,14 +45,14 @@ describe('StripeObject', () => {
       }
     }
 
-    test('returns proper top-level stripe-node resource object', () => {
+    test('returns top-level stripe-node resource object', () => {
       const instance = new StripeObject('Order')
       const resourceObject = instance.objectPath(stripe)
 
       expect(resourceObject.list()).toBe('Listing out orders...')
     })
 
-    test('returns proper namespaced stripe-node resource object', () => {
+    test('returns namespaced stripe-node resource object', () => {
       const instance = new StripeObject('IssuingAuthorization')
       const resourceObject = instance.objectPath(stripe)
 
@@ -61,7 +61,7 @@ describe('StripeObject', () => {
   })
 
   describe('node()', () => {
-    test('creates a proper Gatsby node from a stripe-node resource payload', () => {
+    test('creates Gatsby node from stripe-node resource payload', () => {
       const instance = new StripeObject('Sku')
       const payload = {
         "id": "sku_Ew1GWVDLcI23bd",
