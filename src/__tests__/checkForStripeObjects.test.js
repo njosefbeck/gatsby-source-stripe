@@ -8,5 +8,11 @@ describe('plugin', () => {
 
       expect(() => checkForStripeObjects(objects)).toThrow(error)
     })
+
+    test('is not empty, does not throw error', () => {
+      const objects = ['Sku']
+
+      expect(checkForStripeObjects(objects)).toBe(undefined)
+    })
   })
 })
