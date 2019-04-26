@@ -1,6 +1,7 @@
 const stripeClient = require("stripe");
 const StripeObject = require("./stripeObject");
 const LocalFile = require("./LocalFile");
+const checkForStripeObjects = require("./checkForStripeObjects")
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, store },
@@ -8,14 +9,7 @@ exports.sourceNodes = async (
 ) => {
   const { createNode } = actions;
 
-  if (!objects.length) {
-    console.error(
-      new Error(
-        "No Stripe object types found in your gatsby-config. Add types to the objects array like this: ['Balance', 'Customer', 'BalanceTransaction']"
-      )
-    );
-    return;
-  }
+  checkForStripeObjects(objects)
 
   if (!secretKey) {
     console.error(
