@@ -18,4 +18,32 @@ describe('StripeObject', () => {
       expect(instance.methodName).toBe('list')
     })
   })
+
+  describe('objectPath', () => {
+
+    const stripe = {
+      orders: {
+        list: () => 'Listing out orders...'
+      },
+      issuing: {
+        authorizations: {
+          list: () => 'Listing issuing authorizations...'
+        }
+      }
+    }
+
+    test('returns proper top-level stripe-node resource object', () => {
+      const instance = new StripeObject('Order')
+      const resourceObject = instance.objectPath(stripe)
+
+      expect(resourceObject.list()).toBe('Listing out orders...')
+    })
+
+    test('returns proper namespaced stripe-node resource object', () => {
+      const instance = new StripeObject('IssuingAuthorization')
+      const resourceObject = instance.objectPath(stripe)
+
+      expect(resourceObject.list()).toBe('Listing issuing authorizations...')
+    })
+  })
 })
