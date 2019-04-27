@@ -1,4 +1,4 @@
-const StripeObject = require('../stripeObject')
+const StripeObject = require('../StripeObject')
 const crypto = require(`crypto`)
 
 /**

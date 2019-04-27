@@ -1,5 +1,5 @@
 const stripeClient = require("stripe");
-const StripeObject = require("./stripeObject");
+const StripeObject = require("./StripeObject");
 const LocalFile = require("./LocalFile");
 const checkForSecretKey = require('./checkForSecretKey')
 const checkForStripeObjects = require("./checkForStripeObjects")
