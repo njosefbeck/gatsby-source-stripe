@@ -10,7 +10,8 @@
     "lint": "eslint src --ext .js",
     "format": "prettier --write src/**/**.js",
     "test": "jest",
-    "watch": "babel -w src --out-dir . --ignore 'src/__tests__'"
+    "watch:test": "jest --watch",
+    "watch": "babel -w src --out-dir . --copy-files && del-cli __tests__"
   },
   "keywords": [
     "gatsby",
