@@ -4,7 +4,7 @@
   "main": "index.js",
   "description": "Gatsby source plugin for building websites using Stripe as a data source",
   "scripts": {
-    "prebuild": "del-cli '*.js' '!src/**/**.js' '!index.js'",
+    "prebuild": "npm test && del-cli '*.js' '!src/**/**.js' '!index.js'",
     "build": "babel src --out-dir . --copy-files && del-cli __tests__",
     "prepare": "cross-env NODE_ENV=production npm run build",
     "lint": "eslint src --ext .js",
