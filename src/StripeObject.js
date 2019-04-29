@@ -3,6 +3,11 @@ const stripeObjs = require("./stripeObjects.json");
 class StripeObject {
   constructor(type) {
     const obj = stripeObjs.objects.find(o => o.type === type);
+
+    if (!obj) {
+      throw new Error(`Unknown type: ${type} passed to StripeObject. This type is not supported.`)
+    }
+
     this.id = obj.id;
     this.product = obj.product;
     this.name = obj.name;

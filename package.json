@@ -4,11 +4,14 @@
   "main": "index.js",
   "description": "Gatsby source plugin for building websites using Stripe as a data source",
   "scripts": {
-    "build": "babel src --out-dir . --copy-files --ignore **/__tests__",
+    "prebuild": "npm test && del-cli '*.js' '!src/**/**.js' '!index.js'",
+    "build": "babel src --out-dir . --copy-files && del-cli __tests__",
     "prepare": "cross-env NODE_ENV=production npm run build",
     "lint": "eslint src --ext .js",
     "format": "prettier --write src/**/**.js",
-    "watch": "babel -w src --out-dir . --ignore **/__tests__"
+    "test": "jest",
+    "watch:test": "jest --watch",
+    "watch": "babel -w src --out-dir . --copy-files && del-cli __tests__"
   },
   "keywords": [
     "gatsby",
@@ -34,10 +37,12 @@
     "@babel/preset-env": "7.4.3",
     "babel-eslint": "10.0.1",
     "cross-env": "5.2.0",
+    "del-cli": "1.1.0",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.1.0",
     "eslint-plugin-import": "2.17.0",
     "eslint-plugin-prettier": "3.0.1",
+    "jest": "24.7.1",
     "prettier": "1.17.0"
   },
   "dependencies": {

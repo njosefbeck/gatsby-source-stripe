@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-- Nada
+- Add some initial tests using Jest. Test commands include: `npm test`, `npm run watch:test`. Also tests run every time you use `npm run prepare`, `npm run build`.
+- Add .eslintignore to ignore tests dir when running eslint.
+- Add prebuild npm script to handle deleting old JavaScript files on build.
+- Fix capitalization issue: stripeObject.js --> StripeObject.js
 
 ## [2.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.1...v2.2.2) - 2019-04-13
 - Fix file capitalization issue.
