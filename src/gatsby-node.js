@@ -6,7 +6,7 @@ const checkForStripeObjects = require("./checkForStripeObjects")
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, store },
-  { downloadFiles = false, objects = [], secretKey = "", auth = true }
+  { downloadFiles = false, objects = [], secretKey = "" }
 ) => {
   const { createNode } = actions;
 
@@ -95,8 +95,7 @@ exports.sourceNodes = async (
       if (downloadFiles) {
         fileNodesMap = await localFile.downloadFiles(
           payload,
-          stripeObj.type,
-          auth
+          stripeObj.type
         );
       }
 

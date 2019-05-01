@@ -5,7 +5,7 @@ class LocalFile {
     this.createRemoteArgs = createRemoteArgs;
   }
 
-  async downloadFiles(payload, type, auth) {
+  async downloadFiles(payload, type) {
     let fileNodes;
     let fileNodesMap;
 
@@ -17,32 +17,20 @@ class LocalFile {
     field/s should go, and the value is the corresponding file nodes */
     switch (type.toLowerCase()) {
       case "file": {
-        fileNodes = await this.downloadStripeHostedFile(
-          payload.url,
-          payload.type,
-          payload.id
-        );
+        fileNodes = await this.downloadHostedFiles(payload.url, true, payload.id, payload.type);
         fileNodesMap = { root: fileNodes };
         break;
       }
       case "product": {
-        fileNodes = await this.downloadRemoteHostedFiles(
-          payload.images,
-          auth,
-          payload.id
-        );
+        fileNodes = await this.downloadHostedFiles(payload.images, false, payload.id);
         fileNodesMap = { root: fileNodes };
         break;
       }
       case "sku": {
-        const skuFileNode = await this.downloadStripeHostedFile(
-          payload.image,
-          payload.type,
-          payload.id
-        );
-        const skuParentProductFileNodes = await this.downloadRemoteHostedFiles(
+        const skuFileNode = await this.downloadHostedFiles(payload.image, false, payload.id);
+        const skuParentProductFileNodes = await this.downloadHostedFiles(
           payload.product.images,
-          auth,
+          false,
           payload.product.id
         );
         fileNodesMap = {
@@ -58,63 +46,45 @@ class LocalFile {
     return fileNodesMap;
   }
 
-  /* Some Stripe objects (e.g. Product and SKU types) payloads can have images but they can't
-  currently be hosted on Stripe. Since these images can be hosted anywhere the developer has
-  the option to specify the auth flag which will add or remove the Authorization HTTP header
-  sent when fetching the images. The parentNodeId field is needed so that Gatsby knows what
-  node the newly downloaded File is connected to. Without this, Gatsby will delete the File node
-  when you restart the develop server */
-  async downloadRemoteHostedFiles(urls, authFlag, parentNodeId) {
+  /** Files can either be hosted by Stripe (e.g. an SKUs image) or elsewhere (e.g. The images
+   *  used for a generic product). Files hosted on Stripe can be public or private, this means
+   *  we need to support both having and not having an auth header. Obviously files hosted elsewhere
+   *  can also require auth, however we don't yet support using custom auth credentials in this case.
+   *  The parentNodeId field is needed so that Gatsby knows what node the newly downloaded File is 
+   *  connected to. Without this, Gatsby will delete the File node when you restart the develop server 
+  */
+  async downloadHostedFiles(urls, useAuth, parentNodeId, type) {
+    if (!urls) return;
+
     const urlsArray = convertToArray(urls);
     const { auth, ...createRemoteArgsWithoutAuth } = this.createRemoteArgs; // eslint-disable-line no-unused-vars
+    const ext = type && `.${type}`;
 
     try {
       const fileNodePromises = urlsArray
         .filter(url => url)
         .map(url => {
-          const createRemoteArgs = authFlag
-            ? { url, parentNodeId, ...this.createRemoteArgs }
-            : { url, parentNodeId, ...createRemoteArgsWithoutAuth };
-
+          const createRemoteArgs = useAuth
+            ? { url, parentNodeId, ext, ...this.createRemoteArgs }
+            : { url, parentNodeId, ext, ...createRemoteArgsWithoutAuth };
+          
           return createRemoteFileNode(createRemoteArgs);
         });
-      const fileNodes = await Promise.all(fileNodePromises);
-
-      return this.validateFileNodes(fileNodes);
-    } catch (e) {
-      const URLStrings = urlsArray.reduce(
-        (URLString, url, i) => URLString + `URL ${i + 1}: ` + url + "\n",
-        ""
-      );
-      console.log(
-        "\x1b[1;31m\u2715\x1b[0m We were unable to download images that Stripe was pointing at\n" +
-          URLStrings +
-          `Error: ${e.message}\n`
-      );
-      return null;
-    }
-  }
-
-  // File types objects have images that are hosted on Stripe's servers.
-  async downloadStripeHostedFile(url, type, parentNodeId) {
-    if (!url) return null;
-
-    try {
-      const fileNode = await createRemoteFileNode({
-        url,
-        ext: `.${type}`,
-        parentNodeId,
-        ...this.createRemoteArgs
-      });
-
-      return this.validateFileNodes(fileNode);
-    } catch (e) {
-      console.log(
-        `\x1b[1;31m\u2715\x1b[0m We were unable to download files that Stripe was hosting\nURL: ${url}\n` +
-          `Error: ${e.message}\n`
-      );
-      return null;
-    }
+        const fileNodes = await Promise.all(fileNodePromises);
+  
+        return this.validateFileNodes(fileNodes);
+      } catch (e) {
+        const URLStrings = urlsArray.reduce(
+          (URLString, url, i) => URLString + `URL ${i + 1}: ` + url + "\n",
+          ""
+        );
+        console.log(
+          "\x1b[1;31m\u2715\x1b[0m We were unable to download the following files:\n" +
+            URLStrings +
+            `Error: ${e.message}\n`
+        );
+        return null;
+      }
   }
 
   // Accepts both a single file node and an array of file nodes
@@ -129,7 +99,7 @@ class LocalFile {
 }
 
 function convertToArray(entity) {
-  if (!entity || !entity.length) return [];
+  if (!entity) return [];
   if (!Array.isArray(entity)) return [entity];
   else return entity;
 }

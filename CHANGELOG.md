@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add .eslintignore to ignore tests dir when running eslint.
 - Add prebuild npm script to handle deleting old JavaScript files on build.
 - Fix capitalization issue: stripeObject.js --> StripeObject.js
+- Removed auth option as without the ability to give custom auth credentials its redundant.
+- Refactored LocalFile.js to no longer differentiate between Stripe and non-Stripe hosted files.
+- Fixed issue with convertToArray method returning an empty array when provided with an object.
 
 ## [2.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.1...v2.2.2) - 2019-04-13
 - Fix file capitalization issue.
