@@ -1,25 +1,16 @@
 const stripeClient = require("stripe");
 const StripeObject = require("./StripeObject");
-const LocalFile = require("./LocalFile");
 const checkForSecretKey = require('./checkForSecretKey')
 const checkForStripeObjects = require("./checkForStripeObjects")
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, store },
-  { downloadFiles = false, objects = [], secretKey = "", auth = true }
+  { downloadFiles = false, objects = [], secretKey = "" }
 ) => {
   const { createNode } = actions;
 
   checkForStripeObjects(objects)
   checkForSecretKey(secretKey)
-
-  const localFile = new LocalFile({
-    store,
-    cache,
-    createNode,
-    createNodeId,
-    auth: { htaccess_user: secretKey }
-  });
 
   const stripe = stripeClient(secretKey);
 
@@ -81,26 +72,7 @@ exports.sourceNodes = async (
       }
       */
 
-      /*
-       * Download and create File nodes for object images, only if
-       * downloadFiles is configured.
-       *
-       * Adds the localFiles field, which is an array of
-       * references to the created File nodes.
-       *
-       * Currently supports File, Product and Sku images.
-       */
-      let fileNodesMap;
-
-      if (downloadFiles) {
-        fileNodesMap = await localFile.downloadFiles(
-          payload,
-          stripeObj.type,
-          auth
-        );
-      }
-
-      const node = stripeObj.node(createContentDigest, payload, fileNodesMap);
+      const node = stripeObj.node(createContentDigest, payload);
       createNode(node);
     }
   }
