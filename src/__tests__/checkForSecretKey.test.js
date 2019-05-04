@@ -1,4 +1,4 @@
-const checkForSecretKey = require("../checkForSecretKey");
+const checkForSecretKey = require("../helpers/checkForSecretKey");
 
 describe("plugin", () => {
   describe(", when options: secretKey", () => {

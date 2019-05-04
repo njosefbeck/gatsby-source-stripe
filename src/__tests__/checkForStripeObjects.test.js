@@ -1,4 +1,4 @@
-const checkForStripeObjects = require("../checkForStripeObjects");
+const checkForStripeObjects = require("../helpers/checkForStripeObjects");
 
 describe("plugin", () => {
   describe(", when options: object array", () => {

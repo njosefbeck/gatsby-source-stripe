@@ -1,13 +1,14 @@
 const stripeClient = require("stripe");
 const StripeObject = require("./StripeObject");
+const FileDownloadService = require("./FileDownloadService")
 const checkForSecretKey = require('./checkForSecretKey')
 const checkForStripeObjects = require("./checkForStripeObjects")
 
 exports.sourceNodes = async (
-  { actions, cache, createNodeId, createContentDigest, store },
+  { actions, cache, createNodeId, createContentDigest, getNode, store },
   { downloadFiles = false, objects = [], secretKey = "" }
 ) => {
-  const { createNode } = actions;
+  const { createNode, touchNode } = actions;
 
   checkForStripeObjects(objects)
   checkForSecretKey(secretKey)
@@ -72,7 +73,20 @@ exports.sourceNodes = async (
       }
       */
 
-      const node = stripeObj.node(createContentDigest, payload);
+      let node = stripeObj.node(createContentDigest, payload);
+
+      if (downloadFiles) {
+        const downloadService = new FileDownloadService({
+          store,
+          cache,
+          createNode,
+          createNodeId,
+          touchNode,
+          getNode
+        });
+        node = await downloadService.downloadAndAddTo(node)
+      }
+
       createNode(node);
     }
   }
