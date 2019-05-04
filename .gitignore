@@ -4,5 +4,6 @@ yarn.lock
 package-lock.json
 /*.js
 /*.json
+helpers
 !index.js
 __tests__
