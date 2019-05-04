@@ -1,5 +1,4 @@
-const extractUrls = require('./helpers/extractUrls')
-const cacheKey = require('./helpers/cacheKey');
+const extractUrls = require('./helpers/extractUrls');
 const checkCache = require('./helpers/checkCache');
 const createFileNode = require('./helpers/createFileNode')
 const hasFilesToDownload = require('./helpers/hasFilesToDownload');

@@ -29,7 +29,7 @@ class StripeObject {
     return path;
   }
 
-  node(createContentDigest, payload, fileNodesMap) {
+  node(createContentDigest, payload) {
     const node = {
       ...payload,
       id: payload.id || `Stripe${this.type}${this.id}`,
