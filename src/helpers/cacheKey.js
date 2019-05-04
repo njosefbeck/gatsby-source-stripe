@@ -1,5 +1,5 @@
 function cacheKey(url) {
-  return `stripe-file-${url}`
+  return `stripe-file-${url}`;
 }
 
-module.exports = cacheKey
+module.exports = cacheKey;

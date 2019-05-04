@@ -1,6 +1,6 @@
-const { createRemoteFileNode } = require('gatsby-source-filesystem');
-const cacheKey = require('./cacheKey');
-const saveToCache = require('./saveToCache');
+const { createRemoteFileNode } = require("gatsby-source-filesystem");
+const cacheKey = require("./cacheKey");
+const saveToCache = require("./saveToCache");
 
 async function createFileNode({
   store,
@@ -8,7 +8,7 @@ async function createFileNode({
   createNode,
   createNodeId,
   url,
-  node,
+  node
 }) {
   const fileNode = await createRemoteFileNode({
     url,
@@ -16,14 +16,14 @@ async function createFileNode({
     store,
     cache,
     createNode,
-    createNodeId,
-  })
+    createNodeId
+  });
 
   if (fileNode) {
     await saveToCache(cache, cacheKey(url), {
       fileNodeId: fileNode.id,
-      updated: node.updated,
-    })
+      updated: node.updated
+    });
     return fileNode.id;
   }
 }

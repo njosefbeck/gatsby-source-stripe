@@ -1,5 +1,5 @@
 function saveNodeFromGarbageCollection(touchNode, nodeId) {
-  touchNode({ nodeId })
+  touchNode({ nodeId });
 }
 
 module.exports = saveNodeFromGarbageCollection;
