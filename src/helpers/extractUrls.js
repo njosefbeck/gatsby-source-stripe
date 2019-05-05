@@ -7,7 +7,7 @@ function extractUrls(node) {
     case "sku":
       return extractSkuUrls(node);
     default:
-      return;
+      return [];
   }
 }
 

@@ -30,7 +30,7 @@ class FileDownloadService {
     }
 
     const urls = extractUrls(node);
-    if (!urls) {
+    if (!urls.length) {
       return node;
     }
 
