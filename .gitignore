@@ -7,3 +7,4 @@ package-lock.json
 helpers
 !index.js
 __tests__
+!/src/__tests__
