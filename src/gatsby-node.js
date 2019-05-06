@@ -1,8 +1,8 @@
 const stripeClient = require("stripe");
 const StripeObject = require("./StripeObject");
 const FileDownloadService = require("./FileDownloadService")
-const checkForSecretKey = require('./checkForSecretKey')
-const checkForStripeObjects = require("./checkForStripeObjects")
+const checkForSecretKey = require('./helpers/checkForSecretKey')
+const checkForStripeObjects = require("./helpers/checkForStripeObjects")
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, getNode, store },
