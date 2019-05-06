@@ -5,7 +5,7 @@ describe("getNonRootFileNodeIds()", () => {
     const fileNodeIds = [
       {
         location: "root",
-        id: "8fa3f02d-5e34-5191-bf6a-7533210053fc",
+        id: "8fa3f02d-5e34-5191-bf6a-7533210053fc"
       },
       {
         location: "product",
@@ -18,7 +18,7 @@ describe("getNonRootFileNodeIds()", () => {
       {
         location: "product",
         id: "b9c3ae18-78f9-5b31-8e6b-372de7b6102a"
-      },
+      }
     ];
 
     const expected = [
@@ -33,9 +33,9 @@ describe("getNonRootFileNodeIds()", () => {
       {
         location: "product",
         id: "b9c3ae18-78f9-5b31-8e6b-372de7b6102a"
-      },
+      }
     ];
 
     expect(getNonRootFileNodeIds(fileNodeIds)).toEqual(expected);
-  })
-})
+  });
+});
