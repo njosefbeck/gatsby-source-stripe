@@ -13,14 +13,11 @@ function addLocalFiles(node, fileNodeIds) {
   }
 
   nonRootFileNodeIds.forEach(fileNodeId => {
-    const localFiles =
-      nodeWithLocalFiles[fileNodeId.location].localFiles___NODE;
-    if (localFiles) {
-      nodeWithLocalFiles[fileNodeId.location].localFiles___NODE.concat(
-        fileNodeId.id
-      );
-    }
-    nodeWithLocalFiles[fileNodeId.location].localFiles___NODE = [fileNodeId.id];
+    nodeWithLocalFiles[fileNodeId.location].localFiles___NODE = [];
+  })
+
+  nonRootFileNodeIds.forEach(fileNodeId => {
+    nodeWithLocalFiles[fileNodeId.location].localFiles___NODE.push(fileNodeId.id)
   });
 
   return nodeWithLocalFiles;
