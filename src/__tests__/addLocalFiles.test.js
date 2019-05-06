@@ -6,23 +6,23 @@ describe("addLocalFiles()", () => {
       id: "sku_Ew1GWVDLcI23bd",
       object: "sku",
       image: "https://files.stripe.com/files/f_test_SWXjBddZpg3sRYV6R9yVBpu3",
-      product: "prod_BosWT9EsdzgjPn",
+      product: "prod_BosWT9EsdzgjPn"
     };
 
     const fileNodeIds = [
       {
         location: "root",
         id: "8fa3f02d-5e34-5191-bf6a-7533210053fc"
-      },
+      }
     ];
 
     const expected = {
       ...node,
-      localFiles___NODE: [ "8fa3f02d-5e34-5191-bf6a-7533210053fc" ],
-    }
+      localFiles___NODE: ["8fa3f02d-5e34-5191-bf6a-7533210053fc"]
+    };
 
-    expect(addLocalFiles(node, fileNodeIds)).toEqual(expected)
-  })
+    expect(addLocalFiles(node, fileNodeIds)).toEqual(expected);
+  });
 
   test("adds local files to root and sub-nodes", () => {
     const node = {
@@ -39,7 +39,7 @@ describe("addLocalFiles()", () => {
         ],
         type: "good",
         updated: 1556536238
-      },
+      }
     };
 
     const fileNodeIds = [
@@ -81,9 +81,9 @@ describe("addLocalFiles()", () => {
           "b9c3ae18-78f9-5b31-8e6b-372de7b6102a"
         ]
       },
-      localFiles___NODE: [ "8fa3f02d-5e34-5191-bf6a-7533210053fc" ],
-    }
+      localFiles___NODE: ["8fa3f02d-5e34-5191-bf6a-7533210053fc"]
+    };
 
-    expect(addLocalFiles(node, fileNodeIds)).toEqual(expected)
-  })
-})
+    expect(addLocalFiles(node, fileNodeIds)).toEqual(expected);
+  });
+});
