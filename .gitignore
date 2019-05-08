@@ -8,3 +8,4 @@ helpers
 !index.js
 __tests__
 !/src/__tests__
+!/src/helpers
