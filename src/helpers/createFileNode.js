@@ -10,21 +10,26 @@ async function createFileNode({
   url,
   node
 }) {
-  const fileNode = await createRemoteFileNode({
-    url,
-    parentNodeId: node.id,
-    store,
-    cache,
-    createNode,
-    createNodeId
-  });
-
-  if (fileNode) {
-    await saveToCache(cache, cacheKey(url), {
-      fileNodeId: fileNode.id,
-      updated: node.updated
+  try {
+    const fileNode = await createRemoteFileNode({
+      url,
+      parentNodeId: node.id,
+      store,
+      cache,
+      createNode,
+      createNodeId
     });
-    return fileNode.id;
+
+    if (fileNode) {
+      await saveToCache(cache, cacheKey(url), {
+        fileNodeId: fileNode.id,
+        updated: node.updated
+      });
+      return fileNode.id;
+    }
+  } catch(e) {
+    console.error(`${e}\nSkipping...`)
+    return
   }
 }
 
