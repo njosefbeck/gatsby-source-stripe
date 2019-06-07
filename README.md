@@ -1,15 +1,13 @@
 # gatsby-source-stripe
 
-Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version 2018-11-08.
+Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2019-05-16](https://stripe.com/docs/upgrades#2019-05-16).
 
-This plugin is a source plugin, so it only brings in the data (to be used, for example, in creating a Stripe dashboard, or an e-commerce store). To actually edit the data in your Stripe account, to handle transactions, make charges, you will need to use some kind of backend server or serverless architecture.
-
-Use cases for this Stripe source plugin could be:
+This plugin is a source plugin, so it brings in your Stripe data. Use cases for this Stripe source plugin could be:
 
 * Create an ecommerce store. This plugin will allow you to bring your products and skus into your Gatsby site, and then you can use Stripe Checkout via the [gatsby-plugin-stripe-checkout](https://github.com/njosefbeck/gatsby-plugin-stripe-checkout) plugin.
 * Create various dashboards around customers, invoices, etc. Use this plugin to bring in any of the data types listed below.
 
-Do you use this plugin in your Gatsby project? Let me know and I can add it here as an example!
+Do you use this plugin in your Gatsby project? Let us know and we can add it here as an example!
 
 Check out the [CHANGELOG](https://github.com/njosefbeck/gatsby-source-stripe/blob/master/CHANGELOG.md) for past and upcoming updates.
 
@@ -23,15 +21,15 @@ or
 
 ## How to use
 
-**NOTE: This plugin only supports Node v.10 and above, and has been tested against v10.13.0. If you experience any issues, first make sure you're running at least Node v.10. Also! You must be using Gatsby version 2.0.15 or greater.**
+**NOTE: You must be using Gatsby version 2.0.15 or greater.**
 
-In the plugin options objects' array, specify the object types you would like to get data for. For example, if I'd like to get the lists of data for my balance transactions, customers, and subscriptions, my objects array would look like this: `['BalanceTransaction', 'Customer', 'Subscription']`.
+In the plugin options objects' array, specify the object types you would like to get data for. For example, if you'd like to get the lists of data for your Skus and Products, your objects array would look like this: `['Product', 'Sku']`.
 
-Additionally, please only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file that is not version-controlled. We don't want your key ending up in your version-controlled source code! For enhanced security, you can also create a [restricted API key](https://stripe.com/docs/keys#limiting-access-with-restricted-api-keys) in your Stripe Developer Dashboard. Since this plugin only ever sources data, you can restrict `All core resources` to `Read only`, and even turn off access to certain resources that you know you don't use.
+Additionally, only include your Stripe secret key via a [.env](https://www.npmjs.com/package/dotenv) file that is not version-controlled. We don't want your key ending up in your version-controlled source code! For enhanced security, you can also create a [restricted API key](https://stripe.com/docs/keys#limiting-access-with-restricted-api-keys) in your Stripe Developer Dashboard. Since this plugin only ever sources data, you can restrict `All core resources` to `Read only`, and even turn off access to certain resources that you know you don't use.
 
-Enable [downloading files](#downloading-files) associated with your Stripe data by setting `downloadFiles` to true. You can also set `auth` to false as shown below to remove any Authorization header from HTTP requests made when [downloading files](#downloading-files) not hosted on Stripe.
+Enable [downloading files](#downloading-files) associated with your Stripe Skus and Products by setting `downloadFiles` to true.
 
-Example below.
+Example:
 
 ```javascript
 // In your gatsby-config.js
@@ -42,7 +40,6 @@ plugins: [
       objects: ['Balance', 'BalanceTransaction', 'Product', 'ApplicationFee', 'Sku', 'Subscription'],
       secretKey: 'stripe_secret_key_here',
       downloadFiles: true,
-      auth: false,
     }
   }
 ]
@@ -96,23 +93,19 @@ Expanding all Stripe objects is tricky, as some objects have a lot of nested sub
 
 ## Auto-pagination
 
-**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin only supports Node v.10 and above, and has been tested against v10.13.0. If you experience any issues, first make sure you're running at least Node v.10.**
+**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin has been tested against v10.13.0. If you experience any issues with earlier versions of Node, please first consider upgrading your Node version. Otherwise, file and issue and we'll try to resolve!**
 
 All list responses are fully paginated.
 
 ## Downloading Files
 
-Setting `downloadFiles: true` in the plugin configuration enables downloading of files associated with File objects, and images on Sku and Product objects. A Gatsby [File node](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#how-to-query) is created for each downloaded file, and references are placed on the `localFiles` field of their Stripe nodes.
-
-When downloading these files this plugin will by default use the same authorization header used in the HTTP request for fetching your Stripe details. This can cause some issues with platforms used to host public files (e.g. Google Cloud Platform Storage Buckets) where you will receive a 401 Unauthorized since this header won't match anything the platform knows about. As such you can choose to remove the auth header using the setting `auth: false`. Currently you can not set custom auth headers due to limitations in [gatsby-source-filesystem](https://www.gatsbyjs.org/packages/gatsby-source-filesystem/), however this limitation may be removed in the future.
+Setting `downloadFiles: true` in the plugin configuration enables downloading of images on Sku and Product objects. A Gatsby [File node](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#how-to-query) is created for each downloaded file, and references are placed on the `localFiles` field of their Stripe nodes.
 
 You can give these File nodes to plugins like [gatsby-image](https://using-gatsby-image.gatsbyjs.org/) to create responsive images and/or [gatsby-transformer-sharp](https://image-processing.gatsbyjs.org/) to process images at build.
 
-Note: If you're using the Checkout beta, and have uploaded your images through the dashboard, this feature will not work, due to how Stripe forms the URL for the image resource.
-
 ## How to query
 
-You can query all of the different Stripe object data like the following:
+Below is an example query for fetching all your Stripe Skus. Note that the `localFiles` would not be there if you didn't specify `downloadFiles: true` in the plugin options.
 
 ```graphql
 {
@@ -133,7 +126,7 @@ You can query all of the different Stripe object data like the following:
 }
 ```
 
-Just replace "Sku" with any of the types used in your objects config array.
+Just replace "Sku" with any of the types used in your config `objects` array.
 
 You can also query for a specific Stripe object like this:
 
@@ -154,11 +147,10 @@ Would you like to help maintain this project? We would love your help! Checkout 
 
 To set up the project locally, follow these steps:
 
-1) Make sure you're on at least Node v.10.
-2) Fork the repo and pull it down locally. For ease of testing, we recommend pulling it into an existing Gatsby project, in a `plugins` directory.
-3) Add the plugin, with options, to `gatsby-config.js`.
-4) Install dependencies by running `npm install` in the project directory.
-5) Run `npm run build` in the console, to transpile the code for testing and running in your project.
-6) Hack away!
+1) Fork the repo and pull it down locally. For ease of testing, we recommend pulling it into an existing Gatsby project, in a `plugins` directory.
+2) Add the plugin, with options, to `gatsby-config.js`.
+3) Install dependencies by running `npm install` in the project directory.
+4) Run `npm run build` in the console, to transpile the code for testing and running in your project.
+5) Hack away!
 
-Included is an [ESLint](https://eslint.org) config to help check the correctness of your changes of your code, and a [prettier](https://prettier.io) config to format it. Use them with the corresponding plugins for your editor of choice, or run the tools from the commandline with `npm run lint` and `npm run format`. Don't forget to format your changes with prettier before submitting a PR!
+Included is an [ESLint](https://eslint.org) config to help check the correctness of your changes of your code, and a [prettier](https://prettier.io) config to format it. Use them with the corresponding plugins for your editor of choice, or run the tools from the command line with `npm run lint` and `npm run format`. Don't forget to format your changes with prettier before submitting a PR!
