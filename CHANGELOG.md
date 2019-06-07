@@ -20,6 +20,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fix capitalization issue: stripeObject.js --> StripeObject.js.
 - Update project to support Node `v8.16.0` or above.
 - Add support for [Credit Notes](https://stripe.com/docs/api/credit_notes/list), [Reviews](https://stripe.com/docs/api/radar/reviews/list), and [Value Lists](https://stripe.com/docs/api/radar/value_lists/object). Add one of the following strings to your config `objects` array to get this new data: `CreditNote`, `Review` or `ValueList`.
+- `balance.listTransactions()` has now become `balanceTransactions.list()`. The string used in your config `objects` array stays the same: `BalanceTransaction`.
+
+**DEPENDENCIES**
+- Update @babel/cli from [7.4.3 to 7.4.4](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.4.3 to 7.4.5](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.4.3 to 7.4.5](https://github.com/babel/babel/releases).
+- Update del-cli from [1.1.0 to 2.0.0](https://github.com/sindresorhus/del-cli/releases).
+- Update eslint-config-prettier from [4.1.0 to 4.3.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-import from [2.17.0 to 2.17.3](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update eslint-plugin-prettier from [3.0.1 to 3.1.0](https://github.com/prettier/eslint-plugin-prettier/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.0.29 to 2.0.38](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update jest from [24.7.1 to 24.8.0](https://github.com/facebook/jest/blob/master/CHANGELOG.md).
+- Update prettier from [1.17.0 to 1.18.2](https://prettier.io/blog/2019/04/12/1.17.0.html).
+- Update stripe from [6.28.0 to 7.1.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
 
 ## [2.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.1...v2.2.2) - 2019-04-13
 - Fix file capitalization issue.
