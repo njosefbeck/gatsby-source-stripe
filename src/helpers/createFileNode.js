@@ -27,9 +27,9 @@ async function createFileNode({
       });
       return fileNode.id;
     }
-  } catch(e) {
-    console.error(`${e}\nSkipping...`)
-    return
+  } catch (e) {
+    console.error(`${e}\nSkipping...`);
+    return;
   }
 }
 
