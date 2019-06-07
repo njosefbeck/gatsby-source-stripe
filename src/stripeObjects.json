@@ -13,11 +13,11 @@
     {
       "id": 2,
       "product": null,
-      "name": "balance",
+      "name": "balanceTransactions",
       "type": "BalanceTransaction",
       "description": "A list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth).",
       "canIterate": true,
-      "methodName": "listTransactions",
+      "methodName": "list",
       "methodArgs": {
         "expand": ["data.source.destination", "data.source.customer", "data.source.invoice"]
       }
