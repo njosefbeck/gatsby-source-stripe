@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 - Nothing
 
+## [3.0.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.0...v3.0.1) - 2019-06-07
+- Handle download file error gracefully, so that plugin processes all Stripe objects possible, even if one errors out.
+
 ## [3.0.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.1...v3.0.0) - 2019-06-07
 
 **BREAKING**
