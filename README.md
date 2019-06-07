@@ -52,7 +52,7 @@ Below is a table with a list of the Stripe types supported in the options' objec
 | Type | Stripe API Method | Notes |
 | --- | --- | --- |
 | Balance  | [stripe.balance.retrieve()](https://stripe.com/docs/api/balance/balance_retrieve?lang=node) | Not iterable |
-| BalanceTransaction | [stripe.balance.listTransactions()](https://stripe.com/docs/api/balance/balance_history?lang=node) | None |
+| BalanceTransaction | [stripe.balanceTransactions.list()](https://stripe.com/docs/api/balance/balance_history?lang=node) | None |
 | Charge | [stripe.charges.list()](https://stripe.com/docs/api/charges/list?lang=node) | None |
 | Customer | [stripe.customers.list()](https://stripe.com/docs/api/customers/list?lang=node) | None |
 | Dispute | [stripe.disputes.list()](https://stripe.com/docs/api/disputes/list?lang=node) | None |
