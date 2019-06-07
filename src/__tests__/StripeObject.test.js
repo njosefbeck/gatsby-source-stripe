@@ -17,7 +17,7 @@ const createContentDigest = input => {
 describe("StripeObject", () => {
   describe("constructor", () => {
     test("throws error when given unknown type", () => {
-      const type = "Review";
+      const type = "Skyu";
       const error = `Unknown type: ${type} passed to StripeObject. This type is not supported.`;
 
       expect(() => new StripeObject(type)).toThrow(error);
