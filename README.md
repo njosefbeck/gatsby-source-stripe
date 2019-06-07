@@ -85,6 +85,8 @@ Below is a table with a list of the Stripe types supported in the options' objec
 | Sku | [stripe.skus.list()](https://stripe.com/docs/api/skus/list?lang=node) | None |
 | SigmaScheduledQueryRun | [stripe.sigma.ScheduledQueryRuns.list()](https://stripe.com/docs/api/sigma/scheduled_queries/list?lang=node) | Only works with live secret keys, not test keys |
 | WebhookEndpoint | [stripe.webhookEndpoints.list()](https://stripe.com/docs/api/webhook_endpoints/list?lang=node) | None |
+| CreditNote | [stripe.creditNotes.list()](https://stripe.com/docs/api/credit_notes/list?lang=node) | None |
+| Review | [stripe.reviews.list()](https://stripe.com/docs/api/radar/reviews/list?lang=node) | None |
 
 
 ## Expanding Objects

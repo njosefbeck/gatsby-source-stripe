@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add prebuild npm script to handle deleting old JavaScript files on build.
 - Fix capitalization issue: stripeObject.js --> StripeObject.js.
 - Update project to support Node `v8.16.0` or above.
+- Add support for [Credit Notes](https://stripe.com/docs/api/credit_notes/list), [Reviews](https://stripe.com/docs/api/radar/reviews/list), and [Value Lists](https://stripe.com/docs/api/radar/value_lists/object). Add one of the following strings to your config `objects` array to get this new data: `CreditNote`, `Review` or `ValueList`.
 
 ## [2.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v2.2.1...v2.2.2) - 2019-04-13
 - Fix file capitalization issue.

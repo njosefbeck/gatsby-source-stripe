@@ -369,6 +369,40 @@
       "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
+    },
+    {
+      "id": 35,
+      "product": null,
+      "name": "creditNotes",
+      "type": "CreditNote",
+      "description": "A list of credit notes.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.customer", "data.invoice", "data.refund"]
+      }
+    },
+    {
+      "id": 36,
+      "product": null,
+      "name": "reviews",
+      "type": "Review",
+      "description": "A list of Review objects that have open set to true.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.charge", "data.payment_intent"]
+      }
+    },
+    {
+      "id": 37,
+      "product": "radar",
+      "name": "valueLists",
+      "type": "ValueList",
+      "description": "A list of ValueList objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {}
     }
   ]
 }
