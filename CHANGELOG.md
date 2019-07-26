@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-- Nothing
+- None
+
+## [3.0.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.0...v3.0.1) - 2019-07-26
+- Remove `mediaType` from StripeObject Gatsby node, to solve bug related to using this plugin in the same project as `gatsby-tranformer-json`. Update relevant test.
+- Add `jest` environment to `.eslintrc`.
+- Update @babel/cli from [7.4.3 to 7.4.4](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.4.3 to 7.4.5](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.4.3 to 7.4.5](https://github.com/babel/babel/releases).
+- Update babel-eslint from [10.0.1 to 10.0.2](https://github.com/babel/babel-eslint/releases).
+- Update eslint from [5.16.0 to 6.1.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [4.3.0 to 6.0.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-import from [2.17.3 to 2.18.2](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.0.38 to 2.1.6](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [7.1.0 to 7.5.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
 
 ## [3.0.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.0...v3.0.1) - 2019-06-07
 - Handle download file error gracefully, so that plugin processes all Stripe objects possible, even if one errors out.
