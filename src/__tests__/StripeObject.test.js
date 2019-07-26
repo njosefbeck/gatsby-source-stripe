@@ -28,7 +28,7 @@ describe("StripeObject", () => {
       const instance = new StripeObject("Sku");
 
       expect(instance.name).toBe("skus");
-      expect(instance.type).toBe("Sku");
+      expect(instance.type).toBe(type);
       expect(instance.methodName).toBe("list");
     });
   });
@@ -92,7 +92,6 @@ describe("StripeObject", () => {
         parent: null,
         children: [],
         internal: {
-          mediaType: "application/json",
           type: `Stripe${instance.type}`,
           content: JSON.stringify(payload),
           contentDigest: createContentDigest(payload),
