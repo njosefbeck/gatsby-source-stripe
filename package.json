@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-stripe",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "main": "index.js",
   "description": "Gatsby source plugin for building websites using Stripe as a data source",
   "scripts": {
