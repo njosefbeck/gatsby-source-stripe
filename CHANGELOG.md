@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- None
+
+## [3.0.3](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.2...v3.0.3) - 2019-07-26
 - Fix an issue where the images of a `Sku`'s expanded product field are not downloaded if the `Sku` has no image itself.
 - Update gatsby-source-filesystem from [2.1.6 to 2.1.9](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
 - Update stripe from [7.5.0 to 7.7.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
