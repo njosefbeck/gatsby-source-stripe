@@ -46,7 +46,7 @@
     "prettier": "1.18.2"
   },
   "dependencies": {
-    "gatsby-source-filesystem": "2.1.6",
-    "stripe": "7.5.0"
+    "gatsby-source-filesystem": "2.1.9",
+    "stripe": "7.7.0"
   }
 }

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 - Fix an issue where the images of a `Sku`'s expanded product field are not downloaded if the `Sku` has no image itself.
+- Update gatsby-source-filesystem from [2.1.6 to 2.1.9](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [7.5.0 to 7.7.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
 
 ## [3.0.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.1...v3.0.2) - 2019-07-26
 - Remove `mediaType` from StripeObject Gatsby node, to solve bug related to using this plugin in the same project as `gatsby-tranformer-json`. Update relevant test.
