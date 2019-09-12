@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 - None
 
+## [3.0.3](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.3...v3.0.4) - 2019-09-12
+- Update @babel/cli from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
+- Update babel-eslint from [10.0.2 to 10.0.3](https://github.com/babel/babel-eslint/releases).
+- Update cross-env from [5.2.0 to 5.2.1](https://github.com/kentcdodds/cross-env/releases).
+- Update del-cli from [2.0.0 to 3.0.0](https://github.com/sindresorhus/del-cli/releases).
+- Update eslint from [6.1.0 to 6.3.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [6.0.0 to 6.3.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.1.9 to 2.1.22](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update jest from [24.8.0 to 24.9.0](https://github.com/facebook/jest/blob/master/CHANGELOG.md).
+- Update stripe from [7.7.0 to 7.9.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
 ## [3.0.3](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.2...v3.0.3) - 2019-07-26
 - Fix an issue where the images of a `Sku`'s expanded product field are not downloaded if the `Sku` has no image itself.
 - Update gatsby-source-filesystem from [2.1.6 to 2.1.9](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
@@ -23,7 +36,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Update eslint-plugin-import from [2.17.3 to 2.18.2](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
 - Update gatsby-source-filesystem from [2.0.38 to 2.1.6](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
 - Update stripe from [7.1.0 to 7.5.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
-
 
 ## [3.0.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.0...v3.0.1) - 2019-06-07
 - Handle download file error gracefully, so that plugin processes all Stripe objects possible, even if one errors out.

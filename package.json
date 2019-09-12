@@ -32,21 +32,21 @@
     "gatsby": ">=2.0.15"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.5",
-    "@babel/core": "7.5.5",
-    "@babel/preset-env": "7.5.5",
-    "babel-eslint": "10.0.2",
-    "cross-env": "5.2.0",
-    "del-cli": "2.0.0",
-    "eslint": "6.1.0",
-    "eslint-config-prettier": "6.0.0",
+    "@babel/cli": "7.6.0",
+    "@babel/core": "7.6.0",
+    "@babel/preset-env": "7.6.0",
+    "babel-eslint": "10.0.3",
+    "cross-env": "5.2.1",
+    "del-cli": "3.0.0",
+    "eslint": "6.3.0",
+    "eslint-config-prettier": "6.3.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-prettier": "3.1.0",
-    "jest": "24.8.0",
+    "jest": "24.9.0",
     "prettier": "1.18.2"
   },
   "dependencies": {
-    "gatsby-source-filesystem": "2.1.9",
-    "stripe": "7.7.0"
+    "gatsby-source-filesystem": "2.1.22",
+    "stripe": "7.9.0"
   }
 }
