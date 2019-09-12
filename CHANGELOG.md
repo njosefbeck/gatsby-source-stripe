@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 - None
 
-## [3.0.3](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.3...v3.0.4) - 2019-09-12
+## [3.0.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.3...v3.0.4) - 2019-09-12
 - Update @babel/cli from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
 - Update @babel/core from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
 - Update @babel/preset-env from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
