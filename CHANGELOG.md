@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 - None
 
+## [3.0.5](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.4...v3.0.5) - 2019-11-24
+- Update README with note related to having at least one Product & SKU in your Stripe inventory when running the example query. Thanks @Petar-np!
+
 ## [3.0.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.3...v3.0.4) - 2019-09-12
 - Update @babel/cli from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
 - Update @babel/core from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
