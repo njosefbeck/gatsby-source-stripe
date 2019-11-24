@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [3.0.5](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.4...v3.0.5) - 2019-11-24
 - Update README with note related to having at least one Product & SKU in your Stripe inventory when running the example query. Thanks @Petar-np!
+- Update gatsby-source-filesystem from [2.1.22 to 2.1.38](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [7.9.0 to 7.13.1](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+- Update @babel/cli from [7.6.0 to 7.7.4](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.6.0 to 7.7.4](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.6.0 to 7.7.4](https://github.com/babel/babel/releases).
+- Update cross-env from [5.2.1 to 6.0.3](https://github.com/kentcdodds/cross-env/releases).
+- Update eslint from [6.3.0 to 6.7.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [6.3.0 to 6.7.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update prettier from [1.18.2 to 1.19.1](https://prettier.io/blog/2019/04/12/1.17.0.html).
 
 ## [3.0.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.3...v3.0.4) - 2019-09-12
 - Update @babel/cli from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).
