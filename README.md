@@ -107,6 +107,8 @@ You can give these File nodes to plugins like [gatsby-image](https://using-gatsb
 
 ## How to query
 
+**NOTE: Be sure that you actually have products with SKUs in your Stripe account, otherwise you will get an error saying: `Cannot query field "allStripeSku" on type "Query"`.**
+
 Below is an example query for fetching all your Stripe Skus. Note that the `localFiles` would not be there if you didn't specify `downloadFiles: true` in the plugin options.
 
 ```graphql
