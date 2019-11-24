@@ -1,5 +1,5 @@
-async function getFromCache(cache, cacheKey) {
-  return await cache.get(cacheKey);
+function getFromCache(cache, cacheKey) {
+  return cache.get(cacheKey);
 }
 
 module.exports = getFromCache;

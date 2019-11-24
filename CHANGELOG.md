@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [3.0.5](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.4...v3.0.5) - 2019-11-24
 - Update README with note related to having at least one Product & SKU in your Stripe inventory when running the example query. Thanks @Petar-np!
+- Fix eslint errors.
 - Update gatsby-source-filesystem from [2.1.22 to 2.1.38](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
 - Update stripe from [7.9.0 to 7.13.1](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
 - Update @babel/cli from [7.6.0 to 7.7.4](https://github.com/babel/babel/releases).

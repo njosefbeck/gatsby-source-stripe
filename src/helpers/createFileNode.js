@@ -29,7 +29,6 @@ async function createFileNode({
     }
   } catch (e) {
     console.error(`${e}\nSkipping...`);
-    return;
   }
 }
 
