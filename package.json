@@ -14,6 +14,7 @@
     "watch": "babel -w src --out-dir . --copy-files && del-cli __tests__"
   },
   "keywords": [
+    "stripe",
     "gatsby",
     "gatsby-plugin",
     "gatsby-source-plugin"
