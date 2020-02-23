@@ -90,6 +90,4 @@ exports.sourceNodes = async (
       createNode(node);
     }
   }
-
-  return;
 };

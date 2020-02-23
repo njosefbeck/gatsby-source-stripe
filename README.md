@@ -2,7 +2,7 @@
 
 Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2019-12-03](https://stripe.com/docs/upgrades#2019-12-03).
 
-This plugin is a source plugin, so it brings in your Stripe data. Use cases for this Stripe source plugin could be:
+This plugin is a source plugin, so it brings in your Stripe data. Use cases for this Stripe source plugin:
 
 * Create an ecommerce store. This plugin will allow you to bring your products and skus into your Gatsby site, and then you can use Stripe Checkout via the [gatsby-plugin-stripe-checkout](https://github.com/njosefbeck/gatsby-plugin-stripe-checkout) plugin.
 * Create various dashboards around customers, invoices, etc. Use this plugin to bring in any of the data types listed below.
@@ -107,7 +107,9 @@ You can give these File nodes to plugins like [gatsby-image](https://using-gatsb
 
 ## How to query
 
-Below is an example query for fetching all your Stripe Skus. Note that the `localFiles` would not be there if you didn't specify `downloadFiles: true` in the plugin options.
+**NOTE: For the example below, be sure that you actually have products with SKUs in your Stripe account, otherwise you will get an error saying: `Cannot query field "allStripeSku" on type "Query"`.**
+
+Below is an example query for fetching all your Stripe Skus. Note that the `localFiles` will not be there if you didn't specify `downloadFiles: true` in the plugin options.
 
 ```graphql
 {
