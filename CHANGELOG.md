@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-- None
+- Update @babel/cli from [7.6.0 to 7.8.4](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.6.0 to 7.8.4](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.6.0 to 7.8.4](https://github.com/babel/babel/releases).
+- Update stripe from [7.9.0 to 8.20.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.1.22 to 2.1.48](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update jest from [24.9.0 to 25.1.0](https://github.com/facebook/jest/blob/master/CHANGELOG.md).
+- Update prettier from [1.18.2 to 1.19.1](https://prettier.io/blog/2019/04/12/1.17.0.html).
+- Update cross-env from [5.2.1 to 7.0.0](https://github.com/kentcdodds/cross-env/releases).
+- Update eslint from [6.3.0 to 6.8.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [6.3.0 to 6.10.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-import from [2.18.2 to 2.20.1](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update eslint-plugin-prettier from [3.1.0 to 3.1.2](https://github.com/prettier/eslint-plugin-prettier/blob/master/CHANGELOG.md).
 
 ## [3.0.4](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.3...v3.0.4) - 2019-09-12
 - Update @babel/cli from [7.5.5 to 7.6.0](https://github.com/babel/babel/releases).

@@ -1,6 +1,6 @@
 # gatsby-source-stripe
 
-Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2019-05-16](https://stripe.com/docs/upgrades#2019-05-16).
+Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2019-12-03](https://stripe.com/docs/upgrades#2019-12-03).
 
 This plugin is a source plugin, so it brings in your Stripe data. Use cases for this Stripe source plugin could be:
 
