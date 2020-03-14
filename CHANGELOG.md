@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Remove old ISSUE template as using GitHub's built-in version.
 - Add gotchas section to README and fix some typos.
 - Update Stripe client signature to remove deprecation warning.
+- Update @babel/core from [7.8.4 to 7.8.7](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.8.4 to 7.8.7](https://github.com/babel/babel/releases).
+- Update babel-eslint from [10.0.3 to 10.1.0](https://github.com/babel/babel-eslint/releases).
+- Update cross-env from [7.0.0 to 7.0.2](https://github.com/kentcdodds/cross-env/releases).
+- Update gatsby-source-filesystem from [2.1.48 to 2.1.55](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [8.20.0 to 8.32.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
 
 ## [3.0.6](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.5...v3.0.6) - 2020-02-23
 - Update @babel/cli from [7.6.0 to 7.8.4](https://github.com/babel/babel/releases).
