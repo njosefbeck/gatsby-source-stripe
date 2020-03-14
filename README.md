@@ -1,6 +1,6 @@
 # gatsby-source-stripe
 
-Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2019-12-03](https://stripe.com/docs/upgrades#2019-12-03).
+Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2020-03-02](https://stripe.com/docs/upgrades#2020-03-02).
 
 This plugin is a source plugin, so it brings in your Stripe data. Use cases for this Stripe source plugin:
 
@@ -95,7 +95,7 @@ Expanding all Stripe objects is tricky, as some objects have a lot of nested sub
 
 ## Auto-pagination
 
-**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin has been tested against v10.13.0. If you experience any issues with earlier versions of Node, please first consider upgrading your Node version. Otherwise, file and issue and we'll try to resolve!**
+**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin has been tested against v10.13.0. If you experience any issues with earlier versions of Node, please first consider upgrading your Node version. Otherwise, file an issue and we'll try to resolve!**
 
 All list responses are fully paginated.
 
@@ -109,7 +109,7 @@ You can give these File nodes to plugins like [gatsby-image](https://using-gatsb
 
 **NOTE: For the example below, be sure that you actually have products with SKUs in your Stripe account, otherwise you will get an error saying: `Cannot query field "allStripeSku" on type "Query"`.**
 
-Below is an example query for fetching all your Stripe Skus. Note that the `localFiles` will not be there if you didn't specify `downloadFiles: true` in the plugin options.
+Below is an example query for fetching all your Stripe SKUs. Note that the `localFiles` will not be there if you didn't specify `downloadFiles: true` in the plugin options.
 
 ```graphql
 {
@@ -144,6 +144,30 @@ You can also query for a specific Stripe object like this:
 ```
 
 When using GraphiQL, click on "Docs" in the top-right corner of the screen to explore all of the Stripe data being brought in, including their schemas. Additionally, check out Gatsby's handy [GraphQL Reference](https://www.gatsbyjs.org/docs/graphql-reference/) for information about filtering, sorting, etc.
+
+## Gotchas
+
+This section outlines common questions and issues that other user's have run into and how they were resolved.
+
+### "My Subscription objects aren't showing up in my GraphQL results"
+
+This issue comes up when trying to get back all SKU for your account, expecting that products of type `service` will also be present. As Subscriptions (products of type `service`) don't have SKUs, they won't show up in the SKU results. To get back those, you must also query for `Product` objects.
+
+Thus, for those who have Subscription products, we recommend you have an `objects` array like below.
+
+```javascript
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-source-stripe`,
+    options: {
+      objects: ['Sku', 'Product'],
+      secretKey: 'stripe_secret_key_here',
+      downloadFiles: true,
+    }
+  }
+]
+```
 
 ## Develop
 
