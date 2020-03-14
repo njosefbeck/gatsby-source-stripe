@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+- Remove old ISSUE template as using GitHub's built-in version.
+- Add gotchas section to README and fix some typos.
+- Update Stripe client signature to remove deprecation warning.
+
 ## [3.0.6](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.5...v3.0.6) - 2020-02-23
 - Update @babel/cli from [7.6.0 to 7.8.4](https://github.com/babel/babel/releases).
 - Update @babel/core from [7.6.0 to 7.8.4](https://github.com/babel/babel/releases).
