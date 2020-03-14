@@ -1,4 +1,4 @@
-const stripeClient = require("stripe");
+const Stripe = require("stripe");
 const StripeObject = require("./StripeObject");
 const FileDownloadService = require("./FileDownloadService")
 const checkForSecretKey = require('./helpers/checkForSecretKey')
@@ -13,12 +13,12 @@ exports.sourceNodes = async (
   checkForStripeObjects(objects)
   checkForSecretKey(secretKey)
 
-  const stripe = stripeClient(secretKey);
-
-  stripe.setAppInfo({
-    name: "Gatsby.js Stripe Source Plugin",
-    version: "2.0.0",
-    url: "https://www.npmjs.com/package/gatsby-source-stripe"
+  const stripe = new Stripe(secretKey, {
+    apiInfo: {
+      name: "Gatsby.js Stripe Source Plugin",
+      version: "3.0.7",
+      url: "https://github.com/njosefbeck/gatsby-source-stripe"
+    }
   });
 
   // Initialize stripeObjects based on gatsby plugin objects
