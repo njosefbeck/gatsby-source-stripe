@@ -14,7 +14,7 @@ exports.sourceNodes = async (
   checkForSecretKey(secretKey)
 
   const stripe = new Stripe(secretKey, {
-    apiInfo: {
+    appInfo: {
       name: "Gatsby.js Stripe Source Plugin",
       version: "3.0.7",
       url: "https://github.com/njosefbeck/gatsby-source-stripe"
