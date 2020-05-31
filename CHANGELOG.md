@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.1.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.7...v3.1.0) - 2020-05-30
 - Add Checkout Sessions resource.
 - Add Prices resource.
 - Update @babel/cli from [7.8.4 to 7.10.1](https://github.com/babel/babel/releases).
