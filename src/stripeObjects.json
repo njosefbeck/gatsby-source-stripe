@@ -403,6 +403,28 @@
       "canIterate": true,
       "methodName": "list",
       "methodArgs": {}
+    },
+    {
+      "id": 38,
+      "product": "checkout",
+      "name": "sessions",
+      "type": "Session",
+      "description": "A list of Checkout Session objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.customer", "data.line_items", "data.payment_intent"]
+      }
+    },
+    {
+      "id": 39,
+      "product": null,
+      "name": "prices",
+      "type": "Price",
+      "description": "A list of Price objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {}
     }
   ]
 }

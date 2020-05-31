@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+- Add Checkout Sessions resource.
+- Add Prices resource.
+
 ## [3.0.7](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.6...v3.0.7) - 2020-03-14
 - Remove old ISSUE template as using GitHub's built-in version.
 - Add gotchas section to README and fix some typos.
