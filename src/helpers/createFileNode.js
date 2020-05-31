@@ -8,7 +8,7 @@ async function createFileNode({
   createNode,
   createNodeId,
   url,
-  node
+  node,
 }) {
   try {
     const fileNode = await createRemoteFileNode({
@@ -17,13 +17,13 @@ async function createFileNode({
       store,
       cache,
       createNode,
-      createNodeId
+      createNodeId,
     });
 
     if (fileNode) {
       await saveToCache(cache, cacheKey(url), {
         fileNodeId: fileNode.id,
-        updated: node.updated
+        updated: node.updated,
       });
       return fileNode.id;
     }

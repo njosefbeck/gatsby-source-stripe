@@ -5,13 +5,10 @@ const crypto = require(`crypto`);
  * createContentDigest() implementation taken from:
  * https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby/src/utils/create-content-digest.js
  */
-const createContentDigest = input => {
+const createContentDigest = (input) => {
   const content = typeof input !== `string` ? JSON.stringify(input) : input;
 
-  return crypto
-    .createHash(`md5`)
-    .update(content)
-    .digest(`hex`);
+  return crypto.createHash(`md5`).update(content).digest(`hex`);
 };
 
 describe("StripeObject", () => {
@@ -36,13 +33,13 @@ describe("StripeObject", () => {
   describe("objectPath()", () => {
     const stripe = {
       orders: {
-        list: () => "Listing out orders..."
+        list: () => "Listing out orders...",
       },
       issuing: {
         authorizations: {
-          list: () => "Listing issuing authorizations..."
-        }
-      }
+          list: () => "Listing issuing authorizations...",
+        },
+      },
     };
 
     test("returns top-level stripe-node resource object", () => {
@@ -69,7 +66,7 @@ describe("StripeObject", () => {
         active: true,
         attributes: {
           size: "Medium",
-          gender: "Unisex"
+          gender: "Unisex",
         },
         created: 1555966756,
         currency: "usd",
@@ -77,14 +74,14 @@ describe("StripeObject", () => {
         inventory: {
           quantity: null,
           type: "infinite",
-          value: null
+          value: null,
         },
         livemode: false,
         metadata: {},
         package_dimensions: null,
         price: 1500,
         product: "prod_BosWT9EsdzgjPn",
-        updated: 1555966756
+        updated: 1555966756,
       };
       const expected = {
         ...payload,
@@ -95,8 +92,8 @@ describe("StripeObject", () => {
           type: `Stripe${instance.type}`,
           content: JSON.stringify(payload),
           contentDigest: createContentDigest(payload),
-          description: instance.description
-        }
+          description: instance.description,
+        },
       };
 
       expect(instance.node(createContentDigest, payload)).toEqual(expected);

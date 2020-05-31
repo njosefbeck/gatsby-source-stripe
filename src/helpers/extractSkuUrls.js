@@ -7,7 +7,7 @@ function extractSkuUrls(node) {
   }
 
   if (hasFilesToDownload(node.product)) {
-    node.product.images.forEach(url => {
+    node.product.images.forEach((url) => {
       urls.push({ location: "product", url });
     });
   }
