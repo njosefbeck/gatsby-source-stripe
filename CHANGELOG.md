@@ -7,6 +7,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Add Checkout Sessions resource.
 - Add Prices resource.
+- Update @babel/cli from [7.8.4 to 7.10.1](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.8.7 to 7.10.2](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.8.7 to 7.10.2](https://github.com/babel/babel/releases).
+- Update del-cli from [3.0.0 to 3.0.1](https://github.com/sindresorhus/del-cli/releases).
+- Update eslint from [6.8.0 to 7.1.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [6.10.0 to 6.11.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-import from [2.20.1 to 2.20.2](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update eslint-plugin-prettier from [3.1.2 to 3.1.3](https://github.com/prettier/eslint-plugin-prettier/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.1.55 to 2.3.8](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update jest from [25.1.0 to 26.0.1](https://github.com/facebook/jest/blob/master/CHANGELOG.md).
+- Update prettier from [1.19.1 to 2.0.5](https://prettier.io/blog/2019/04/12/1.17.0.html).
+- Update stripe from [8.32.0 to 8.56.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
 
 ## [3.0.7](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.6...v3.0.7) - 2020-03-14
 - Remove old ISSUE template as using GitHub's built-in version.
