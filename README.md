@@ -87,11 +87,13 @@ Below is a table with a list of the Stripe types supported in the options' objec
 | WebhookEndpoint | [stripe.webhookEndpoints.list()](https://stripe.com/docs/api/webhook_endpoints/list?lang=node) | None |
 | CreditNote | [stripe.creditNotes.list()](https://stripe.com/docs/api/credit_notes/list?lang=node) | None |
 | Review | [stripe.reviews.list()](https://stripe.com/docs/api/radar/reviews/list?lang=node) | None |
+| Sessions | [stripe.checkout.sessions.list()](https://stripe.com/docs/api/checkout/sessions/list?lang=node) | None |
+| Prices | [stripe.prices.list()](https://stripe.com/docs/api/prices/list?lang=node) | None |
 
 
 ## Expanding Objects
 
-Expanding all Stripe objects is tricky, as some objects have a lot of nested sub-objects to expand! We've tried to auto-expand as much of the top-level objects as possible. You can peruse a list of what is expanded per object in the `stripeObjects.json` file.
+Expanding all Stripe objects is tricky, as some objects have a lot of nested sub-objects to expand! We've tried to auto-expand as much of the top-level objects as possible. You can peruse a list of what is expanded per object in the `stripeObjects.json` file. If we're missing something that you'd like expanded, please create an issue!
 
 ## Auto-pagination
 
