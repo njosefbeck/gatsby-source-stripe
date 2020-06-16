@@ -424,7 +424,9 @@
       "description": "A list of Price objects.",
       "canIterate": true,
       "methodName": "list",
-      "methodArgs": {}
+      "methodArgs": {
+        "expand": ["data.product"]
+      }
     }
   ]
 }
