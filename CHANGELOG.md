@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.1.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.1.0...v3.1.1) - 2020-06-21
+- Expand Price product, so that product object is returned along with price. Thanks @vSterlin!
+- Include Price query example in README. Thanks @brittneypostma!
+- Update @babel/cli from [7.10.1 to 7.10.3](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.10.1 to 7.10.3](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.10.2 to 7.10.3](https://github.com/babel/babel/releases).
+- Update eslint from [7.1.0 to 7.3.0](https://github.com/eslint/eslint/releases).
+- Update eslint-plugin-import from [2.20.2 to 2.21.2](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update eslint-plugin-prettier from [3.1.3 to 3.1.4](https://github.com/prettier/eslint-plugin-prettier/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.3.8 to 2.3.12](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [8.56.0 to 8.64.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
+
 ## [3.1.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.0.7...v3.1.0) - 2020-05-30
 - Add Checkout Sessions resource.
 - Add Prices resource.
