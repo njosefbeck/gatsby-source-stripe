@@ -107,9 +107,9 @@ Setting `downloadFiles: true` in the plugin configuration enables downloading of
 
 You can give these File nodes to plugins like [gatsby-image](https://using-gatsby-image.gatsbyjs.org/) to create responsive images and/or [gatsby-transformer-sharp](https://image-processing.gatsbyjs.org/) to process images at build.
 
-## How to query
+## How to query with Skus
 
-**NOTE: For the example below, be sure that you actually have products with SKUs in your Stripe account, otherwise you will get an error saying: `Cannot query field "allStripeSku" on type "Query"`.**
+**NOTE: For the example below, be sure that you actually have products with SKUs in your Stripe account, otherwise you will get an error saying: `Cannot query field "allStripeSku" on type "Query"`. With the update to Prices API, the Sku/Order API is now deprecated. If you have an account that uses Prices, see [How to query with Prices](#how-to-query-with-prices).**
 
 Below is an example query for fetching all your Stripe SKUs. Note that the `localFiles` will not be there if you didn't specify `downloadFiles: true` in the plugin options.
 
@@ -146,6 +146,36 @@ You can also query for a specific Stripe object like this:
 ```
 
 When using GraphiQL, click on "Docs" in the top-right corner of the screen to explore all of the Stripe data being brought in, including their schemas. Additionally, check out Gatsby's handy [GraphQL Reference](https://www.gatsbyjs.org/docs/graphql-reference/) for information about filtering, sorting, etc.
+
+
+## How to query with Prices
+
+**NOTE: With the update to Prices API, the Sku/Order API is now deprecated. If you still have an account that uses Skus, see [How to query with Skus](#how-to-query-with-skus).**
+
+Below is an example query for fetching all Stripe Prices. 
+
+```graphql
+{
+allStripePrice {
+    edges {
+      node {
+        id,
+        object,
+        active,
+        billing_scheme,
+        product,
+        type,
+        livemode,
+        unit_amount,
+        unit_amount_decimal,
+        currency
+      }
+    }
+  }
+}  
+```
+
+You can add or remove any of the nodes to query for what you need.
 
 ## Gotchas
 
