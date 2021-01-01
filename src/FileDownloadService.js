@@ -18,6 +18,7 @@ class FileDownloadService {
     switch(node.object) {
       case 'product':
       case 'sku':
+      case 'price':
         return this.downloadFiles(node);
       default:
         return node;

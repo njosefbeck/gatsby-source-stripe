@@ -1,11 +1,12 @@
-const extractSkuUrls = require("./extractSkuUrls");
+const extractChildUrls = require("./extractChildUrls");
 
 function extractUrls(node) {
   switch (node.object) {
     case "product":
       return node.images.map((url) => ({ location: "root", url }));
     case "sku":
-      return extractSkuUrls(node);
+    case "price":
+      return extractChildUrls(node);
     default:
       return [];
   }

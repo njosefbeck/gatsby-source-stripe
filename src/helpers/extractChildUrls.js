@@ -1,6 +1,6 @@
 const hasFilesToDownload = require("./hasFilesToDownload");
 
-function extractSkuUrls(node) {
+function extractChildUrls(node) {
   let urls = [];
   if (node.image && node.image.length) {
     urls = [{ location: "root", url: node.image }];
@@ -14,4 +14,4 @@ function extractSkuUrls(node) {
   return urls;
 }
 
-module.exports = extractSkuUrls;
+module.exports = extractChildUrls;
