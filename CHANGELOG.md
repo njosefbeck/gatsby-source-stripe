@@ -5,6 +5,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.2.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.1.1...v3.2.0) - 2021-01-01
+- Enable downloading of images in the expanded `products` field of the Price type (thanks @brxck).
+- Add the following Stripe objects: TaxRate, SetupIntent, PromotionCode, SubscriptionSchedule, EarlyFraudWarning. These objects are now retrievable via their list methods.
+- Add above objects to the README, and update README to the fact that we're in line with Stripe API version 2020-08-27.
+- Update @babel/cli from [7.10.3 to 7.12.10](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.10.3 to 7.12.10](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.10.3 to 7.12.11](https://github.com/babel/babel/releases).
+- Update cross-env from [7.0.2 to 7.0.3](https://github.com/kentcdodds/cross-env/releases).
+- Update eslint from [7.3.0 to 7.16.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [6.11.0 to 7.1.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-import from [2.21.2 to 2.22.1](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update eslint-plugin-prettier from [3.1.4 to 3.3.0](https://github.com/prettier/eslint-plugin-prettier/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.3.12 to 2.8.1](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update jest from [26.0.1 to 26.6.3](https://github.com/facebook/jest/blob/master/CHANGELOG.md).
+- Update prettier from [2.0.5 to 2.2.1](https://prettier.io/blog/2019/04/12/1.17.0.html).
+- Update stripe from [8.64.0 to 8.129.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
 ## [3.1.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.1.0...v3.1.1) - 2020-06-21
 - Expand Price product, so that product object is returned along with price. Thanks @vSterlin!
 - Include Price query example in README. Thanks @brittneypostma!
