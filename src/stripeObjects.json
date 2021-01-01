@@ -427,6 +427,64 @@
       "methodArgs": {
         "expand": ["data.product"]
       }
+    },
+    {
+      "id": 40,
+      "product": null,
+      "name": "taxRates",
+      "type": "TaxRate",
+      "description": "A list of TaxRate objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {}
+    },
+    {
+      "id": 41,
+      "product": null,
+      "name": "setupIntents",
+      "type": "SetupIntent",
+      "description": "A list of SetupIntent objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.customer", "data.latest_attempt", "data.mandate", "data.on_behalf_of", "data.single_use_mandate"]
+      }
+    },
+    {
+      "id": 42,
+      "product": null,
+      "name": "promotionCodes",
+      "type": "PromotionCode",
+      "description": "A list of PromotionCode objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.customer"]
+      }
+    },
+    {
+      "id": 43,
+      "product": null,
+      "name": "subscriptionSchedules",
+      "type": "SubscriptionSchedule",
+      "description": "A list of SubscriptionSchedule objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.customer", "data.subscription"]
+      }
+    },
+    {
+      "id": 44,
+      "product": "radar",
+      "name": "earlyFraudWarnings",
+      "type": "EarlyFraudWarning",
+      "description": "A list of EarlyFraudWarning objects.",
+      "canIterate": true,
+      "methodName": "list",
+      "methodArgs": {
+        "expand": ["data.charge"]
+      }
     }
   ]
 }

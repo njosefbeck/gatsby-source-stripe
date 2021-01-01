@@ -1,6 +1,6 @@
 # gatsby-source-stripe
 
-Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2020-03-02](https://stripe.com/docs/upgrades#2020-03-02).
+Source plugin for pulling in data from the [Stripe API](https://stripe.com/docs/api). Current with Stripe API version [2020-08-27](https://stripe.com/docs/upgrades#2020-08-27).
 
 This plugin is a source plugin, so it brings in your Stripe data. Use cases for this Stripe source plugin:
 
@@ -89,6 +89,11 @@ Below is a table with a list of the Stripe types supported in the options' objec
 | Review | [stripe.reviews.list()](https://stripe.com/docs/api/radar/reviews/list?lang=node) | None |
 | Session | [stripe.checkout.sessions.list()](https://stripe.com/docs/api/checkout/sessions/list?lang=node) | None |
 | Price | [stripe.prices.list()](https://stripe.com/docs/api/prices/list?lang=node) | None |
+| TaxRate | [stripe.taxRates.list()](https://stripe.com/docs/api/tax_rates/list?lang=node) | None |
+| SetupIntent | [stripe.setupIntents.list()](https://stripe.com/docs/api/setup_intents/list?lang=node) | None |
+| PromotionCode | [stripe.promotionCodes.list()](https://stripe.com/docs/api/promotion_codes/list?lang=node) | None |
+| SubscriptionSchedule | [stripe.subscriptionSchedules.list()](https://stripe.com/docs/api/subscription_schedules/list?lang=node) | None |
+| EarlyFraudWarning | [stripe.radar.earlyFraudWarnings.list()](https://stripe.com/docs/api/radar/early_fraud_warnings/list?lang=node) | None |
 
 
 ## Expanding Objects
@@ -97,7 +102,7 @@ Expanding all Stripe objects is tricky, as some objects have a lot of nested sub
 
 ## Auto-pagination
 
-**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin has been tested against v10.13.0. If you experience any issues with earlier versions of Node, please first consider upgrading your Node version. Otherwise, file an issue and we'll try to resolve!**
+**NOTE: Due to stripe-node's [autopagination recommendations](https://github.com/stripe/stripe-node#auto-pagination) this plugin has been tested against v10.13.0 and later. If you experience any issues with earlier versions of Node, please first consider upgrading your Node version. Otherwise, file an issue and we'll try to resolve!**
 
 All list responses are fully paginated.
 
