@@ -196,9 +196,7 @@
       "description": "A list of all accounts connected to your platform via Stripe Connect.",
       "canIterate": true,
       "methodName": "list",
-      "methodArgs": {
-        "expand": ["data.business_logo"]
-      }
+      "methodArgs": {}
     },
     {
       "id": 19,
