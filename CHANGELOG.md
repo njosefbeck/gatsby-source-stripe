@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.2.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.2.0...v3.2.1) - 2021-01-02
+- Remove a non-existent field from the Stripe Connect Account object so that it wouldn't error out when fetching Connect Accounts.
+
 ## [3.2.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.1.1...v3.2.0) - 2021-01-01
 - Enable downloading of images in the expanded `products` field of the Price type (thanks @brxck).
 - Add the following Stripe objects: TaxRate, SetupIntent, PromotionCode, SubscriptionSchedule, EarlyFraudWarning. These objects are now retrievable via their list methods.
