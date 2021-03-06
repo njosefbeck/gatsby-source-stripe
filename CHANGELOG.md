@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.2.1...v3.2.2) - 2021-03-06
+- Auto-expand the tiers field in the Price object (thanks @klintan!).
+- Update file formatting based on updated eslint + prettier.
+- Update @babel/cli from [7.12.10 to 7.13.0](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.12.10 to 7.13.8](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.12.11 to 7.13.9](https://github.com/babel/babel/releases).
+- Update eslint from [7.16.0 to 7.21.0](https://github.com/eslint/eslint/releases).
+- Update eslint-config-prettier from [7.1.0 to 8.1.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-prettier from [3.3.0 to 3.3.1](https://github.com/prettier/eslint-plugin-prettier/blob/master/CHANGELOG.md).
+- Update gatsby-source-filesystem from [2.8.1 to 3.0.0](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [8.129.0 to 8.137.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
 ## [3.2.1](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.2.0...v3.2.1) - 2021-01-02
 - Remove a non-existent field from the Stripe Connect Account object so that it wouldn't error out when fetching Connect Accounts.
 
