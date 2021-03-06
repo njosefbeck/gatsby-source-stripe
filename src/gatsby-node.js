@@ -1,8 +1,8 @@
 const Stripe = require("stripe");
 const StripeObject = require("./StripeObject");
-const FileDownloadService = require("./FileDownloadService")
-const checkForSecretKey = require('./helpers/checkForSecretKey')
-const checkForStripeObjects = require("./helpers/checkForStripeObjects")
+const FileDownloadService = require("./FileDownloadService");
+const checkForSecretKey = require("./helpers/checkForSecretKey");
+const checkForStripeObjects = require("./helpers/checkForStripeObjects");
 
 exports.sourceNodes = async (
   { actions, cache, createNodeId, createContentDigest, getNode, store },
@@ -10,19 +10,19 @@ exports.sourceNodes = async (
 ) => {
   const { createNode, touchNode } = actions;
 
-  checkForStripeObjects(objects)
-  checkForSecretKey(secretKey)
+  checkForStripeObjects(objects);
+  checkForSecretKey(secretKey);
 
   const stripe = new Stripe(secretKey, {
     appInfo: {
       name: "Gatsby.js Stripe Source Plugin",
       version: "3.0.7",
-      url: "https://github.com/njosefbeck/gatsby-source-stripe"
-    }
+      url: "https://github.com/njosefbeck/gatsby-source-stripe",
+    },
   });
 
   // Initialize stripeObjects based on gatsby plugin objects
-  const stripeObjects = objects.map(type => new StripeObject(type));
+  const stripeObjects = objects.map((type) => new StripeObject(type));
 
   for (const stripeObj of stripeObjects) {
     /*
@@ -82,9 +82,9 @@ exports.sourceNodes = async (
           createNode,
           createNodeId,
           touchNode,
-          getNode
+          getNode,
         });
-        node = await downloadService.downloadAndAddTo(node)
+        node = await downloadService.downloadAndAddTo(node);
       }
 
       createNode(node);

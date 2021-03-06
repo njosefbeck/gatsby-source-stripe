@@ -1,8 +1,8 @@
-const extractUrls = require('./helpers/extractUrls');
-const checkCache = require('./helpers/checkCache');
-const createFileNode = require('./helpers/createFileNode')
-const hasFilesToDownload = require('./helpers/hasFilesToDownload');
-const addLocalFiles = require('./helpers/addLocalFiles');
+const extractUrls = require("./helpers/extractUrls");
+const checkCache = require("./helpers/checkCache");
+const createFileNode = require("./helpers/createFileNode");
+const hasFilesToDownload = require("./helpers/hasFilesToDownload");
+const addLocalFiles = require("./helpers/addLocalFiles");
 
 class FileDownloadService {
   constructor({ store, cache, createNode, createNodeId, touchNode, getNode }) {
@@ -15,10 +15,10 @@ class FileDownloadService {
   }
 
   async downloadAndAddTo(node) {
-    switch(node.object) {
-      case 'product':
-      case 'sku':
-      case 'price':
+    switch (node.object) {
+      case "product":
+      case "sku":
+      case "price":
         return this.downloadFiles(node);
       default:
         return node;
@@ -35,7 +35,7 @@ class FileDownloadService {
       return node;
     }
 
-    const fileNodeIds = []
+    const fileNodeIds = [];
 
     for (const url of urls) {
       const cachedFileNodeId = await checkCache({
@@ -58,10 +58,10 @@ class FileDownloadService {
         createNodeId: this.createNodeId,
         url: url.url,
         node,
-      })
+      });
 
       if (fileNodeId) {
-        fileNodeIds.push({ location: url.location, id: fileNodeId })
+        fileNodeIds.push({ location: url.location, id: fileNodeId });
       }
     }
 
@@ -69,7 +69,7 @@ class FileDownloadService {
       return node;
     }
 
-    const nodeWithLocalFiles = addLocalFiles(node, fileNodeIds)
+    const nodeWithLocalFiles = addLocalFiles(node, fileNodeIds);
     return nodeWithLocalFiles;
   }
 }

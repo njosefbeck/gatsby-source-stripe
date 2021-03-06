@@ -4,7 +4,10 @@
     "node": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "prettier", "prettier/babel"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
   "parser": "babel-eslint",
   "rules": {
     "no-console": "off"
