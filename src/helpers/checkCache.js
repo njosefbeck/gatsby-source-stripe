@@ -9,7 +9,11 @@ async function checkCache({ cache, getNode, touchNode, url, node }) {
     const fileNode = getNode(cachedFileData.fileNodeId);
 
     if (fileNode) {
-      saveNodeFromGarbageCollection(touchNode, cachedFileData.fileNodeId);
+      saveNodeFromGarbageCollection(
+        touchNode,
+        getNode,
+        cachedFileData.fileNodeId
+      );
       return cachedFileData.fileNodeId;
     }
   }
