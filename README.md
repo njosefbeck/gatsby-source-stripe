@@ -21,7 +21,7 @@ or
 
 ## How to use
 
-**NOTE: You must be using Gatsby version 2.0.15 or greater.**
+**NOTE: You must be using Gatsby version 4.0.0 or greater.**
 
 In the plugin options objects' array, specify the object types you would like to get data for. For example, if you'd like to get the lists of data for your Skus and Products, your objects array would look like this: `['Product', 'Sku']`.
 
