@@ -5,6 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [4.0.0](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.2.2...v4.0.0) - 2021-11-23
+- Fix issue that occurred when using Gatsby v4.
+- [BREAKING] From this version on, this package will only support Gatsby v4+.
+- Update @babel/cli from [7.13.0 to 7.16.0](https://github.com/babel/babel/releases).
+- Update @babel/core from [7.13.8 to 7.16.0](https://github.com/babel/babel/releases).
+- Update @babel/preset-env from [7.13.9 to 7.16.4](https://github.com/babel/babel/releases).
+- Update del-cli from [3.0.1 to 4.0.1](https://github.com/sindresorhus/del-cli/releases).
+- Update eslint-config-prettier from [8.1.0 to 8.3.0](https://github.com/prettier/eslint-config-prettier/blob/master/CHANGELOG.md).
+- Update eslint-plugin-import from [2.22.1 to 2.25.3](https://github.com/benmosher/eslint-plugin-import/blob/master/CHANGELOG.md).
+- Update jest from [26.6.3 to 27.3.1](https://github.com/facebook/jest/blob/master/CHANGELOG.md).
+- Update prettier from [2.2.1 to 2.4.1](https://prettier.io/blog/2019/04/12/1.17.0.html).
+- Update gatsby-source-filesystem from [3.0.0 to 4.2.0](https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-filesystem/CHANGELOG.md).
+- Update stripe from [8.137.0 to 8.191.0](https://github.com/stripe/stripe-node/blob/master/CHANGELOG.md).
+
 ## [3.2.2](https://github.com/njosefbeck/gatsby-source-stripe/compare/v3.2.1...v3.2.2) - 2021-03-06
 - Auto-expand the tiers field in the Price object (thanks @klintan!).
 - Update file formatting based on updated eslint + prettier.
